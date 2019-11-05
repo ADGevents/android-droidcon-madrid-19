@@ -1,2 +1,1 @@
-# android-droidcon-madrid-19
-Android app for droidcon Madrid event
+# Android app for Droidcon Madrid 2019
