@@ -4,6 +4,7 @@
 
     <dist:module
         dist:instant="true"
+        dist:onDemand="false"
         dist:title="@string/title_home">
         <dist:delivery>
             <dist:install-time />
