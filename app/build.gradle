@@ -22,7 +22,9 @@ android {
         }
     }
 
-    dynamicFeatures = [":schedule", ":home"]
+    dynamicFeatures = [":schedule", ":home", ":favourites"]
+
+
 }
 
 dependencies {
