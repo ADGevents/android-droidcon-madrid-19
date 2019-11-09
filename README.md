@@ -11,13 +11,19 @@ Once the module has been created you have to think if the module should be an in
 * If the module should be an instant feature delivered instantly and at install time you have to ensure the next tags and values are present on its AndroidManifest.xml
 
 ```
-dist:instant="true" dist:onDemand="false"
+dist:instant="true" 
+<dist:delivery>
+    <dist:install-time />
+</dist:delivery>
 ```
 
 * If the module should be a dynamic feature delivered at install time you have you have to ensure the next tags and values are present on its AndroidManifest.xml
 
 ```
-dist:instant="false" dist:onDemand="false"
+dist:instant="false" 
+<dist:delivery>
+    <dist:install-time />
+</dist:delivery>
 ```
 
 ## Run app as instant experience
