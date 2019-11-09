@@ -12,7 +12,6 @@ class DroidconMadridActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fragmentHost, ScheduleFragment.build(), ScheduleFragment.TAG)
-            commit()
-        }
+        }.commit()
     }
 }
