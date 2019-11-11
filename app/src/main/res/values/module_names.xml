@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_module">home</string>
+    <string name="schedule_module">schedule</string>
+    <string name="favourites_module">favourites</string>
+</resources>

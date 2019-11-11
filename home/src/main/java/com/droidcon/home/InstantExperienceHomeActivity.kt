@@ -2,16 +2,19 @@ package com.droidcon.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.adg.events.droidcon_app.R
 import com.droidcon.schedule.ScheduleFragment
 
-class DroidconMadridActivity : AppCompatActivity() {
+class InstantExperienceHomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
         supportFragmentManager.beginTransaction().apply {
-            add(R.id.fragmentHost, ScheduleFragment.build(), ScheduleFragment.TAG)
+            add(
+                R.id.fragmentHost,
+                ScheduleFragment.build("Instant experience", true),
+                ScheduleFragment.TAG
+            )
         }.commit()
     }
 }
