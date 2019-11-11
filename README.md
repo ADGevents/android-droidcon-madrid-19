@@ -1,7 +1,5 @@
 # Android app for Droidcon Madrid 2019
 
-## Adding a new module
-
 ## Run app as instant experience
 
 In Android Studio, go to *Edit Configurations...* menu. 
