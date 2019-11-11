@@ -1,6 +1,3 @@
 <resources>
     <string name="app_name">Droidcon-app</string>
-    <string name="title_schedule">Schedule</string>
-    <string name="title_home">Droidcon Madrid</string>
-    <string name="title_favourites">Favourites</string>
 </resources>
