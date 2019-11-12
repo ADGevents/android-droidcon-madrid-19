@@ -15,7 +15,9 @@ class ScheduleFragment private constructor() : Fragment() {
     ): View? = inflater.inflate(R.layout.fragment_schedule, container, false)
 
     companion object {
-        fun build(): Fragment = ScheduleFragment()
+        fun build(): Fragment =
+            ScheduleFragment()
+
         const val TAG = "fragment:ScheduleFragment"
     }
 }

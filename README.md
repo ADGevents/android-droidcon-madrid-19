@@ -4,8 +4,10 @@
 
 In Android Studio, go to *Edit Configurations...* menu. 
 
-Set up a new build configuration matching the one you can see in the next image:
+For any build configuration, in *Installation Settings* section, check the *Deploy as instant app* box.
 
-<img src="https://github.com/ADGevents/android-droidcon-madrid-19/blob/master/doc/InstantAppBuildConfiguration.png" width="800" height="500">
+<img src="https://https://github.com/ADGevents/android-droidcon-madrid-19/blob/master/doc/instant_app_build_configuration.png" width="500" height="500">
 
-And just run the app from AS as you would do with an usual android app
+Then run the app with the correspondent build configuration. And that's all!
+
+
