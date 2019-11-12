@@ -1,4 +1,4 @@
-package com.droidcon.home
+package com.droidcon.favourites
 
 import org.junit.Test
 
