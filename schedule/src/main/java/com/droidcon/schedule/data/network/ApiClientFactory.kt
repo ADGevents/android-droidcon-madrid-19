@@ -18,6 +18,8 @@ object ApiClientFactory {
         return retrofit.create(SessionsApiClient::class.java)
     }
 
+    fun createFakeSessionsApiClient() = FakeSessionsApiClient()
+
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
