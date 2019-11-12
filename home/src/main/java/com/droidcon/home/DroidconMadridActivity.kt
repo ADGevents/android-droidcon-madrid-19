@@ -3,7 +3,7 @@ package com.droidcon.home
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.adg.events.droidcon_app.R
-import com.droidcon.schedule.ScheduleFragment
+import com.droidcon.schedule.ui.ScheduleFragment
 
 class DroidconMadridActivity : AppCompatActivity() {
 

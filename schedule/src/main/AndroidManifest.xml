@@ -10,5 +10,8 @@
         </dist:delivery>
         <dist:fusing dist:include="false" />
     </dist:module>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
 

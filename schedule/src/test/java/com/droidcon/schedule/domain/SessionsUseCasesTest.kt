@@ -1,6 +1,6 @@
 package com.droidcon.schedule.domain
 
-import com.droidcon.schedule.core.ioc.ScheduleServiceLocator
+import com.droidcon.schedule.core.di.ScheduleServiceLocator
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 
