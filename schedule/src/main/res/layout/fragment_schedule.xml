@@ -27,4 +27,11 @@
             tools:text="Schedule" />
     </com.google.android.material.appbar.AppBarLayout>
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sessions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
