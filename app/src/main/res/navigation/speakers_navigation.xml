@@ -5,7 +5,7 @@
     app:startDestination="@id/speakersFragment">
     <fragment
         android:id="@+id/speakersFragment"
-        android:name="com.droidcon.speakers.SpeakersFragment"
+        android:name="com.droidcon.speakers.presentation.SpeakersFragment"
         android:label="@string/speakers" />
 
 </navigation>

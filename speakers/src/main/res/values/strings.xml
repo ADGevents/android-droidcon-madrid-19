@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">speakers</string>
+    <string name="speakeravatar">speakerAvatar</string>
+    <string name="speakers">Speakers</string>
 </resources>
