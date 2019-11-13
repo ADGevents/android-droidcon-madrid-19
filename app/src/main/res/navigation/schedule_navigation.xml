@@ -5,7 +5,7 @@
     app:startDestination="@id/scheduleFragment">
     <fragment
         android:id="@+id/scheduleFragment"
-        android:name="com.droidcon.schedule.ScheduleFragment"
+        android:name="com.droidcon.schedule.ui.ScheduleFragment"
         android:label="@string/schedule" />
 
 </navigation>
