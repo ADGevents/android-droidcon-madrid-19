@@ -10,7 +10,7 @@ import com.droidcon.schedule.ui.SessionsAdapter
 object ScheduleServiceLocator {
 
     private val sessionsApiClient
-        get() = ApiClientFactory.createFakeSessionsApiClient()
+        get() = ApiClientFactory.createSessionsApiClient()
 
     private val sessionsRepository by lazy { SessionsRepository(sessionsApiClient) }
 

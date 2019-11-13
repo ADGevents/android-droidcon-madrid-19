@@ -1,6 +1,6 @@
 package com.droidcon.schedule.ui
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.droidcon.schedule.core.di.ScheduleServiceLocator
@@ -12,8 +12,17 @@ class ScheduleViewModel : ViewModel() {
 
     private val getSessions: GetSessions = ScheduleServiceLocator.getSessions
 
-    val sessions: LiveData<List<Session>> = liveData {
-        val loadedSessions = getSessions()
-        emit(loadedSessions)
+    private val mutableSessions = MutableLiveData<List<Session>>()
+//    val sessions: LiveData<List<Session>> = mutableSessions
+
+    val sessions = liveData {
+        emit(getSessions())
     }
+
+//    init {
+//        viewModelScope.launch {
+//            val loadedSessions = getSessions()
+//            mutableSessions.value = loadedSessions
+//        }
+//    }
 }
