@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.droidcon.commons.recyclerview.setDivider
 import com.droidcon.speakers.R
 import com.droidcon.speakers.presentation.recyclerview.SpeakersAdapter
 import com.droidcon.speakers.presentation.viewmodel.SpeakersViewModel
@@ -39,6 +40,7 @@ class SpeakersFragment : DaggerFragment() {
         rootView.findViewById<RecyclerView>(R.id.speakers).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = speakersAdapter
+            setDivider(R.drawable.speakers_divider)
         }
     }
 
