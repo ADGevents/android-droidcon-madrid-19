@@ -2,10 +2,14 @@
 
 ext {
     compileSdk = 29
+    buildTools = "29.0.2"
     targetSdk = 29
     minSdk = 21
     versionCode = 1
     versionName = "1.0.0"
+    dagger = "2.24"
+    androidLifecycle = "2.1.0"
+    navigation = "2.1.0"
 }
 
 buildscript {
@@ -13,7 +17,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.2'
@@ -28,7 +32,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
