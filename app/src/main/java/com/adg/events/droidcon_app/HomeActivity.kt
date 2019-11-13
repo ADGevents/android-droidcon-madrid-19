@@ -25,6 +25,7 @@ class HomeActivity : DaggerAppCompatActivity() {
         val navigationGraphsIds = listOf(
             R.navigation.schedule_navigation,
             R.navigation.favourites_navigation,
+            R.navigation.speakers_navigation,
             R.navigation.info_navigation
         )
 

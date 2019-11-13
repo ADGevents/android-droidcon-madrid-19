@@ -1,5 +1,5 @@
 rootProject.name='Droidcon-app'
-include ':app', ':commons'
+include ':app', ':commons', ':speakers'
 include ':schedule'
 include ':favourites'
 include ':info'

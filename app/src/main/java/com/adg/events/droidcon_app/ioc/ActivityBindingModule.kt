@@ -5,6 +5,7 @@ import com.droidcon.commons.ioc.ActivityScope
 import com.droidcon.favourites.ioc.FavouritesModule
 import com.droidcon.info.presentation.ioc.InfoModule
 import com.droidcon.schedule.ioc.ScheduleModule
+import com.droidcon.speakers.ioc.SpeakersModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,7 +17,8 @@ abstract class ActivityBindingModule {
         modules = [
             InfoModule::class,
             ScheduleModule::class,
-            FavouritesModule::class
+            FavouritesModule::class,
+            SpeakersModule::class
         ]
     )
     abstract fun homeActivity(): HomeActivity
