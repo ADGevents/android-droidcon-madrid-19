@@ -9,6 +9,7 @@ ext {
     versionName = "1.0.0"
     dagger = "2.24"
     androidLifecycle = "2.1.0"
+    navigation = "2.1.0"
 }
 
 buildscript {

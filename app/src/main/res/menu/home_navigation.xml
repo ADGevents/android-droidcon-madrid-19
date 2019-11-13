@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/scheduleNavigation"
+        android:icon="@drawable/ic_schedule_black_24dp"
+        android:title="@string/schedule" />
+
+    <item
+        android:id="@+id/favouritesNavigation"
+        android:icon="@drawable/ic_favorite_black_24dp"
+        android:title="@string/favourites" />
+
+    <item
+        android:id="@+id/infoNavigation"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/info" />
+</menu>

@@ -10,7 +10,7 @@ import com.droidcon.info.presentation.viewmodel.InfoFragmentViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class InfoFragment private constructor() : DaggerFragment() {
+class InfoFragment : DaggerFragment() {
 
     @Inject
     lateinit var infoFragmentViewModelFactory: InfoFragmentViewModelFactory
@@ -26,10 +26,5 @@ class InfoFragment private constructor() : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         infoFragmentViewModel = infoFragmentViewModelFactory.get(this)
-    }
-
-    companion object {
-        fun build(): InfoFragment = InfoFragment()
-        const val TAG = "fragment:InfoFragment"
     }
 }
