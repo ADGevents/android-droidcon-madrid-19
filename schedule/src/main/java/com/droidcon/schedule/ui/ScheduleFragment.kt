@@ -1,7 +1,6 @@
 package com.droidcon.schedule.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
 import com.droidcon.schedule.core.di.ScheduleServiceLocator
 import com.droidcon.schedule.domain.Session
-import kotlinx.android.synthetic.main.fragment_schedule.*
+import dagger.android.support.DaggerFragment
 
-class ScheduleFragment private constructor() : Fragment() {
+class ScheduleFragment private constructor() : DaggerFragment() {
 
     private val sessionsAdapter by lazy { ScheduleServiceLocator.sessionsAdapter }
     private lateinit var scheduleViewModel: ScheduleViewModel
