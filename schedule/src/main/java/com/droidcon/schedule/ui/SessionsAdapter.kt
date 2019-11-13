@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
 import com.droidcon.schedule.domain.Session
 
-class SessionsAdapter(
-    sessionModelDiffCallback: SessionDiffCallback
-) : ListAdapter<Session, SessionViewHolder>(sessionModelDiffCallback) {
+class SessionsAdapter: ListAdapter<Session, SessionViewHolder>(SessionDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionViewHolder =
         SessionViewHolder(
@@ -37,5 +36,13 @@ class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.findViewById<TextView>(R.id.timePeriod).text = "PM"
         itemView.findViewById<TextView>(R.id.sessionCategory).text = session.category
     }
+}
+
+object SessionDiffCallback: DiffUtil.ItemCallback<Session>() {
+    override fun areItemsTheSame(oldItem: Session, newItem: Session): Boolean =
+        oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: Session, newItem: Session): Boolean =
+        oldItem == newItem
 }
 

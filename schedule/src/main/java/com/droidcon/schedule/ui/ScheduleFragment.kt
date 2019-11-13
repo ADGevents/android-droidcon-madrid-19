@@ -4,22 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
-import com.droidcon.schedule.core.di.ScheduleServiceLocator
 import com.droidcon.schedule.domain.Session
+import com.droidcon.schedule.ui.viewmodel.ScheduleFragmentViewModel
+import com.droidcon.schedule.ui.viewmodel.ScheduleFragmentViewModelFactory
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class ScheduleFragment private constructor() : DaggerFragment() {
+class ScheduleFragment : DaggerFragment() {
 
-    private val sessionsAdapter by lazy { ScheduleServiceLocator.sessionsAdapter }
-    private lateinit var scheduleViewModel: ScheduleViewModel
+    @Inject
+    lateinit var scheduleFragmentViewModelFactory: ScheduleFragmentViewModelFactory
+    private lateinit var scheduleFragmentViewModel: ScheduleFragmentViewModel
 
     private lateinit var sessions: RecyclerView
+    private val sessionsAdapter by lazy { SessionsAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,9 +32,11 @@ class ScheduleFragment private constructor() : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel::class.java)
-        scheduleViewModel.sessions.observe(this, Observer<List<Session>> { showSessions(it) })
+        setUpScheduleViewModel()
+        initViews(view)
+    }
 
+    private fun initViews(view: View) {
         sessions = view.findViewById(R.id.sessions)
         sessions.apply {
             layoutManager = LinearLayoutManager(context)
@@ -39,12 +44,16 @@ class ScheduleFragment private constructor() : DaggerFragment() {
         }
     }
 
-    private fun showSessions(sessions: List<Session>) {
-        sessionsAdapter.submitList(sessions)
+    private fun setUpScheduleViewModel() {
+        scheduleFragmentViewModel = scheduleFragmentViewModelFactory.get(this)
+        scheduleFragmentViewModel =
+            ViewModelProviders.of(this).get(ScheduleFragmentViewModel::class.java)
+        scheduleFragmentViewModel.sessions.observe(
+            this,
+            Observer<List<Session>> { showSessions(it) })
     }
 
-    companion object {
-        fun build(): Fragment = ScheduleFragment()
-        const val TAG = "fragment:ScheduleFragment"
+    private fun showSessions(sessions: List<Session>) {
+        sessionsAdapter.submitList(sessions)
     }
 }

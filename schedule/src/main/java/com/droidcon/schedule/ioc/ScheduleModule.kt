@@ -1,14 +1,14 @@
 package com.droidcon.schedule.ioc
 
-import com.droidcon.commons.ioc.FragmentScope
-import com.droidcon.schedule.ui.ScheduleFragment
+import com.droidcon.schedule.data.network.ApiClientFactory
+import com.droidcon.schedule.data.network.SessionsApiClient
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.Provides
 
-@Module
-abstract class ScheduleModule {
 
-    @FragmentScope
-    @ContributesAndroidInjector
-    abstract fun contributeScheduleFragment(): ScheduleFragment
+@Module(includes = [ScheduleFragmentModule::class])
+class ScheduleModule {
+
+    @Provides
+    fun provideSessionsApiClient(): SessionsApiClient = ApiClientFactory.createSessionsApiClient()
 }
