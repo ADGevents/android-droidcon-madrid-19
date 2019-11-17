@@ -20,7 +20,7 @@ class SpeakersViewModel(private val getAllSpeakers: GetAllSpeakers) : ViewModel(
         viewModelScope.launch {
             getAllSpeakers().fold(
                 ifLeft = ::onGetAllSpeakersError,
-                ifRight = ::onGetAllSpeakersError
+                ifRight = ::onGetAllSpeakersSuccess
             )
         }
     }
@@ -33,7 +33,7 @@ class SpeakersViewModel(private val getAllSpeakers: GetAllSpeakers) : ViewModel(
 
     }
 
-    private fun onGetAllSpeakersError(speakers: List<Speaker>) {
+    private fun onGetAllSpeakersSuccess(speakers: List<Speaker>) {
         mutableSpeakers.value = speakers.toUIModel()
     }
 }
