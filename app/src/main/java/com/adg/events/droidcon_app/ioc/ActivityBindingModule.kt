@@ -4,7 +4,6 @@ import com.adg.events.droidcon_app.HomeActivity
 import com.droidcon.commons.ioc.ActivityScope
 import com.droidcon.favourites.ioc.FavouritesModule
 import com.droidcon.info.presentation.ioc.InfoModule
-import com.droidcon.schedule.ioc.ScheduleFragmentModule
 import com.droidcon.schedule.ioc.ScheduleModule
 import com.droidcon.speakers.ioc.SpeakersModule
 import dagger.Module

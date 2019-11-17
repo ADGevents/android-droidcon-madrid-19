@@ -39,6 +39,17 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation 'com.google.android.material:material:1.0.0'
 
+    // moshi
+    implementation("com.squareup.moshi:moshi-kotlin:1.9.1")
+
+    // okhttp
+    implementation("com.squareup.okhttp3:okhttp:4.2.2")
+
+    // arrow core
+    implementation "io.arrow-kt:arrow-core:$rootProject.arrow"
+    implementation "io.arrow-kt:arrow-syntax:$rootProject.arrow"
+    kapt "io.arrow-kt:arrow-meta:$rootProject.arrow"
+
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation"

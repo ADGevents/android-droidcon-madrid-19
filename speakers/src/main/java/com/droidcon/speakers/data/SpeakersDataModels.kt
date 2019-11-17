@@ -4,7 +4,6 @@ inline class Url(val rawUrl: String)
 
 fun String.asUrl(): Url = Url(this)
 
-
 data class NameData(
     val firstName: String,
     val lastName: String,
