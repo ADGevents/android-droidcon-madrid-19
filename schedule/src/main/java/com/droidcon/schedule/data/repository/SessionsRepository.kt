@@ -1,17 +1,29 @@
 package com.droidcon.schedule.data.repository
 
+import com.droidcon.schedule.data.SessionData
+import com.droidcon.schedule.data.SessionsCacheStorage
 import com.droidcon.schedule.data.network.SessionsApiClient
 import com.droidcon.schedule.data.network.toSessionData
-import com.droidcon.schedule.domain.Session
 import javax.inject.Inject
 
 
 class SessionsRepository @Inject constructor(
+    private val sessionsCacheStorage: SessionsCacheStorage,
     private val sessionsApiClient: SessionsApiClient
 ) {
 
-    suspend fun getAllSessions(): List<Session> =
-        sessionsApiClient.getSessions().map {
+    suspend fun getAllSessions(): List<SessionData> =
+        if (sessionsCacheStorage.get().isNullOrEmpty()) {
+            getAllSessionsFromApi()
+        } else {
+            sessionsCacheStorage.get()!!
+        }
+
+    private suspend fun getAllSessionsFromApi(): List<SessionData> {
+        val sessionsFromApi = sessionsApiClient.getSessions().map {
             it.toSessionData()
         }
+        sessionsCacheStorage.update(sessionsFromApi)
+        return sessionsFromApi
+    }
 }

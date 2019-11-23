@@ -25,7 +25,6 @@ class ScheduleDayFragment : DaggerFragment() {
     private lateinit var sessions: RecyclerView
     private val sessionsAdapter by lazy { SessionsAdapter() }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,11 +51,10 @@ class ScheduleDayFragment : DaggerFragment() {
             ViewModelProviders.of(this).get(ScheduleFragmentViewModel::class.java)
         scheduleFragmentViewModel.sessions.observe(
             this,
-            Observer<List<Session>> { showSessions(it) })
+            Observer { showSessions(it) })
     }
 
     private fun showSessions(sessions: List<Session>) {
-        activity!!.findViewById<View>(R.id.progress_indicator).visibility = View.GONE
         sessionsAdapter.submitList(sessions)
     }
 
