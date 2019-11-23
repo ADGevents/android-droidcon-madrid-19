@@ -2,13 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/default_screen_margin"
-    android:layout_marginEnd="@dimen/default_screen_margin">
+    android:layout_marginLeft="@dimen/default_screen_margin"
+    android:layout_marginRight="@dimen/default_screen_margin">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sessions_recycler_view"
-        android:paddingTop="18dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="18dp" />
 
 </FrameLayout>

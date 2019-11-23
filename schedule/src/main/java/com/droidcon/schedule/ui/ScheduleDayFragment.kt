@@ -56,6 +56,7 @@ class ScheduleDayFragment : DaggerFragment() {
     }
 
     private fun showSessions(sessions: List<Session>) {
+        activity!!.findViewById<View>(R.id.progress_indicator).visibility = View.GONE
         sessionsAdapter.submitList(sessions)
     }
 

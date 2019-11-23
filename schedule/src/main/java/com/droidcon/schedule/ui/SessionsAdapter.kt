@@ -34,7 +34,7 @@ class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.findViewById<TextView>(R.id.sessionAdditionalInfo).text = "Main stage / 30min"
         itemView.findViewById<TextView>(R.id.sessionTime).text = "12:05"
         itemView.findViewById<TextView>(R.id.timePeriod).text = "PM"
-        itemView.findViewById<TextView>(R.id.sessionCategory).text = session.category
+        itemView.findViewById<TextView>(R.id.sessionCategory).text = "droidcon"
     }
 }
 
