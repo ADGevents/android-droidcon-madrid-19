@@ -77,7 +77,9 @@ class ScheduleFragment : DaggerFragment() {
 
         override fun getCount() = CONFERENCE_DAYS
 
-        override fun getItem(position: Int): Fragment = ScheduleDayFragment.newInstance(position)
+        override fun getItem(position: Int): Fragment = ScheduleDayFragment.newInstance(
+            CONFERENCE_DAYS_OF_MONTH[position]
+        )
 
         override fun getPageTitle(position: Int): CharSequence = CONFERENCE_DAYS_TAB_TITLE[position]
     }
@@ -85,5 +87,6 @@ class ScheduleFragment : DaggerFragment() {
     companion object {
         private const val CONFERENCE_DAYS = 2
         private val CONFERENCE_DAYS_TAB_TITLE = listOf("20 dec", "21 dec")
+        private val CONFERENCE_DAYS_OF_MONTH = listOf(20, 21)
     }
 }

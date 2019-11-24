@@ -25,6 +25,11 @@ class ScheduleDayFragment : DaggerFragment() {
     private lateinit var sessions: RecyclerView
     private val sessionsAdapter by lazy { SessionsAdapter() }
 
+    private val conferenceDay: Int by lazy {
+        val args = arguments ?: throw IllegalStateException("Missing arguments!")
+        args.getInt(ARG_CONFERENCE_DAY)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,13 +54,15 @@ class ScheduleDayFragment : DaggerFragment() {
         scheduleFragmentViewModel = scheduleFragmentViewModelFactory.get(this)
         scheduleFragmentViewModel =
             ViewModelProviders.of(this).get(ScheduleFragmentViewModel::class.java)
-        scheduleFragmentViewModel.sessions.observe(
+        scheduleFragmentViewModel.sessionsPerDay.observe(
             this,
-            Observer { showSessions(it) })
+            Observer { showSessions(it[conferenceDay]) })
     }
 
-    private fun showSessions(sessions: List<Session>) {
-        sessionsAdapter.submitList(sessions)
+    private fun showSessions(sessions: List<Session>?) {
+        sessions?.let {
+            sessionsAdapter.submitList(it)
+        }
     }
 
     companion object {
