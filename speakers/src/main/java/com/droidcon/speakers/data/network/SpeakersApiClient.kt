@@ -17,12 +17,12 @@ class SpeakersApiClient @Inject constructor(
     private val apiConfig: ApiConfig
 ) {
 
-    suspend fun getSpeakers(): Either<GetSpeakersError, List<SpeakerDto>> {
-        val getSpeakersRequest = Request.Builder()
-            .url("${apiConfig.baseUrl}$GET_SPEAKERS_PATH")
-            .build()
+    suspend fun getSpeakers(): Either<GetSpeakersError, List<SpeakerDto>> =
+        withContext(coroutineDispatcher) {
+            val getSpeakersRequest = Request.Builder()
+                .url("${apiConfig.baseUrl}$GET_SPEAKERS_PATH")
+                .build()
 
-        return withContext(coroutineDispatcher) {
             val response = okHttpClient.newCall(getSpeakersRequest).execute()
 
             if (response.code != 200) return@withContext getSpeakersApiError()
@@ -41,7 +41,6 @@ class SpeakersApiClient @Inject constructor(
 
             return@withContext Either.right(getSpeakersDto)
         }
-    }
 
     private fun getSpeakersApiError(): Either<GetSpeakersError, List<SpeakerDto>> =
         Either.left(GetSpeakersError.Generic)
