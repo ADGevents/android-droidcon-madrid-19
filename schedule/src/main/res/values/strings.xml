@@ -1,3 +1,4 @@
 <resources>
     <string name="schedule_screen_title">Schedule</string>
+    <string name="schedule_session_duration">Duration</string>
 </resources>

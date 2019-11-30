@@ -35,9 +35,8 @@ class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(session: Session) {
         itemView.findViewById<TextView>(R.id.sessionTitle).text = session.title
         itemView.findViewById<TextView>(R.id.sessionAdditionalInfo).text =
-            "${TimeUnit.MILLISECONDS.toMinutes(session.durationInMillis)} min"
+            "${TimeUnit.MILLISECONDS.toMinutes(session.durationInMillis)} min / Room 3"
         itemView.findViewById<TextView>(R.id.sessionTime).text = session.sessionStartTimeStamp.toFormattedTime()
-        itemView.findViewById<TextView>(R.id.sessionCategory).text = "droidcon"
     }
 }
 
