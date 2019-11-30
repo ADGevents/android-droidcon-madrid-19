@@ -51,7 +51,7 @@ class SpeakerDetailFragment : DaggerFragment() {
         speakerName = view.findViewById(R.id.speakerName)
         speakerDescription = view.findViewById(R.id.speakerDescription)
         speakerTalks = view.findViewById(R.id.speakerTalks)
-        speakerTalks.apply {
+        speakerTalks.run {
             layoutManager = LinearLayoutManager(context)
             adapter = speakerTalksAdapter
         }
