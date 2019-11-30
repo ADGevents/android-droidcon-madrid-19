@@ -29,8 +29,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.0.2'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api 'androidx.core:core-ktx:1.1.0'
 
     // dagger
     implementation "com.google.dagger:dagger-android:$rootProject.dagger"
@@ -44,7 +44,20 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.androidLifecycle"
 
+    //Network
+    api 'com.squareup.retrofit2:retrofit:2.6.1'
+    api 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.4.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+    //Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
+
+    //Persistence
+    api "androidx.room:room-runtime:$rootProject.roomDatabase"
+    api "androidx.room:room-ktx:$rootProject.roomDatabase"
+    kapt "androidx.room:room-compiler:$rootProject.roomDatabase"
+
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
