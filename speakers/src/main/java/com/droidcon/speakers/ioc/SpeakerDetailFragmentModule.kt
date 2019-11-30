@@ -1,14 +1,14 @@
 package com.droidcon.speakers.ioc
 
 import com.droidcon.commons.ioc.FragmentScope
-import com.droidcon.speakers.presentation.SpeakersFragment
+import com.droidcon.speakers.presentation.SpeakerDetailFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class SpeakersFragmentModule {
+abstract class SpeakerDetailFragmentModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun contributeSpeakersFragment(): SpeakersFragment
+    abstract fun contributeSpeakerDetailFragment(): SpeakerDetailFragment
 }

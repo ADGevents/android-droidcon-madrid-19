@@ -1,11 +1,15 @@
 package com.adg.events.droidcon_app
 
 import android.os.Bundle
+import androidx.lifecycle.LiveData
+import androidx.navigation.NavController
 import com.droidcon.commons.navigation.setupWithNavController
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : DaggerAppCompatActivity() {
+
+    private var currentNavController: LiveData<NavController>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +25,16 @@ class HomeActivity : DaggerAppCompatActivity() {
             R.navigation.info_navigation
         )
 
-        bottomNavigation.setupWithNavController(
+        val navController = bottomNavigation.setupWithNavController(
             navGraphIds = navigationGraphsIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.fragmentContainer
         )
+
+        currentNavController = navController
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false
     }
 }

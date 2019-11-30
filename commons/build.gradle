@@ -42,6 +42,10 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation"
 
+    // lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.androidLifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.androidLifecycle"
+
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.androidLifecycle"
 
     testImplementation 'junit:junit:4.12'

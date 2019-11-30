@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="appBarLayoutBackground">@android:color/white</color>
-    <color name="row_divider">#ddd</color>
+    <color name="rowDivider">#ddd</color>
+    <color name="headerBackground">#ddd</color>
+    <color name="textTitle">@android:color/black</color>
 </resources>

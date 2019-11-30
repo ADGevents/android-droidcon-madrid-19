@@ -12,6 +12,7 @@ import okhttp3.OkHttpClient
 @Module(
     includes = [
         SpeakersFragmentModule::class,
+        SpeakerDetailFragmentModule::class,
         CoroutinesModule::class
     ]
 )

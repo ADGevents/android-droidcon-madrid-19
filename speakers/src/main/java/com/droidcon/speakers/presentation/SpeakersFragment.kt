@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.commons.recyclerview.setDivider
@@ -47,11 +49,22 @@ class SpeakersFragment : DaggerFragment() {
     private fun setUpViewModel() {
         speakersViewModel = speakersViewModelFactory.get(this)
         speakersViewModel.speakers.observe(::getLifecycle, ::onSpeakersUpdated)
+        speakersViewModel.speakersEffects.observe(::getLifecycle, ::onSpeakersEffect)
         speakersViewModel.onSpeakersScreenVisible()
     }
 
-    private fun onSpeakersUpdated(speakersModel: SpeakersModel) {
+    private fun onSpeakersUpdated(speakersModel: SpeakersState) {
         Log.d("Speaker", "model = $speakersModel")
         speakersAdapter.submitList(speakersModel.speakers)
+    }
+
+    private fun onSpeakersEffect(speakersEffect: SpeakersEffect) {
+        when (speakersEffect) {
+            is SpeakersEffect.NavigateToDetail -> navigateToSpeakerDetail(speakersEffect.speakerId)
+        }
+    }
+
+    private fun navigateToSpeakerDetail(speakerId: String) {
+        findNavController().navigate(SpeakersFragmentDirections.actionSpeakersFragmentToSpeakerDetailFragment(speakerId))
     }
 }

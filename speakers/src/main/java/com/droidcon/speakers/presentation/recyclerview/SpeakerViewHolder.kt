@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.droidcon.speakers.R
-import com.droidcon.speakers.presentation.SpeakerRowModel
+import com.droidcon.speakers.presentation.SpeakerState
 
 class SpeakerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(speaker: SpeakerRowModel) {
+    fun bind(speaker: SpeakerState) {
         itemView.findViewById<TextView>(R.id.speakerTitle).text = speaker.title
         itemView.findViewById<TextView>(R.id.speakerSubtitle).text = speaker.subtitle
         val avatarView = itemView.findViewById<ImageView>(R.id.speakerAvatar)
@@ -19,5 +19,6 @@ class SpeakerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .load(speaker.avatar.rawUrl)
             .transform(CircleCrop())
             .into(avatarView)
+        itemView.setOnClickListener { speaker.onClickAction(speaker.id) }
     }
 }

@@ -20,3 +20,5 @@ data class LinkDto(
 sealed class GetSpeakersError {
     object Generic: GetSpeakersError()
 }
+
+object GetSpeakerError

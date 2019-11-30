@@ -1,6 +1,7 @@
 package com.droidcon.speakers.data.network
 
 import arrow.core.Either
+import arrow.core.flatMap
 import com.droidcon.commons.ioc.IoDispatcher
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -41,6 +42,18 @@ class SpeakersApiClient @Inject constructor(
 
             return@withContext Either.right(getSpeakersDto)
         }
+
+    suspend fun getSpeaker(speakerId: String): Either<GetSpeakerError, SpeakerDto> =
+        getSpeakers()
+            .mapLeft { GetSpeakerError }
+            .flatMap { speakers ->
+                val speaker = speakers.find { it.id == speakerId }
+
+                if (speaker == null) return@flatMap Either.left(GetSpeakerError)
+
+                return@flatMap Either.right(speaker)
+            }
+
 
     private fun getSpeakersApiError(): Either<GetSpeakersError, List<SpeakerDto>> =
         Either.left(GetSpeakersError.Generic)
