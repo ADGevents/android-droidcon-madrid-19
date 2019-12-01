@@ -29,4 +29,5 @@ data class SpeakerTalk(
 
 sealed class SpeakersEffect {
     class NavigateToDetail(val speakerId: String) : SpeakersEffect()
+    object NavigateToSearch: SpeakersEffect()
 }

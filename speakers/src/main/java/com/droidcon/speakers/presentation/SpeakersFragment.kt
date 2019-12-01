@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavDirections
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,8 +34,10 @@ class SpeakersFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpView(view)
         setUpViewModel()
+        setUpView(view)
+        setUpMenu(view)
+        bindViewModel()
     }
 
     private fun setUpView(rootView: View) {
@@ -46,11 +48,30 @@ class SpeakersFragment : DaggerFragment() {
         }
     }
 
+    private fun setUpMenu(rootView: View) {
+        val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
+        toolbar.run {
+            inflateMenu(R.menu.speakers_menu)
+            setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.search -> {
+                        speakersViewModel.onSearchTapped()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+    }
+
     private fun setUpViewModel() {
         speakersViewModel = speakersViewModelFactory.get(this)
+        speakersViewModel.onSpeakersScreenVisible()
+    }
+
+    private fun bindViewModel() {
         speakersViewModel.speakers.observe(::getLifecycle, ::onSpeakersUpdated)
         speakersViewModel.speakersEffects.observe(::getLifecycle, ::onSpeakersEffect)
-        speakersViewModel.onSpeakersScreenVisible()
     }
 
     private fun onSpeakersUpdated(speakersModel: SpeakersState) {
@@ -61,10 +82,19 @@ class SpeakersFragment : DaggerFragment() {
     private fun onSpeakersEffect(speakersEffect: SpeakersEffect) {
         when (speakersEffect) {
             is SpeakersEffect.NavigateToDetail -> navigateToSpeakerDetail(speakersEffect.speakerId)
+            is SpeakersEffect.NavigateToSearch -> navigateToSearch()
         }
     }
 
     private fun navigateToSpeakerDetail(speakerId: String) {
-        findNavController().navigate(SpeakersFragmentDirections.actionSpeakersFragmentToSpeakerDetailFragment(speakerId))
+        findNavController().navigate(
+            SpeakersFragmentDirections.actionSpeakersFragmentToSpeakerDetailFragment(
+                speakerId
+            )
+        )
+    }
+
+    private fun navigateToSearch() {
+
     }
 }

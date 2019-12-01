@@ -34,6 +34,10 @@ class SpeakersViewModel(private val getAllSpeakers: GetAllSpeakers) : ViewModel(
 
     }
 
+    fun onSearchTapped() {
+        mutableSpeakersEffects.setValue(SpeakersEffect.NavigateToSearch)
+    }
+
     private fun onGetAllSpeakersError(getSpeakersError: GetSpeakersError) {
 
     }
