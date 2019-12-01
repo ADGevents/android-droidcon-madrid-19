@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
 import com.droidcon.schedule.domain.Session
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class SessionsAdapter: ListAdapter<Session, SessionViewHolder>(SessionDiffCallback) {
 
@@ -31,10 +34,9 @@ class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(session: Session) {
         itemView.findViewById<TextView>(R.id.sessionTitle).text = session.title
-        itemView.findViewById<TextView>(R.id.sessionAdditionalInfo).text = "Main stage / 30min"
-        itemView.findViewById<TextView>(R.id.sessionTime).text = "12:05"
-        itemView.findViewById<TextView>(R.id.timePeriod).text = "PM"
-        itemView.findViewById<TextView>(R.id.sessionCategory).text = session.category
+        itemView.findViewById<TextView>(R.id.sessionAdditionalInfo).text =
+            "${TimeUnit.MILLISECONDS.toMinutes(session.durationInMillis)} min / Room 3"
+        itemView.findViewById<TextView>(R.id.sessionTime).text = session.sessionStartTimeStamp.toFormattedTime()
     }
 }
 
@@ -44,5 +46,11 @@ object SessionDiffCallback: DiffUtil.ItemCallback<Session>() {
 
     override fun areContentsTheSame(oldItem: Session, newItem: Session): Boolean =
         oldItem == newItem
+}
+
+fun Long.toFormattedTime(): String {
+    val date = Date(this)
+    val formatter = SimpleDateFormat("HH:mm")
+    return formatter.format(date)
 }
 

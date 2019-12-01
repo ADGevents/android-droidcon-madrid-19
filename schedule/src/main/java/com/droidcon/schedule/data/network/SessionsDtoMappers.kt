@@ -1,10 +1,9 @@
 package com.droidcon.schedule.data.network
 
 import com.droidcon.schedule.data.SessionData
-import com.droidcon.schedule.data.SpeakerData
 
 
-fun SessionDto.toSessionData(category: String): SessionData =
+fun SessionDto.toSessionData(): SessionData =
     SessionData(
         id,
         title,
@@ -13,10 +12,6 @@ fun SessionDto.toSessionData(category: String): SessionData =
         endsAt,
         isServiceSession,
         isPlenumSession,
-        speakers.map { it.toSpeakerData() },
-        category,
-        roomId,
-        room
+        speakers,
+        roomId
     )
-
-fun SpeakerDto.toSpeakerData() = SpeakerData(id, name)
