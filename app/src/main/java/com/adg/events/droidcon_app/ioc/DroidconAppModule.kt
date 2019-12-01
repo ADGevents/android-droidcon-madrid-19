@@ -2,8 +2,8 @@ package com.adg.events.droidcon_app.ioc
 
 import android.content.Context
 import com.adg.events.droidcon_app.DroidconApp
-import com.droidcon.commons.data.db.AppDatabase
-import com.droidcon.commons.data.db.SessionsDao
+import com.droidcon.commons.data.AppDatabase
+import com.droidcon.commons.data.schedule.disk.SessionsDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

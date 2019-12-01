@@ -1,7 +1,7 @@
-package com.droidcon.schedule.data.disk
+package com.droidcon.commons.data.schedule.disk
 
-import com.droidcon.commons.data.db.entities.SessionEntity
-import com.droidcon.schedule.data.SessionData
+import com.droidcon.commons.data.schedule.SessionData
+import com.droidcon.commons.data.schedule.entity.SessionEntity
 
 
 fun SessionEntity.toSessionData(): SessionData =

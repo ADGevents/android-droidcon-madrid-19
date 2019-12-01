@@ -1,9 +1,6 @@
-package com.droidcon.schedule.data.network
+package com.droidcon.commons.data.schedule
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class SessionDto(
+data class SessionData(
     val id: String,
     val title: String,
     val description: String?,
@@ -11,6 +8,6 @@ data class SessionDto(
     val endsAt: String,
     val isServiceSession: Boolean,
     val isPlenumSession: Boolean,
-    val speakers: List<String> = emptyList(),
+    val speakers: List<String>,
     val roomId: Int?
 )

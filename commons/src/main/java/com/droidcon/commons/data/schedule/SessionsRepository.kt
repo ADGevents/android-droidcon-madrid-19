@@ -1,9 +1,8 @@
-package com.droidcon.schedule.data
+package com.droidcon.commons.data.schedule
 
-import com.droidcon.schedule.data.disk.SessionsStorage
-import com.droidcon.schedule.data.network.SessionsApiClient
-import com.droidcon.schedule.data.network.toSessionData
-import kotlinx.coroutines.Dispatchers
+import com.droidcon.commons.data.schedule.disk.SessionsStorage
+import com.droidcon.commons.data.schedule.network.SessionsApiClient
+import com.droidcon.commons.data.schedule.network.toSessionData
 import javax.inject.Inject
 
 
