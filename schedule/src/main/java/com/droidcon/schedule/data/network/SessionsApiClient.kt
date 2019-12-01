@@ -8,7 +8,7 @@ interface SessionsApiClient {
     suspend fun getSessions(): List<SessionDto>
 
     companion object {
-        const val BASE_URL = "https://sessionize.com/api/v2/jl4ktls0/view/"
+        const val BASE_URL = "https://my-json-server.typicode.com/JorgeMucientes/demo/"
         const val SESSIONS = "Sessions"
     }
 }

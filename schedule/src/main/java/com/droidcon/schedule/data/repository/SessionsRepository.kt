@@ -14,7 +14,7 @@ class SessionsRepository @Inject constructor(
 
     suspend fun getAllSessions(): List<SessionData> {
         val cachedSessions = sessionsCacheStorage.get()
-        
+
         return if (cachedSessions.isNullOrEmpty()) {
             getAllSessionsFromApi()
         } else {
