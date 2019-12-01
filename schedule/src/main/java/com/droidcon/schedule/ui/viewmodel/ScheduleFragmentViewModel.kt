@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.droidcon.schedule.domain.GetSessions
 import com.droidcon.schedule.domain.GetSessionsPerDay
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 
@@ -12,11 +13,11 @@ class ScheduleFragmentViewModel @Inject constructor(
     private val getSessionsPerDay: GetSessionsPerDay
 ) : ViewModel() {
 
-    val sessions = liveData {
+    val sessions = liveData(Dispatchers.IO) {
         emit(getSessions())
     }
 
-    val sessionsPerDay = liveData {
+    val sessionsPerDay = liveData(Dispatchers.IO) {
         emit(getSessionsPerDay())
     }
 }
