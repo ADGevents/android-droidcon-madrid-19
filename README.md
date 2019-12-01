@@ -100,12 +100,24 @@ class InfoFragment private constructor() : DaggerFragment() {
 
 ## Run app as instant experience
 
-In Android Studio, go to *Edit Configurations...* menu. 
+In Android Studio, go to *Run/Edit Configurations...* menu. 
 
-For any build configuration, in *Installation Settings* section, check the *Deploy as instant app* box.
+For each build configuration (app, Instant app, etc), in *Installation Settings* section, check the *Deploy as instant app* box. And in the dropdown "Deploy" select *Apk from app bundle*
 
 <img src="https://github.com/ADGevents/android-droidcon-madrid-19/blob/master/doc/instant_app_build_configuration.png" width="800" height="500">
 
 Then run the app with the correspondent build configuration. And that's all!
 
+To get back to run/install the app in the standard way open again *Run/Edit Configurations...* menu. Uncheck *Deploy as instant app*. Select *Default apk* from the "Deploy" dropdown. Make a clean build through Build/Rebuild project. 
+
+If when running/installing your app in the regular way (non instant app way) you see the following error: 
+
+```
+Installation did not succeed.
+The application could not be installed.
+Installation failed due to: '-27'
+Retry
+```
+
+Just execute ` adb uninstall com.adg.events.droidcon_app` and retry
 

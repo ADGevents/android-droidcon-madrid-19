@@ -1,7 +1,5 @@
 package com.droidcon.commons.ioc
 
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
 import javax.inject.Scope
 
 
@@ -11,6 +9,6 @@ import javax.inject.Scope
  * singleton within the lifespan of a child Fragment
  */
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 @kotlin.annotation.Target(allowedTargets = [AnnotationTarget.CLASS, AnnotationTarget.FUNCTION])
 annotation class ChildFragmentScope

@@ -1,7 +1,7 @@
 package com.droidcon.schedule.ioc
 
-import com.droidcon.schedule.data.network.ApiClientFactory
-import com.droidcon.schedule.data.network.SessionsApiClient
+import com.droidcon.commons.data.schedule.network.ApiClientFactory
+import com.droidcon.commons.data.schedule.network.SessionsApiClient
 import dagger.Module
 import dagger.Provides
 
@@ -11,4 +11,5 @@ class ScheduleModule {
 
     @Provides
     fun provideSessionsApiClient(): SessionsApiClient = ApiClientFactory.createSessionsApiClient()
+
 }

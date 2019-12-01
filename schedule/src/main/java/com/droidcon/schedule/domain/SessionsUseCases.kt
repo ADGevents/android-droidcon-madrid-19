@@ -1,6 +1,6 @@
 package com.droidcon.schedule.domain
 
-import com.droidcon.schedule.data.repository.SessionsRepository
+import com.droidcon.commons.data.schedule.SessionsRepository
 import java.util.*
 import javax.inject.Inject
 
