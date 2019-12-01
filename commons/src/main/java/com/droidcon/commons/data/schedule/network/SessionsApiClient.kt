@@ -1,4 +1,4 @@
-package com.droidcon.schedule.data.network
+package com.droidcon.commons.data.schedule.network
 
 import retrofit2.http.GET
 

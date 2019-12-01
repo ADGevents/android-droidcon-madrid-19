@@ -1,6 +1,6 @@
-package com.droidcon.schedule.data.network
+package com.droidcon.commons.data.schedule.network
 
-import com.droidcon.schedule.data.SessionData
+import com.droidcon.commons.data.schedule.SessionData
 
 
 fun SessionDto.toSessionData(): SessionData =

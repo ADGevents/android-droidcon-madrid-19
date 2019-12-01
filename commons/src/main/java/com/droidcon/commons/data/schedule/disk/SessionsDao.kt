@@ -1,8 +1,8 @@
-package com.droidcon.commons.data.db
+package com.droidcon.commons.data.schedule.disk
 
 import androidx.room.*
-import com.droidcon.commons.data.db.entities.SESSIONS_TABLE_NAME
-import com.droidcon.commons.data.db.entities.SessionEntity
+import com.droidcon.commons.data.schedule.entity.SESSIONS_TABLE_NAME
+import com.droidcon.commons.data.schedule.entity.SessionEntity
 
 
 @Dao

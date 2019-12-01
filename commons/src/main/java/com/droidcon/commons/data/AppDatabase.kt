@@ -1,10 +1,11 @@
-package com.droidcon.commons.data.db
+package com.droidcon.commons.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.droidcon.commons.data.db.entities.SessionEntity
+import com.droidcon.commons.data.schedule.entity.SessionEntity
+import com.droidcon.commons.data.schedule.disk.SessionsDao
 
 
 @Database(entities = [SessionEntity::class], version = 1)
@@ -22,7 +23,8 @@ abstract class AppDatabase : RoomDatabase() {
             context: Context
         ): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                val instance = buildDatabase(context)
+                val instance =
+                    buildDatabase(context)
                 INSTANCE = instance
                 instance
             }

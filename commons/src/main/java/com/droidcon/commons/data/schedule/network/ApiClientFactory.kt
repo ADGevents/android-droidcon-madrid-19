@@ -1,6 +1,6 @@
-package com.droidcon.schedule.data.network
+package com.droidcon.commons.data.schedule.network
 
-import com.droidcon.schedule.data.network.SessionsApiClient.Companion.BASE_URL
+import com.droidcon.commons.data.schedule.network.SessionsApiClient.Companion.BASE_URL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
@@ -21,7 +21,8 @@ object ApiClientFactory {
         return retrofit.create(SessionsApiClient::class.java)
     }
 
-    fun createFakeSessionsApiClient() = FakeSessionsApiClient()
+//    fun createFakeSessionsApiClient() =
+//        FakeSessionsApiClient()
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
