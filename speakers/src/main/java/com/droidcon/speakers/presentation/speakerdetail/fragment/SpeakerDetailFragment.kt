@@ -1,4 +1,4 @@
-package com.droidcon.speakers.presentation
+package com.droidcon.speakers.presentation.speakerdetail.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.droidcon.speakers.R
-import com.droidcon.speakers.presentation.recyclerview.SpeakerTalksAdapter
-import com.droidcon.speakers.presentation.viewmodel.SpeakerDetailViewModel
-import com.droidcon.speakers.presentation.viewmodel.SpeakerDetailViewModelFactory
+import com.droidcon.speakers.presentation.speakerdetail.recyclerview.SpeakerTalksAdapter
+import com.droidcon.speakers.presentation.speakerdetail.viewmodel.SpeakerDetailViewModel
+import com.droidcon.speakers.presentation.speakerdetail.viewmodel.SpeakerDetailViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -32,7 +32,9 @@ class SpeakerDetailFragment : DaggerFragment() {
     private lateinit var speakerTalks: RecyclerView
 
     private val speakerId
-        get() = arguments?.let { SpeakerDetailFragmentArgs.fromBundle(it).speakerId }
+        get() = arguments?.let { SpeakerDetailFragmentArgs.fromBundle(
+            it
+        ).speakerId }
             ?: error("Cannot use SpeakerDetailFragment without speakerId")
 
     override fun onCreateView(

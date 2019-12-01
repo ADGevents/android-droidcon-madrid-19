@@ -5,7 +5,15 @@ import androidx.room.RoomDatabase
 import javax.inject.Singleton
 
 @Singleton
-@Database(entities = [SpeakerEntity::class, LinkEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [
+        SpeakerEntity::class,
+        SpeakerFtsEntity::class,
+        LinkEntity::class
+    ],
+    version = 1,
+    exportSchema = false
+)
 abstract class SessionizeDatabase : RoomDatabase() {
 
     abstract fun speakerDao(): SpeakerDao

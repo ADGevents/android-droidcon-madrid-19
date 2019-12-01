@@ -1,4 +1,4 @@
-package com.droidcon.speakers.presentation.recyclerview
+package com.droidcon.speakers.presentation.speakerlist.recyclerview
 
 import android.view.View
 import android.widget.ImageView
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.droidcon.speakers.R
-import com.droidcon.speakers.presentation.SpeakerState
+import com.droidcon.speakers.presentation.speakerlist.model.SpeakerState
 
 class SpeakerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

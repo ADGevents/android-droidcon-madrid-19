@@ -1,10 +1,10 @@
-package com.droidcon.speakers.presentation.recyclerview
+package com.droidcon.speakers.presentation.speakerdetail.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.droidcon.speakers.R
-import com.droidcon.speakers.presentation.SpeakerTalk
+import com.droidcon.speakers.presentation.speakerdetail.model.SpeakerTalk
 import javax.inject.Inject
 
 class SpeakerTalksAdapter @Inject constructor(

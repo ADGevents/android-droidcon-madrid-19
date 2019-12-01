@@ -1,4 +1,4 @@
-package com.droidcon.speakers.presentation
+package com.droidcon.speakers.presentation.speakerlist.model
 
 import com.droidcon.commons.sessionize.repository.Url
 
@@ -12,19 +12,6 @@ data class SpeakerState(
     val subtitle: String,
     val avatar: Url,
     val onClickAction: (String) -> Unit
-)
-
-data class SpeakerDetailState(
-    val speakerAvatar: String,
-    val speakerName: String,
-    val speakerDescription: String,
-    val speakerTalks: List<SpeakerTalk>
-)
-
-data class SpeakerTalk(
-    val talkId: Int,
-    val talkTitle: String,
-    val talkSubtitle: String
 )
 
 sealed class SpeakersEffect {

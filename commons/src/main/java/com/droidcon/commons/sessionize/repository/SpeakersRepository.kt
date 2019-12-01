@@ -2,10 +2,7 @@ package com.droidcon.commons.sessionize.repository
 
 import arrow.core.Either
 import com.droidcon.commons.datatypes.runRight
-import com.droidcon.commons.sessionize.api.GetSpeakerError
-import com.droidcon.commons.sessionize.api.GetSpeakersError
-import com.droidcon.commons.sessionize.api.SpeakerDto
-import com.droidcon.commons.sessionize.api.SpeakersApiClient
+import com.droidcon.commons.sessionize.api.*
 import com.droidcon.commons.sessionize.storage.SpeakersStorage
 import javax.inject.Inject
 
@@ -42,4 +39,7 @@ class SpeakersRepository @Inject constructor(
             speakersApiClient.getSpeaker(speakerId).map { it.toDataModel() }
         }
     }
+
+    suspend fun search(query: String): Either<SearchSpeakersError, List<SpeakerData>> =
+        Either.right(speakersStorage.search(query).map { it.toDataModel() })
 }

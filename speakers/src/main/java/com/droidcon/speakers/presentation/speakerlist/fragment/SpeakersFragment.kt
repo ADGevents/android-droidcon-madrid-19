@@ -1,4 +1,4 @@
-package com.droidcon.speakers.presentation
+package com.droidcon.speakers.presentation.speakerlist.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.commons.recyclerview.setDivider
 import com.droidcon.speakers.R
-import com.droidcon.speakers.presentation.recyclerview.SpeakersAdapter
-import com.droidcon.speakers.presentation.viewmodel.SpeakersViewModel
-import com.droidcon.speakers.presentation.viewmodel.SpeakersViewModelFactory
+import com.droidcon.speakers.presentation.speakerlist.model.SpeakersEffect
+import com.droidcon.speakers.presentation.speakerlist.model.SpeakersState
+import com.droidcon.speakers.presentation.speakerlist.recyclerview.SpeakersAdapter
+import com.droidcon.speakers.presentation.speakerlist.viewmodel.SpeakersViewModel
+import com.droidcon.speakers.presentation.speakerlist.viewmodel.SpeakersViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -95,6 +97,8 @@ class SpeakersFragment : DaggerFragment() {
     }
 
     private fun navigateToSearch() {
-
+        findNavController().navigate(
+            SpeakersFragmentDirections.actionSpeakersFragmentToSearchSpeakersFragment()
+        )
     }
 }

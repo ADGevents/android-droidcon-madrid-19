@@ -1,7 +1,7 @@
-package com.droidcon.speakers.presentation.recyclerview
+package com.droidcon.speakers.presentation.speakerdetail.recyclerview
 
 import androidx.recyclerview.widget.DiffUtil
-import com.droidcon.speakers.presentation.SpeakerTalk
+import com.droidcon.speakers.presentation.speakerdetail.model.SpeakerTalk
 import javax.inject.Inject
 
 class SpeakerTalkDiffCallback @Inject constructor() : DiffUtil.ItemCallback<SpeakerTalk>() {

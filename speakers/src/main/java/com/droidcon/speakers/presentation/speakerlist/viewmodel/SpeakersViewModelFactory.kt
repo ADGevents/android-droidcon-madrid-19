@@ -1,4 +1,4 @@
-package com.droidcon.speakers.presentation.viewmodel
+package com.droidcon.speakers.presentation.speakerlist.viewmodel
 
 import androidx.fragment.app.Fragment
 import com.droidcon.commons.ioc.lifecycle.buildViewModel

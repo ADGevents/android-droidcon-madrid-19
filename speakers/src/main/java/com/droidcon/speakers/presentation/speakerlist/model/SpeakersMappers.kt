@@ -1,9 +1,13 @@
-package com.droidcon.speakers.presentation
+package com.droidcon.speakers.presentation.speakerlist.model
 
 import com.droidcon.speakers.domain.Speaker
 
 fun Iterable<Speaker>.toState(onClickAction: (String) -> Unit): SpeakersState =
-    SpeakersState(map { it.toState(onClickAction) })
+    SpeakersState(map {
+        it.toState(
+            onClickAction
+        )
+    })
 
 fun Speaker.toState(onClickAction: (String) -> Unit): SpeakerState =
     SpeakerState(
@@ -13,10 +17,3 @@ fun Speaker.toState(onClickAction: (String) -> Unit): SpeakerState =
         avatar = profilePicture,
         onClickAction = onClickAction
     )
-
-fun Speaker.toDetailState(): SpeakerDetailState = SpeakerDetailState(
-    speakerAvatar = profilePicture.rawUrl,
-    speakerName = name.fullName,
-    speakerDescription = bio,
-    speakerTalks = listOf()
-)

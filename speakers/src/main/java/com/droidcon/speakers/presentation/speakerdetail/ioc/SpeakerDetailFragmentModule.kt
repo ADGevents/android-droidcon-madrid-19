@@ -1,7 +1,7 @@
-package com.droidcon.speakers.ioc
+package com.droidcon.speakers.presentation.speakerdetail.ioc
 
 import com.droidcon.commons.ioc.FragmentScope
-import com.droidcon.speakers.presentation.SpeakerDetailFragment
+import com.droidcon.speakers.presentation.speakerdetail.fragment.SpeakerDetailFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

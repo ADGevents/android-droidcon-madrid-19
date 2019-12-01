@@ -2,6 +2,7 @@ package com.droidcon.commons.sessionize.storage
 
 import com.droidcon.commons.sessionize.storage.database.LinkEntity
 import com.droidcon.commons.sessionize.storage.database.SpeakerEntity
+import com.droidcon.commons.sessionize.storage.database.SpeakerFtsEntity
 
 fun SpeakerDO.toEntity(): SpeakerEntity = SpeakerEntity(
     id = id,
@@ -13,7 +14,7 @@ fun SpeakerDO.toEntity(): SpeakerEntity = SpeakerEntity(
     profilePicture = profilePicture
 )
 
-fun SpeakerDO.toLinkEntities(): List<LinkEntity> = links.map {link ->
+fun SpeakerDO.toLinkEntities(): List<LinkEntity> = links.map { link ->
     LinkEntity(
         id = link.id,
         speakerId = this.id,
@@ -22,3 +23,10 @@ fun SpeakerDO.toLinkEntities(): List<LinkEntity> = links.map {link ->
         linkType = link.linkType
     )
 }
+
+fun SpeakerDO.toFTSEntity(): SpeakerFtsEntity = SpeakerFtsEntity(
+    id = id,
+    firstName = firstName,
+    lastName = lastName,
+    fullName = fullName
+)

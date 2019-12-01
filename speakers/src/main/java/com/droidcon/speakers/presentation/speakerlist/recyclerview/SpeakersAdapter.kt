@@ -1,10 +1,10 @@
-package com.droidcon.speakers.presentation.recyclerview
+package com.droidcon.speakers.presentation.speakerlist.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.droidcon.speakers.R
-import com.droidcon.speakers.presentation.SpeakerState
+import com.droidcon.speakers.presentation.speakerlist.model.SpeakerState
 import javax.inject.Inject
 
 class SpeakersAdapter @Inject constructor(
@@ -17,7 +17,9 @@ class SpeakersAdapter @Inject constructor(
             parent,
             false
         )
-        return SpeakerViewHolder(itemView)
+        return SpeakerViewHolder(
+            itemView
+        )
     }
 
 
