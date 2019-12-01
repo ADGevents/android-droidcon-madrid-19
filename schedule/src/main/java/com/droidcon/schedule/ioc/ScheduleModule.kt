@@ -11,4 +11,5 @@ class ScheduleModule {
 
     @Provides
     fun provideSessionsApiClient(): SessionsApiClient = ApiClientFactory.createSessionsApiClient()
+
 }
