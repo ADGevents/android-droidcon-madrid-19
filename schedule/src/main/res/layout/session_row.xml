@@ -3,15 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/default_screen_margin"
+    android:layout_marginBottom="@dimen/default_screen_margin">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/default_screen_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/default_screen_margin" />
 
     <TextView
         android:id="@+id/sessionTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/text_default_margin"
+        android:layout_marginTop="@dimen/text_default_margin"
         android:textColor="#3F66B5"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,30 +34,15 @@
         tools:text="10" />
 
     <TextView
-        android:id="@+id/timePeriod"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#3F66B5"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/sessionTime"
-        app:layout_constraintStart_toStartOf="@+id/sessionTime"
-        app:layout_constraintTop_toBottomOf="@+id/sessionTime"
-        tools:text="PM" />
-
-    <TextView
         android:id="@+id/sessionTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/timePeriod"
+        android:layout_marginStart="@dimen/text_default_margin"
+        android:textAppearance="@style/SessionTitle"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/sessionTime"
         app:layout_constraintTop_toTopOf="@+id/sessionTime"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         tools:text="What's new in Jetpack Compose" />
 
     <TextView
@@ -54,19 +54,5 @@
         app:layout_constraintStart_toStartOf="@+id/sessionTitle"
         app:layout_constraintTop_toBottomOf="@+id/sessionTitle"
         tools:text="1 hour/ Main Stage" />
-
-    <TextView
-        android:id="@+id/sessionCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
-        android:drawableStart="@drawable/category_circle_blue"
-        android:drawablePadding="4dp"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/sessionAdditionalInfo"
-        app:layout_constraintTop_toBottomOf="@+id/sessionAdditionalInfo"
-        tools:text="Jetpack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
