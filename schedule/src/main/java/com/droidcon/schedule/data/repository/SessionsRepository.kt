@@ -12,12 +12,15 @@ class SessionsRepository @Inject constructor(
     private val sessionsApiClient: SessionsApiClient
 ) {
 
-    suspend fun getAllSessions(): List<SessionData> =
-        if (sessionsCacheStorage.get().isNullOrEmpty()) {
+    suspend fun getAllSessions(): List<SessionData> {
+        val cachedSessions = sessionsCacheStorage.get()
+        
+        return if (cachedSessions.isNullOrEmpty()) {
             getAllSessionsFromApi()
         } else {
-            sessionsCacheStorage.get()!!
+            cachedSessions
         }
+    }
 
     private suspend fun getAllSessionsFromApi(): List<SessionData> {
         val sessionsFromApi = sessionsApiClient.getSessions().map {
