@@ -1,7 +1,7 @@
-package com.droidcon.speakers.data.network
+package com.droidcon.commons.sessionize.api
 
 import arrow.core.orNull
-import com.droidcon.test.leftOrNull
+import com.droidcon.commons.testutils.leftOrNull
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

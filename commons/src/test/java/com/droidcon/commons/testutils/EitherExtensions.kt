@@ -1,4 +1,4 @@
-package com.droidcon.test
+package com.droidcon.commons.testutils
 
 import arrow.core.EitherOf
 import arrow.core.fix

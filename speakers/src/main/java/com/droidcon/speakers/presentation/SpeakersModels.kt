@@ -1,6 +1,6 @@
 package com.droidcon.speakers.presentation
 
-import com.droidcon.speakers.data.Url
+import com.droidcon.commons.sessionize.repository.Url
 
 data class SpeakersState(
     val speakers: List<SpeakerState>

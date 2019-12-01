@@ -1,4 +1,4 @@
-package com.droidcon.speakers.data.network
+package com.droidcon.commons.sessionize.api
 
 import arrow.core.Either
 import arrow.core.flatMap

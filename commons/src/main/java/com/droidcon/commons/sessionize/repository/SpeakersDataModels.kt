@@ -1,8 +1,9 @@
-package com.droidcon.speakers.data
+package com.droidcon.commons.sessionize.repository
 
 inline class Url(val rawUrl: String)
 
-fun String.asUrl(): Url = Url(this)
+fun String.asUrl(): Url =
+    Url(this)
 
 data class NameData(
     val firstName: String,

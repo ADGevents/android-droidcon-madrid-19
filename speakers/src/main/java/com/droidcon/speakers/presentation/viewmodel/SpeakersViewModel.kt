@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.lifecycle.SingleLiveEvent
-import com.droidcon.speakers.data.network.GetSpeakersError
+import com.droidcon.commons.sessionize.api.GetSpeakersError
 import com.droidcon.speakers.domain.GetAllSpeakers
 import com.droidcon.speakers.domain.Speaker
 import com.droidcon.speakers.presentation.SpeakersEffect

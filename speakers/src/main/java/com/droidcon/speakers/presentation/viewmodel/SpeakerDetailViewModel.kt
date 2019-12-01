@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.droidcon.speakers.data.network.GetSpeakerError
+import com.droidcon.commons.sessionize.api.GetSpeakerError
 import com.droidcon.speakers.domain.GetSpeaker
 import com.droidcon.speakers.domain.Speaker
 import com.droidcon.speakers.presentation.SpeakerDetailState
-import com.droidcon.speakers.presentation.SpeakersEffect
 import com.droidcon.speakers.presentation.toDetailState
 import kotlinx.coroutines.launch
 
