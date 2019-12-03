@@ -19,8 +19,7 @@ abstract class ActivityBindingModule {
             InfoModule::class,
             ScheduleModule::class,
             FavouritesModule::class,
-            SpeakersModule::class,
-            SessionizeModule::class
+            SpeakersModule::class
         ]
     )
     abstract fun homeActivity(): HomeActivity

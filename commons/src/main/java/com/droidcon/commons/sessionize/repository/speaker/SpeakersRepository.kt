@@ -1,8 +1,8 @@
-package com.droidcon.commons.sessionize.repository
+package com.droidcon.commons.sessionize.repository.speaker
 
 import arrow.core.Either
 import com.droidcon.commons.datatypes.runRight
-import com.droidcon.commons.sessionize.api.*
+import com.droidcon.commons.sessionize.api.speaker.*
 import com.droidcon.commons.sessionize.storage.SpeakersStorage
 import javax.inject.Inject
 

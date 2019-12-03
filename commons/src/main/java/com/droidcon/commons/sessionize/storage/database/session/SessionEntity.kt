@@ -1,4 +1,4 @@
-package com.droidcon.commons.data.schedule.entity
+package com.droidcon.commons.sessionize.storage.database.session
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

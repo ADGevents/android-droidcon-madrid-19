@@ -1,4 +1,4 @@
-package com.droidcon.commons.sessionize.api
+package com.droidcon.commons.sessionize.api.speaker
 
 data class SpeakerDto(
     val id: String,

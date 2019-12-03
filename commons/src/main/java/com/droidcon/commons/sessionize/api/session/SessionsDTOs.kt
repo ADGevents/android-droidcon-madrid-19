@@ -1,4 +1,4 @@
-package com.droidcon.commons.data.schedule.network
+package com.droidcon.commons.sessionize.api.session
 
 import kotlinx.serialization.Serializable
 

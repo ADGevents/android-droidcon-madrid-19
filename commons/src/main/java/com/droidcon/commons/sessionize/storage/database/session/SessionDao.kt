@@ -1,12 +1,10 @@
-package com.droidcon.commons.data.schedule.disk
+package com.droidcon.commons.sessionize.storage.database.session
 
 import androidx.room.*
-import com.droidcon.commons.data.schedule.entity.SESSIONS_TABLE_NAME
-import com.droidcon.commons.data.schedule.entity.SessionEntity
 
 
 @Dao
-interface SessionsDao {
+interface SessionDao {
 
     @Query("SELECT * from $SESSIONS_TABLE_NAME")
     fun getSessions(): List<SessionEntity>

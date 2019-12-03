@@ -1,4 +1,4 @@
-package com.droidcon.commons.data.schedule
+package com.droidcon.commons.sessionize.repository.session
 
 data class SessionData(
     val id: String,

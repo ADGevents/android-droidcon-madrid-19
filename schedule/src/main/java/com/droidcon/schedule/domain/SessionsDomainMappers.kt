@@ -1,6 +1,6 @@
 package com.droidcon.schedule.domain
 
-import com.droidcon.commons.data.schedule.SessionData
+import com.droidcon.commons.sessionize.repository.session.SessionData
 import java.text.SimpleDateFormat
 
 

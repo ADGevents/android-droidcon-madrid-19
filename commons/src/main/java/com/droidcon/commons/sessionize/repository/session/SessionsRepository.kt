@@ -1,8 +1,8 @@
-package com.droidcon.commons.data.schedule
+package com.droidcon.commons.sessionize.repository.session
 
-import com.droidcon.commons.data.schedule.disk.SessionsStorage
-import com.droidcon.commons.data.schedule.network.SessionsApiClient
-import com.droidcon.commons.data.schedule.network.toSessionData
+import com.droidcon.commons.sessionize.storage.SessionsStorage
+import com.droidcon.commons.sessionize.api.session.SessionsApiClient
+import com.droidcon.commons.sessionize.api.session.toSessionData
 import javax.inject.Inject
 
 

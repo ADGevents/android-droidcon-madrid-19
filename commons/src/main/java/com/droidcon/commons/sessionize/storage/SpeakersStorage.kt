@@ -1,9 +1,9 @@
 package com.droidcon.commons.sessionize.storage
 
-import com.droidcon.commons.sessionize.storage.database.LinkEntity
-import com.droidcon.commons.sessionize.storage.database.SpeakerDao
-import com.droidcon.commons.sessionize.storage.database.SpeakerEntity
-import com.droidcon.commons.sessionize.storage.database.toDO
+import com.droidcon.commons.sessionize.storage.database.speaker.LinkEntity
+import com.droidcon.commons.sessionize.storage.database.speaker.SpeakerDao
+import com.droidcon.commons.sessionize.storage.database.speaker.SpeakerEntity
+import com.droidcon.commons.sessionize.storage.database.speaker.toDO
 import javax.inject.Inject
 
 class SpeakersStorage @Inject constructor(
@@ -20,7 +20,7 @@ class SpeakersStorage @Inject constructor(
     suspend fun add(speakers: List<SpeakerDO>) {
         speakerDao.insertSpeakers(speakers.map { it.toEntity() })
         speakerDao.insertLinks(speakers.flatMap { it.toLinkEntities() })
-        speakerDao.insertSpeakersForSearch(speakers.map { it.toFTSEntity() })
+        // speakerDao.insertSpeakersForSearch(speakers.map { it.toFTSEntity() })
     }
 
     suspend fun get(id: String): SpeakerDO? {

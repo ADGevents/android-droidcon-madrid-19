@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.droidcon.schedule.R
 import com.droidcon.schedule.domain.Session
-import com.droidcon.schedule.ui.viewmodel.ScheduleFragmentViewModel
-import com.droidcon.schedule.ui.viewmodel.ScheduleFragmentViewModelFactory
+import com.droidcon.schedule.ui.viewmodel.ScheduleViewModel
+import com.droidcon.schedule.ui.viewmodel.ScheduleViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -22,8 +22,8 @@ import javax.inject.Inject
 class ScheduleFragment : DaggerFragment() {
 
     @Inject
-    lateinit var scheduleFragmentViewModelFactory: ScheduleFragmentViewModelFactory
-    private lateinit var scheduleFragmentViewModel: ScheduleFragmentViewModel
+    lateinit var scheduleViewModelFactory: ScheduleViewModelFactory
+    private lateinit var scheduleFragmentViewModel: ScheduleViewModel
 
     private lateinit var scheduleAdapter: ScheduleAdapter
     private lateinit var viewPager: ViewPager
@@ -49,9 +49,9 @@ class ScheduleFragment : DaggerFragment() {
     }
 
     private fun setUpScheduleViewModel() {
-        scheduleFragmentViewModel = scheduleFragmentViewModelFactory.get(this)
+        scheduleFragmentViewModel = scheduleViewModelFactory.get(this)
         scheduleFragmentViewModel =
-            ViewModelProviders.of(this).get(ScheduleFragmentViewModel::class.java)
+            ViewModelProviders.of(this).get(ScheduleViewModel::class.java)
         scheduleFragmentViewModel.sessions.observe(
             this,
             Observer<List<Session>> { onSessionLoaded() })

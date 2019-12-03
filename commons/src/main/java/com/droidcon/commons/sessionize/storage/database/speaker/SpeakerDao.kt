@@ -1,4 +1,4 @@
-package com.droidcon.commons.sessionize.storage.database
+package com.droidcon.commons.sessionize.storage.database.speaker
 
 import androidx.room.Dao
 import androidx.room.Insert

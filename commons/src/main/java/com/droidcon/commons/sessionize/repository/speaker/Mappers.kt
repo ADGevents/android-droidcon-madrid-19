@@ -1,7 +1,7 @@
-package com.droidcon.commons.sessionize.repository
+package com.droidcon.commons.sessionize.repository.speaker
 
-import com.droidcon.commons.sessionize.api.LinkDto
-import com.droidcon.commons.sessionize.api.SpeakerDto
+import com.droidcon.commons.sessionize.api.speaker.LinkDto
+import com.droidcon.commons.sessionize.api.speaker.SpeakerDto
 import com.droidcon.commons.sessionize.storage.LinkDO
 import com.droidcon.commons.sessionize.storage.SpeakerDO
 
@@ -47,23 +47,26 @@ fun LinkDto.toDO(): LinkDO = LinkDO(
 
 // DO Mappers
 
-fun SpeakerDO.toDataModel(): SpeakerData = SpeakerData(
-    id = id,
-    name = getNameData(),
-    bio = bio,
-    tagLine = tagLine,
-    profilePicture = profilePicture.asUrl(),
-    links = links.map { it.toDataModel() }
-)
+fun SpeakerDO.toDataModel(): SpeakerData =
+    SpeakerData(
+        id = id,
+        name = getNameData(),
+        bio = bio,
+        tagLine = tagLine,
+        profilePicture = profilePicture.asUrl(),
+        links = links.map { it.toDataModel() }
+    )
 
-fun SpeakerDO.getNameData(): NameData = NameData(
-    firstName = firstName,
-    lastName = lastName,
-    fullName = fullName
-)
+fun SpeakerDO.getNameData(): NameData =
+    NameData(
+        firstName = firstName,
+        lastName = lastName,
+        fullName = fullName
+    )
 
-fun LinkDO.toDataModel(): LinkData = LinkData(
-    title = title,
-    url = url.asUrl(),
-    linkType = linkType
-)
+fun LinkDO.toDataModel(): LinkData =
+    LinkData(
+        title = title,
+        url = url.asUrl(),
+        linkType = linkType
+    )

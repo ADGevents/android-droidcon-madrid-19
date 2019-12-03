@@ -6,13 +6,12 @@ import com.droidcon.schedule.domain.GetSessions
 import com.droidcon.schedule.domain.GetSessionsPerDay
 import javax.inject.Inject
 
-
-class ScheduleFragmentViewModelFactory @Inject constructor(
+class ScheduleViewModelFactory @Inject constructor(
     private val getSessions: GetSessions,
     private val getSessionsPerDay: GetSessionsPerDay
 ) {
 
-    fun get(fragment: Fragment): ScheduleFragmentViewModel = fragment.buildViewModel {
-        ScheduleFragmentViewModel(getSessions, getSessionsPerDay)
+    fun get(fragment: Fragment): ScheduleViewModel = fragment.buildViewModel {
+        ScheduleViewModel(getSessions, getSessionsPerDay)
     }
 }

@@ -1,4 +1,4 @@
-package com.droidcon.commons.sessionize.storage.database
+package com.droidcon.commons.sessionize.storage.database.speaker
 
 import com.droidcon.commons.sessionize.storage.LinkDO
 import com.droidcon.commons.sessionize.storage.SpeakerDO

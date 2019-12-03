@@ -5,10 +5,9 @@ import androidx.lifecycle.liveData
 import com.droidcon.schedule.domain.GetSessions
 import com.droidcon.schedule.domain.GetSessionsPerDay
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Inject
 
 
-class ScheduleFragmentViewModel @Inject constructor(
+class ScheduleViewModel(
     private val getSessions: GetSessions,
     private val getSessionsPerDay: GetSessionsPerDay
 ) : ViewModel() {
