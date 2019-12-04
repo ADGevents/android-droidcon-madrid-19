@@ -2,9 +2,7 @@ package com.droidcon.commons.data.schedule.disk
 
 import com.droidcon.commons.data.schedule.SessionData
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class SessionsStorage @Inject constructor(
     private val sessionsDao: SessionsDao
 ) {
