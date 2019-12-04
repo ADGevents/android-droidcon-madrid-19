@@ -10,17 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
 import com.droidcon.schedule.domain.Session
-import com.droidcon.schedule.ui.viewmodel.ScheduleFragmentViewModel
-import com.droidcon.schedule.ui.viewmodel.ScheduleFragmentViewModelFactory
+import com.droidcon.schedule.ui.viewmodel.ScheduleViewModel
+import com.droidcon.schedule.ui.viewmodel.ScheduleViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
-
 
 class ScheduleDayFragment : DaggerFragment() {
 
     @Inject
-    lateinit var scheduleFragmentViewModelFactory: ScheduleFragmentViewModelFactory
-    private lateinit var scheduleFragmentViewModel: ScheduleFragmentViewModel
+    lateinit var scheduleViewModelFactory: ScheduleViewModelFactory
+    private lateinit var scheduleFragmentViewModel: ScheduleViewModel
 
     private lateinit var sessions: RecyclerView
     private val sessionsAdapter by lazy { SessionsAdapter() }
@@ -51,9 +50,9 @@ class ScheduleDayFragment : DaggerFragment() {
     }
 
     private fun setUpScheduleViewModel() {
-        scheduleFragmentViewModel = scheduleFragmentViewModelFactory.get(this)
+        scheduleFragmentViewModel = scheduleViewModelFactory.get(this)
         scheduleFragmentViewModel =
-            ViewModelProviders.of(this).get(ScheduleFragmentViewModel::class.java)
+            ViewModelProviders.of(this).get(ScheduleViewModel::class.java)
         scheduleFragmentViewModel.sessionsPerDay.observe(
             this,
             Observer { showSessions(it[conferenceDay]) })

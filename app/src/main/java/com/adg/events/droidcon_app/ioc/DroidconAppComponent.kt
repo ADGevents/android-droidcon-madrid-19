@@ -1,6 +1,8 @@
 package com.adg.events.droidcon_app.ioc
 
 import com.adg.events.droidcon_app.DroidconApp
+import com.droidcon.commons.ioc.CoroutinesModule
+import com.droidcon.commons.sessionize.ioc.SessionizeModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -11,7 +13,9 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         ActivityBindingModule::class,
-        AppModule::class
+        CoroutinesModule::class,
+        AppModule::class,
+        SessionizeModule::class
     ]
 )
 interface DroidconAppComponent : AndroidInjector<DroidconApp> {

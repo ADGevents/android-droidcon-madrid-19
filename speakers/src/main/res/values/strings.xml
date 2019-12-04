@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">speakers</string>
+    <string name="speakeravatar">speakerAvatar</string>
+    <string name="speakers">Speakers</string>
+    <string name="speaker_avatar_content_descriptipon">Speaker Avatar</string>
+    <string name="talks">TALKS</string>
+    <string name="search">Search</string>
+    <string name="speakers_search">Search speakers</string>
+</resources>

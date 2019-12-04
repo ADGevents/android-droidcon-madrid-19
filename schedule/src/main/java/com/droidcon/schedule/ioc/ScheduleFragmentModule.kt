@@ -2,12 +2,13 @@ package com.droidcon.schedule.ioc
 
 import com.droidcon.commons.ioc.ChildFragmentScope
 import com.droidcon.commons.ioc.FragmentScope
+import com.droidcon.commons.sessionize.ioc.SessionizeModule
 import com.droidcon.schedule.ui.ScheduleDayFragment
 import com.droidcon.schedule.ui.ScheduleFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Module
+@Module(includes = [SessionizeModule::class])
 abstract class ScheduleFragmentModule {
 
     @FragmentScope
@@ -17,5 +18,4 @@ abstract class ScheduleFragmentModule {
     @ChildFragmentScope
     @ContributesAndroidInjector
     internal abstract fun contributeScheduleDayFragment(): ScheduleDayFragment
-
 }

@@ -130,6 +130,7 @@ fun BottomNavigationView.setupWithNavController(
             }
         }
     }
+
     return selectedNavController
 }
 
