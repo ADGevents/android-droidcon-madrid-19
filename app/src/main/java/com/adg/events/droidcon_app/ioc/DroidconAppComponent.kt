@@ -11,7 +11,7 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         ActivityBindingModule::class,
-        DroidconAppModule::class
+        AppModule::class
     ]
 )
 interface DroidconAppComponent : AndroidInjector<DroidconApp> {

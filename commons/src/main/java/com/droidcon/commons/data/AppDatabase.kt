@@ -4,35 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.droidcon.commons.data.schedule.entity.SessionEntity
 import com.droidcon.commons.data.schedule.disk.SessionsDao
+import com.droidcon.commons.data.schedule.entity.SessionEntity
+import javax.inject.Singleton
 
-
-@Database(entities = [SessionEntity::class], version = 1)
+@Singleton
+@Database(entities = [SessionEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun sessionDao(): SessionsDao
 
     companion object {
-        private const val DATABASE_NAME = "droidcon-db"
+        const val DATABASE_NAME = "droidcon-db"
 
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
-
-        fun getDatabase(
-            context: Context
-        ): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance =
-                    buildDatabase(context)
-                INSTANCE = instance
-                instance
-            }
-        }
-
-        private fun buildDatabase(context: Context): AppDatabase {
+        fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(
-                context.applicationContext,
+                context,
                 AppDatabase::class.java,
                 DATABASE_NAME
             ).build()
