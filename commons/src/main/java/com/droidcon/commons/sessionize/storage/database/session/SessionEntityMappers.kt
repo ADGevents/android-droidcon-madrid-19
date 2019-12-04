@@ -13,7 +13,8 @@ fun SessionEntity.toSessionData(): SessionData =
         isServiceSession,
         isPlenumSession,
         emptyList(),
-        roomId
+        roomId,
+        isStarred
     )
 
 fun SessionData.toSessionEntity(): SessionEntity =
@@ -25,5 +26,6 @@ fun SessionData.toSessionEntity(): SessionEntity =
         endsAt,
         isServiceSession,
         isPlenumSession,
-        roomId
+        roomId,
+        isStarred
     )

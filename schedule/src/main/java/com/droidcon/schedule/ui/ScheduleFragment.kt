@@ -8,22 +8,12 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.droidcon.schedule.R
-import com.droidcon.schedule.domain.Session
-import com.droidcon.schedule.ui.viewmodel.ScheduleViewModel
-import com.droidcon.schedule.ui.viewmodel.ScheduleViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
-import javax.inject.Inject
 
 class ScheduleFragment : DaggerFragment() {
-
-    @Inject
-    lateinit var scheduleViewModelFactory: ScheduleViewModelFactory
-    private lateinit var scheduleFragmentViewModel: ScheduleViewModel
 
     private lateinit var scheduleAdapter: ScheduleAdapter
     private lateinit var viewPager: ViewPager
@@ -38,7 +28,6 @@ class ScheduleFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpScheduleViewModel()
         initViews(view)
     }
 
@@ -46,18 +35,6 @@ class ScheduleFragment : DaggerFragment() {
         tabs = view.findViewById(R.id.tabs)
         viewPager = view.findViewById(R.id.schedule_days_viewpager)
         progress = view.findViewById(R.id.progress_indicator)
-    }
-
-    private fun setUpScheduleViewModel() {
-        scheduleFragmentViewModel = scheduleViewModelFactory.get(this)
-        scheduleFragmentViewModel =
-            ViewModelProviders.of(this).get(ScheduleViewModel::class.java)
-        scheduleFragmentViewModel.sessions.observe(
-            this,
-            Observer<List<Session>> { onSessionLoaded() })
-    }
-
-    private fun onSessionLoaded() {
         setUpViewPager()
         progress.visibility = View.GONE
     }

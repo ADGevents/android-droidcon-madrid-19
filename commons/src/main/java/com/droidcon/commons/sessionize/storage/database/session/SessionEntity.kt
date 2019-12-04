@@ -12,7 +12,8 @@ data class SessionEntity(
     val endsAt: String,
     val isServiceSession: Boolean,
     val isPlenumSession: Boolean,
-    val roomId: Int?
+    val roomId: Int?,
+    val isStarred: Boolean
 )
 
 internal const val SESSIONS_TABLE_NAME = "sessions"

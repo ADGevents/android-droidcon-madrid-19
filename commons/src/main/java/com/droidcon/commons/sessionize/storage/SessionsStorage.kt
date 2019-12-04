@@ -5,14 +5,12 @@ import com.droidcon.commons.sessionize.storage.database.session.SessionDao
 import com.droidcon.commons.sessionize.storage.database.session.toSessionData
 import com.droidcon.commons.sessionize.storage.database.session.toSessionEntity
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class SessionsStorage @Inject constructor(
     private val sessionDao: SessionDao
 ) {
 
-    fun getAllSessionsData(): List<SessionData> =
+    suspend fun getAllSessionsData(): List<SessionData> =
         sessionDao.getSessions().map {
             it.toSessionData()
         }
@@ -22,4 +20,8 @@ class SessionsStorage @Inject constructor(
         sessionDao.updatePersistedSessions(sessionsEntity)
     }
 
+    suspend fun updateStarredValue(id: String, isStarred: Boolean): Boolean {
+        val updatedSessions = sessionDao.updateStarredValue(id, isStarred)
+        return updatedSessions > 0
+    }
 }

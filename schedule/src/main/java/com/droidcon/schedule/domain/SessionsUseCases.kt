@@ -14,15 +14,22 @@ class GetSessions @Inject constructor(
         }
 }
 
-class GetSessionsPerDay @Inject constructor(
+class GetSessionsByDay @Inject constructor(
     private val sessionsRepository: SessionsRepository
 ) {
-    suspend operator fun invoke(): Map<Int, List<Session>> =
+    suspend operator fun invoke(sessionDay: Int): List<Session> =
         sessionsRepository.getAllSessions()
             .map { it.toSession() }
             .sortedBy { it.sessionStartTimeStamp }
-            .groupBy { it.sessionStartTimeStamp.getDayOfTheMonth() }
+            .filter { it.sessionStartTimeStamp.getDayOfTheMonth() == sessionDay }
+}
 
+class UpdateSessionStarredValue @Inject constructor(
+    private val sessionsRepository: SessionsRepository
+) {
+
+    suspend operator fun invoke(sessionId: String, isStarred: Boolean): Boolean =
+        sessionsRepository.updateStarredValue(sessionId, isStarred)
 }
 
 private fun Long.getDayOfTheMonth(): Int {

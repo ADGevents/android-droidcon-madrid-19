@@ -9,5 +9,6 @@ data class Session(
     val isServiceSession: Boolean,
     val isPlenumSession: Boolean,
     val speakers: List<String>,
-    val roomId: Int?
+    val roomId: Int?,
+    val starred: Boolean = false
 )

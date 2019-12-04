@@ -28,7 +28,7 @@
         android:layout_marginStart="@dimen/text_default_margin"
         android:layout_marginTop="@dimen/text_default_margin"
         android:textColor="#3F66B5"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="10" />
@@ -37,12 +37,11 @@
         android:id="@+id/sessionTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_default_margin"
+        android:layout_marginStart="16dp"
         android:textAppearance="@style/SessionTitle"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/starSession"
         app:layout_constraintStart_toEndOf="@+id/sessionTime"
         app:layout_constraintTop_toTopOf="@+id/sessionTime"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         tools:text="What's new in Jetpack Compose" />
 
     <TextView
@@ -54,5 +53,18 @@
         app:layout_constraintStart_toStartOf="@+id/sessionTitle"
         app:layout_constraintTop_toBottomOf="@+id/sessionTitle"
         tools:text="1 hour/ Main Stage" />
+
+    <ImageButton
+        android:id="@+id/starSession"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/ic_star_empty_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

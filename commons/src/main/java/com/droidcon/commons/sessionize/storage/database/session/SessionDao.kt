@@ -7,10 +7,10 @@ import androidx.room.*
 interface SessionDao {
 
     @Query("SELECT * from $SESSIONS_TABLE_NAME")
-    fun getSessions(): List<SessionEntity>
+    suspend fun getSessions(): List<SessionEntity>
 
     @Query("SELECT * FROM $SESSIONS_TABLE_NAME WHERE id LIKE :id LIMIT 1")
-    fun findSessionById(id: String): SessionEntity
+    suspend fun findSessionById(id: String): SessionEntity
 
     @Transaction
     suspend fun updatePersistedSessions(sessions: List<SessionEntity>) {
@@ -24,4 +24,6 @@ interface SessionDao {
     @Query("DELETE FROM $SESSIONS_TABLE_NAME")
     fun clearSessions()
 
+    @Query("UPDATE $SESSIONS_TABLE_NAME SET isStarred = :isStarred WHERE id = :id")
+    suspend fun updateStarredValue(id: String, isStarred: Boolean): Int
 }
