@@ -49,8 +49,8 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation"
 
     // lifecycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.androidLifecycle"
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.androidLifecycle"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.androidLifecycle"
+    api "androidx.lifecycle:lifecycle-extensions:$rootProject.androidLifecycle"
 
     // network
     api 'com.squareup.retrofit2:retrofit:2.6.1'

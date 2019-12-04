@@ -5,14 +5,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-fun Session.toUIModel(
-    onStartClicked: (String, Boolean) -> Unit,
+fun Session.toState(
+    favouritesEnabled: Boolean,
+    onStartClicked: (String, Boolean) -> Unit = { _, _ -> },
     onSessionClicked: (String) -> Unit = {}
-): SessionModel = SessionModel(
+): SessionState = SessionState(
     id = id,
     title = title,
     additionalInfo = "${TimeUnit.MILLISECONDS.toMinutes(durationInMillis)} min / Room 3",
     time = sessionStartTimeStamp.toFormattedTime(),
+    favouritesEnabled = favouritesEnabled,
     starred = starred,
     onStarClicked = onStartClicked,
     onSessionClicked = onSessionClicked

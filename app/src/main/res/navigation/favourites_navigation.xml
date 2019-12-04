@@ -5,7 +5,7 @@
     app:startDestination="@id/favouritesFragment">
     <fragment
         android:id="@+id/favouritesFragment"
-        android:name="com.droidcon.favourites.FavouritesFragment"
+        android:name="com.droidcon.favourites.presentation.FavouritesFragment"
         android:label="@string/favourites" />
 
 </navigation>

@@ -1,10 +1,11 @@
 package com.droidcon.schedule.ui.model
 
-data class SessionModel(
+data class SessionState(
     val id: String,
     val title: String,
     val additionalInfo: String,
     val time: String,
+    val favouritesEnabled: Boolean,
     val starred: Boolean,
     val onStarClicked: (String, Boolean) -> Unit,
     val onSessionClicked: (String) -> Unit

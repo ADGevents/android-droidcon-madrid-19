@@ -21,8 +21,9 @@ class ScheduleDayFragment : DaggerFragment() {
     lateinit var scheduleViewModelFactory: ScheduleViewModelFactory
     private lateinit var scheduleFragmentViewModel: ScheduleDayViewModel
 
+    @Inject
+    lateinit var sessionsAdapter: SessionsAdapter
     private lateinit var sessions: RecyclerView
-    private val sessionsAdapter by lazy { SessionsAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,

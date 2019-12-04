@@ -1,9 +1,8 @@
 package com.droidcon.schedule.domain
 
-import com.droidcon.commons.sessionize.repository.session.SessionsRepository
+import com.droidcon.commons.sessionize.data.repository.session.SessionsRepository
 import java.util.*
 import javax.inject.Inject
-
 
 class GetSessions @Inject constructor(
     private val sessionsRepository: SessionsRepository

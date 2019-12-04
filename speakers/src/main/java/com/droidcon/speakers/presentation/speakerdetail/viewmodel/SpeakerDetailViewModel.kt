@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.droidcon.commons.sessionize.api.speaker.GetSpeakerError
+import com.droidcon.commons.sessionize.data.api.speaker.GetSpeakerError
 import com.droidcon.speakers.domain.GetSpeaker
 import com.droidcon.speakers.domain.Speaker
 import com.droidcon.speakers.presentation.speakerdetail.model.SpeakerDetailState
