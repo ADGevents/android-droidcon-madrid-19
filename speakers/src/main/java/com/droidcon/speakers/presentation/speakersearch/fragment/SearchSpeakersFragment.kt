@@ -109,7 +109,7 @@ class SearchSpeakersFragment : DaggerFragment() {
 
     private fun onSpeakersSearchResult(speakersSearchResult: SpeakersSearchResult) {
         when (speakersSearchResult) {
-            SpeakersSearchResult.Empty,
+            SpeakersSearchResult.Empty -> speakersAdapter.submitList(emptyList())
             SpeakersSearchResult.Error -> {
             }
             is SpeakersSearchResult.Content -> speakersAdapter.submitList(speakersSearchResult.speakers.speakers)

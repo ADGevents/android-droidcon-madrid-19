@@ -23,6 +23,11 @@ class SearchSpeakersViewModel(
     val speakersSearchResult: LiveData<SpeakersSearchResult> = mutableSpeakersSearchResult
 
     fun onSearchQueryChanged(queryText: String) {
+        if (queryText.isBlank()) {
+            mutableSpeakersSearchResult.value = SpeakersSearchResult.Empty
+            return
+        }
+
         viewModelScope.launch {
             val speakers = searchSpeakers(queryText)
             speakers.fold(

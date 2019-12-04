@@ -20,7 +20,6 @@ class SpeakersStorage @Inject constructor(
     suspend fun add(speakers: List<SpeakerDO>) {
         speakerDao.insertSpeakers(speakers.map { it.toEntity() })
         speakerDao.insertLinks(speakers.flatMap { it.toLinkEntities() })
-        // speakerDao.insertSpeakersForSearch(speakers.map { it.toFTSEntity() })
     }
 
     suspend fun get(id: String): SpeakerDO? {
@@ -31,7 +30,7 @@ class SpeakersStorage @Inject constructor(
     }
 
     suspend fun search(query: String): List<SpeakerDO> {
-        val searchResults = speakerDao.searchSpeakers(query)
+        val searchResults = speakerDao.searchSpeakers("*$query*")
         return searchResults.mapNotNull { speakerId -> get(speakerId) }
     }
 

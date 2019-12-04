@@ -25,7 +25,4 @@ interface SpeakerDao {
 
     @Query("SELECT ${Speaker.COLUMN_ID} FROM ${Speaker.FTS_TABLE_NAME} WHERE ${Speaker.FTS_TABLE_NAME} MATCH :query")
     suspend fun searchSpeakers(query: String): List<String>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSpeakersForSearch(speakers: List<SpeakerFtsEntity>)
 }
