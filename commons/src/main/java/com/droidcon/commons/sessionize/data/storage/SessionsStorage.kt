@@ -4,6 +4,7 @@ import com.droidcon.commons.sessionize.data.repository.session.SessionData
 import com.droidcon.commons.sessionize.data.storage.database.session.SessionDao
 import com.droidcon.commons.sessionize.data.storage.database.session.toSessionData
 import com.droidcon.commons.sessionize.data.storage.database.session.toSessionEntity
+import com.droidcon.commons.sessionize.data.storage.database.sessionandspeaker.SessionAndSpeakerEntity
 import javax.inject.Inject
 
 class SessionsStorage @Inject constructor(
@@ -18,6 +19,16 @@ class SessionsStorage @Inject constructor(
     suspend fun storeSessions(sessions: List<SessionData>) {
         val sessionsEntity = sessions.map { it.toSessionEntity() }
         sessionDao.updatePersistedSessions(sessionsEntity)
+
+        val sessionsAndSpeakers = sessions.flatMap { session ->
+            session.speakers.map { speakerId ->
+                SessionAndSpeakerEntity(
+                    sessionId = session.id,
+                    speakerId = speakerId
+                )
+            }
+        }
+        sessionDao.insertSessionsAndSpeakers(sessionsAndSpeakers)
     }
 
     suspend fun updateStarredValue(id: String, isStarred: Boolean): Boolean {
@@ -29,4 +40,10 @@ class SessionsStorage @Inject constructor(
         sessionDao.getFavourites().map {
             it.toSessionData()
         }
+
+    suspend fun getBySpeakerId(speakerId: String): List<SessionData> =
+        sessionDao.getSessionsBySpeakerId(speakerId).map {
+            it.toSessionData()
+        }
+
 }

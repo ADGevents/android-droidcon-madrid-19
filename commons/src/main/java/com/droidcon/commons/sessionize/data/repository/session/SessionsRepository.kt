@@ -27,6 +27,9 @@ class SessionsRepository @Inject constructor(
 
     suspend fun getFavourites(): List<SessionData> = sessionsStorage.getFavourites()
 
+    suspend fun getBySpeakerId(speakerId: String): List<SessionData> =
+        sessionsStorage.getBySpeakerId(speakerId)
+
     private suspend fun getAllSessionsFromDisk(): List<SessionData> =
         sessionsStorage.getAllSessionsData()
 

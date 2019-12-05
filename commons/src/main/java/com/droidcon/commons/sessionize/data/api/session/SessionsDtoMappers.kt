@@ -13,5 +13,6 @@ fun SessionDto.toSessionData(): SessionData =
         isServiceSession,
         isPlenumSession,
         speakers,
-        roomId
+        roomId,
+        room
     )

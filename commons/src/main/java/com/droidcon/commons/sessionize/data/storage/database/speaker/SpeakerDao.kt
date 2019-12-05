@@ -1,9 +1,8 @@
 package com.droidcon.commons.sessionize.data.storage.database.speaker
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.droidcon.commons.sessionize.data.storage.database.session.SessionEntity
+import com.droidcon.commons.sessionize.data.storage.database.sessionandspeaker.SessionAndSpeaker
 
 @Dao
 interface SpeakerDao {

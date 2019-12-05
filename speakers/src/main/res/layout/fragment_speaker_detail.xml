@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:textStyle="bold"
-        tools:text="@string/talks"/>
+        android:text="@string/talks"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/speakerTalks"
         android:layout_width="match_parent"

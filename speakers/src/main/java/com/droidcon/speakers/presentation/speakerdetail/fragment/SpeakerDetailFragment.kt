@@ -31,12 +31,6 @@ class SpeakerDetailFragment : DaggerFragment() {
     private lateinit var speakerDescription: TextView
     private lateinit var speakerTalks: RecyclerView
 
-    private val speakerId
-        get() = arguments?.let { SpeakerDetailFragmentArgs.fromBundle(
-            it
-        ).speakerId }
-            ?: error("Cannot use SpeakerDetailFragment without speakerId")
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,6 +53,9 @@ class SpeakerDetailFragment : DaggerFragment() {
         }
 
         bindViewModel()
+
+        val speakerId = arguments?.let { SpeakerDetailFragmentArgs.fromBundle(it).speakerId }
+            ?: error("Cannot use SpeakerDetailFragment without speakerId")
         speakerDetailViewModel.onSpeakerDetailVisible(speakerId)
     }
 
@@ -72,7 +69,7 @@ class SpeakerDetailFragment : DaggerFragment() {
             }
             speakerName.text = speakerDetailState.speakerName
             speakerDescription.text = speakerDetailState.speakerDescription
-            speakerTalksAdapter.submitList(speakerDetailState.speakerTalks)
+            speakerTalksAdapter.submitList(speakerDetailState.speakerSessions)
         }
     }
 }

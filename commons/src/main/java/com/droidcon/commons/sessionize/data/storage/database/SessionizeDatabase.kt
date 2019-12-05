@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.droidcon.commons.sessionize.data.storage.database.session.SessionDao
 import com.droidcon.commons.sessionize.data.storage.database.session.SessionEntity
+import com.droidcon.commons.sessionize.data.storage.database.sessionandspeaker.SessionAndSpeakerEntity
 import com.droidcon.commons.sessionize.data.storage.database.speaker.LinkEntity
 import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerDao
 import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerEntity
@@ -16,7 +17,8 @@ import javax.inject.Singleton
         SessionEntity::class,
         SpeakerEntity::class,
         SpeakerFtsEntity::class,
-        LinkEntity::class
+        LinkEntity::class,
+        SessionAndSpeakerEntity::class
     ],
     version = 1,
     exportSchema = false

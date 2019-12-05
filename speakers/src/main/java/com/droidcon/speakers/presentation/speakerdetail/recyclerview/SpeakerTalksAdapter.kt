@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.droidcon.speakers.R
-import com.droidcon.speakers.presentation.speakerdetail.model.SpeakerTalk
+import com.droidcon.speakers.presentation.speakerdetail.model.SpeakerSessionState
 import javax.inject.Inject
 
 class SpeakerTalksAdapter @Inject constructor(
     speakerTalkDiffCallback: SpeakerTalkDiffCallback
-) : ListAdapter<SpeakerTalk, SpeakerTalkViewHolder>(speakerTalkDiffCallback) {
+) : ListAdapter<SpeakerSessionState, SpeakerTalkViewHolder>(speakerTalkDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpeakerTalkViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(

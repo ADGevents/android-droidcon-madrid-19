@@ -12,5 +12,6 @@ data class SessionDto(
     val isServiceSession: Boolean,
     val isPlenumSession: Boolean,
     val speakers: List<String> = emptyList(),
-    val roomId: Int?
+    val roomId: Int?,
+    val room: String
 )

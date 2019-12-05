@@ -13,6 +13,7 @@ data class SessionEntity(
     val isServiceSession: Boolean,
     val isPlenumSession: Boolean,
     val roomId: Int?,
+    val roomName: String,
     val isStarred: Boolean
 )
 

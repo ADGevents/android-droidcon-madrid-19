@@ -12,7 +12,7 @@ fun Session.toState(
 ): SessionState = SessionState(
     id = id,
     title = title,
-    additionalInfo = "${TimeUnit.MILLISECONDS.toMinutes(durationInMillis)} min / Room 3",
+    additionalInfo = "${TimeUnit.MILLISECONDS.toMinutes(durationInMillis)} min / $roomName",
     time = sessionStartTimeStamp.toFormattedTime(),
     favouritesEnabled = favouritesEnabled,
     starred = starred,

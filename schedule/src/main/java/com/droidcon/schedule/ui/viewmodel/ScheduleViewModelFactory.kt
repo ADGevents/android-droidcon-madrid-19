@@ -2,8 +2,8 @@ package com.droidcon.schedule.ui.viewmodel
 
 import androidx.fragment.app.Fragment
 import com.droidcon.commons.ioc.lifecycle.buildViewModel
+import com.droidcon.commons.sessionize.domain.UpdateSessionStarredValue
 import com.droidcon.schedule.domain.GetSessionsByDay
-import com.droidcon.schedule.domain.UpdateSessionStarredValue
 import javax.inject.Inject
 
 class ScheduleViewModelFactory @Inject constructor(

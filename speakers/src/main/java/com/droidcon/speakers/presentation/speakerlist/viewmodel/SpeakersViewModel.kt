@@ -1,5 +1,6 @@
 package com.droidcon.speakers.presentation.speakerlist.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,7 +40,7 @@ class SpeakersViewModel(private val getAllSpeakers: GetAllSpeakers) : ViewModel(
     }
 
     private fun onGetAllSpeakersError(getSpeakersError: GetSpeakersError) {
-
+        Log.e("SpeakersViewModel", "getSpeakersError :(")
     }
 
     private fun onGetAllSpeakersSuccess(speakers: List<Speaker>) {

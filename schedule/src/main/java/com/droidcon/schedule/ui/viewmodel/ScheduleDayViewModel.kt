@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.droidcon.commons.sessionize.domain.UpdateSessionStarredValue
 import com.droidcon.schedule.domain.GetSessionsByDay
-import com.droidcon.schedule.domain.UpdateSessionStarredValue
 import com.droidcon.schedule.ui.model.ScheduleEffect
 import com.droidcon.schedule.ui.model.SessionState
 import com.droidcon.schedule.ui.model.toState

@@ -23,14 +23,6 @@ class GetSessionsByDay @Inject constructor(
             .filter { it.sessionStartTimeStamp.getDayOfTheMonth() == sessionDay }
 }
 
-class UpdateSessionStarredValue @Inject constructor(
-    private val sessionsRepository: SessionsRepository
-) {
-
-    suspend operator fun invoke(sessionId: String, isStarred: Boolean): Boolean =
-        sessionsRepository.updateStarredValue(sessionId, isStarred)
-}
-
 private fun Long.getDayOfTheMonth(): Int {
     val calendar = Calendar.getInstance()
     calendar.timeInMillis = this

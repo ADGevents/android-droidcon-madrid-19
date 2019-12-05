@@ -64,6 +64,6 @@ class ScheduleFragment : DaggerFragment() {
     companion object {
         private const val CONFERENCE_DAYS = 2
         private val CONFERENCE_DAYS_TAB_TITLE = listOf("20 dec", "21 dec")
-        private val CONFERENCE_DAYS_OF_MONTH = listOf(20, 21)
+        private val CONFERENCE_DAYS_OF_MONTH = listOf(27, 28)
     }
 }

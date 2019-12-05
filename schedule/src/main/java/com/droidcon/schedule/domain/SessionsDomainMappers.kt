@@ -15,6 +15,7 @@ fun SessionData.toSession(): Session =
         isPlenumSession,
         speakers,
         roomId,
+        roomName,
         isStarred
     )
 
@@ -22,5 +23,5 @@ private fun String.toTimeStamp(): Long =
     SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(this)?.time ?: 0
 
 
-private fun getSessionDurationInMillis(startsAt: String, endsAt: String): Long =
+fun getSessionDurationInMillis(startsAt: String, endsAt: String): Long =
     endsAt.toTimeStamp() - startsAt.toTimeStamp()
