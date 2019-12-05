@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
-import com.droidcon.schedule.domain.Session
-import com.droidcon.schedule.ui.viewmodel.ScheduleViewModel
+import com.droidcon.schedule.ui.model.ScheduleEffect
+import com.droidcon.schedule.ui.viewmodel.ScheduleDayViewModel
 import com.droidcon.schedule.ui.viewmodel.ScheduleViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -19,15 +19,11 @@ class ScheduleDayFragment : DaggerFragment() {
 
     @Inject
     lateinit var scheduleViewModelFactory: ScheduleViewModelFactory
-    private lateinit var scheduleFragmentViewModel: ScheduleViewModel
+    private lateinit var scheduleFragmentViewModel: ScheduleDayViewModel
 
+    @Inject
+    lateinit var sessionsAdapter: SessionsAdapter
     private lateinit var sessions: RecyclerView
-    private val sessionsAdapter by lazy { SessionsAdapter() }
-
-    private val conferenceDay: Int by lazy {
-        val args = arguments ?: throw IllegalStateException("Missing arguments!")
-        args.getInt(ARG_CONFERENCE_DAY)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +33,12 @@ class ScheduleDayFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews(view)
-        setUpScheduleViewModel()
+        val conferenceDay = arguments?.getInt(ARG_CONFERENCE_DAY) ?: error("Missing arguments!!")
+        setUpViews(view)
+        setUpScheduleViewModel(conferenceDay)
     }
 
-    private fun initViews(view: View) {
+    private fun setUpViews(view: View) {
         sessions = view.findViewById(R.id.sessions_recycler_view)
         sessions.apply {
             layoutManager = LinearLayoutManager(context)
@@ -49,18 +46,30 @@ class ScheduleDayFragment : DaggerFragment() {
         }
     }
 
-    private fun setUpScheduleViewModel() {
+    private fun setUpScheduleViewModel(conferenceDay: Int) {
         scheduleFragmentViewModel = scheduleViewModelFactory.get(this)
         scheduleFragmentViewModel =
-            ViewModelProviders.of(this).get(ScheduleViewModel::class.java)
-        scheduleFragmentViewModel.sessionsPerDay.observe(
-            this,
-            Observer { showSessions(it[conferenceDay]) })
+            ViewModelProviders.of(this).get(ScheduleDayViewModel::class.java)
+        scheduleFragmentViewModel.scheduleEffects.observe(::getLifecycle) { scheduleEffect ->
+            onScheduleEffectReceived(scheduleEffect)
+        }
+        scheduleFragmentViewModel.sessions.observe(::getLifecycle, sessionsAdapter::submitList)
+        scheduleFragmentViewModel.onScheduleVisible(conferenceDay)
     }
 
-    private fun showSessions(sessions: List<Session>?) {
-        sessions?.let {
-            sessionsAdapter.submitList(it)
+    private fun onScheduleEffectReceived(scheduleEffect: ScheduleEffect) {
+        when (scheduleEffect) {
+            ScheduleEffect.ShowUpdateStarredStateError -> showSnackbarError()
+        }
+    }
+
+    private fun showSnackbarError() {
+        view?.let {
+            Snackbar.make(
+                it,
+                "There was an error starring the session. Please try again.",
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 

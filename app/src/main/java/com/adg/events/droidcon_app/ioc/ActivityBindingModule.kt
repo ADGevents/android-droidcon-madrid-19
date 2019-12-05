@@ -2,7 +2,6 @@ package com.adg.events.droidcon_app.ioc
 
 import com.adg.events.droidcon_app.HomeActivity
 import com.droidcon.commons.ioc.ActivityScope
-import com.droidcon.commons.sessionize.ioc.SessionizeModule
 import com.droidcon.favourites.ioc.FavouritesModule
 import com.droidcon.info.presentation.ioc.InfoModule
 import com.droidcon.schedule.ioc.ScheduleModule

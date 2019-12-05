@@ -1,7 +1,7 @@
 package com.droidcon.favourites.ioc
 
 import com.droidcon.commons.ioc.FragmentScope
-import com.droidcon.favourites.FavouritesFragment
+import com.droidcon.favourites.presentation.FavouritesFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

@@ -2,16 +2,19 @@ package com.droidcon.schedule.ui.viewmodel
 
 import androidx.fragment.app.Fragment
 import com.droidcon.commons.ioc.lifecycle.buildViewModel
-import com.droidcon.schedule.domain.GetSessions
-import com.droidcon.schedule.domain.GetSessionsPerDay
+import com.droidcon.commons.sessionize.domain.UpdateSessionStarredValue
+import com.droidcon.schedule.domain.GetSessionsByDay
 import javax.inject.Inject
 
 class ScheduleViewModelFactory @Inject constructor(
-    private val getSessions: GetSessions,
-    private val getSessionsPerDay: GetSessionsPerDay
+    private val getSessionsByDay: GetSessionsByDay,
+    private val updateSessionStarredValue: UpdateSessionStarredValue
 ) {
 
-    fun get(fragment: Fragment): ScheduleViewModel = fragment.buildViewModel {
-        ScheduleViewModel(getSessions, getSessionsPerDay)
+    fun get(fragment: Fragment): ScheduleDayViewModel = fragment.buildViewModel {
+        ScheduleDayViewModel(
+            getSessionsByDay,
+            updateSessionStarredValue
+        )
     }
 }

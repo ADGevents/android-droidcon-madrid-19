@@ -46,7 +46,7 @@ class SpeakersFragment : DaggerFragment() {
         rootView.findViewById<RecyclerView>(R.id.speakers).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = speakersAdapter
-            setDivider(R.drawable.speakers_divider)
+            setDivider(R.drawable.row_divider)
         }
     }
 
