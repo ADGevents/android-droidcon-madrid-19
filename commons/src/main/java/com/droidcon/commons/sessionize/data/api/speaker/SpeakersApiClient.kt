@@ -2,6 +2,7 @@ package com.droidcon.commons.sessionize.data.api.speaker
 
 import arrow.core.Either
 import arrow.core.flatMap
+import com.droidcon.commons.BuildConfig
 import com.droidcon.commons.ioc.IoDispatcher
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -59,6 +60,6 @@ class SpeakersApiClient @Inject constructor(
         Either.left(GetSpeakersError.Generic)
 
     private companion object {
-        const val GET_SPEAKERS_PATH = "/Speakers"
+        const val GET_SPEAKERS_PATH = BuildConfig.API_SPEAKERS_PATH
     }
 }

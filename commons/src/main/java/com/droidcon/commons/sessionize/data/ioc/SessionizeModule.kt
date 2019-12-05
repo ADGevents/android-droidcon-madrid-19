@@ -30,13 +30,17 @@ class SessionizeModule {
 
     @Provides
     fun provideApiConfig(): ApiConfig =
-        ApiConfig(baseUrl = BuildConfig.SESSIONIZE_API_ENDPOINT)
+        ApiConfig(
+            baseUrl = BuildConfig.API_ENDPOINT,
+            speakersPath = BuildConfig.API_SPEAKERS_PATH,
+            sessionsPath = BuildConfig.API_SESSIONS_PATH
+        )
 
     @UnstableDefault
     @Provides
-    fun provideSessionsApiClient(): SessionsApiClient {
+    fun provideSessionsApiClient(apiConfig: ApiConfig): SessionsApiClient {
         val retrofit = Retrofit.Builder()
-            .baseUrl(SessionsApiClient.BASE_URL)
+            .baseUrl(apiConfig.baseUrl)
             .addConverterFactory(Json.nonstrict.asConverterFactory("application/json".toMediaType()))
             .build()
         return retrofit.create(SessionsApiClient::class.java)

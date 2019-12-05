@@ -4,6 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlinx-serialization'
 
+def getApiProperties() {
+    def apiPropertiesFile = rootProject.file("api.properties")
+    def apiProperties = new Properties()
+    apiProperties.load(new FileInputStream(apiPropertiesFile))
+    return apiProperties
+}
+
 android {
     compileSdkVersion rootProject.compileSdk
     buildToolsVersion rootProject.buildTools
@@ -21,7 +28,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
 
-        buildConfigField("String", "SESSIONIZE_API_ENDPOINT", "\"https://sessionize.com/api/v2/jl4ktls0/view\"")
+        def apiProperties = getApiProperties()
+        buildConfigField("String", "API_ENDPOINT", apiProperties["endpoint"])
+        buildConfigField("String", "API_SPEAKERS_PATH", apiProperties["speakersPath"])
+        buildConfigField("String", "API_SESSIONS_PATH", apiProperties["sessionsPath"])
     }
 
     buildTypes {
