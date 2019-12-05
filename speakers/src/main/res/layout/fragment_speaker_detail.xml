@@ -36,6 +36,18 @@
             android:textColor="@android:color/black"
             tools:text="Chet Haase" />
 
+        <!-- Toolbar needs to be on top for the back button to be tappable -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+            app:layout_collapseMode="pin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
