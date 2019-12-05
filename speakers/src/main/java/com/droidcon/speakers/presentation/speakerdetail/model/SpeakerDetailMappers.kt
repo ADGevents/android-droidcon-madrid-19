@@ -18,7 +18,7 @@ fun SpeakerSession.toState(onStarClicked: (String, Boolean) -> Unit): SpeakerSes
     SpeakerSessionState(
         id = id,
         talkTitle = title,
-        talkSubtitle = "bullshit",
+        talkSubtitle = description,
         isStarred = isStarred,
         onStarClicked = onStarClicked
     )

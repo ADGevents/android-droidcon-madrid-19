@@ -4,66 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/default_screen_margin"
-    android:layout_marginBottom="@dimen/default_screen_margin">
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingStart="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="16dp">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/timeColumn"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:gravity="top|center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/default_screen_margin" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/default_screen_margin" />
-
-    <TextView
-        android:id="@+id/sessionTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_default_margin"
-        android:layout_marginTop="@dimen/text_default_margin"
-        android:textColor="#3F66B5"
-        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="10" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/sessionTitle"
+        <TextView
+            android:id="@+id/sessionTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#3F66B5"
+            android:textSize="20sp"
+            tools:text="12:06" />
+
+        <TextView
+            android:id="@+id/timePeriod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#3F66B5"
+            android:textSize="14sp"
+            tools:text="AM" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textAppearance="@style/SessionTitle"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="start"
+        android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/starSession"
-        app:layout_constraintStart_toEndOf="@+id/sessionTime"
-        app:layout_constraintTop_toTopOf="@+id/sessionTime"
-        tools:text="What's new in Jetpack Compose" />
+        app:layout_constraintStart_toEndOf="@+id/timeColumn"
+        app:layout_constraintTop_toTopOf="@+id/timeColumn">
 
-    <TextView
-        android:id="@+id/sessionAdditionalInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/sessionTitle"
-        app:layout_constraintTop_toBottomOf="@+id/sessionTitle"
-        tools:text="1 hour/ Main Stage" />
+        <TextView
+            android:id="@+id/sessionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/SessionTitle"
+            tools:text="What's new in Jetpack Compose" />
+
+        <TextView
+            android:id="@+id/sessionAdditionalInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            tools:text="1 hour/ Main Stage" />
+    </LinearLayout>
+
 
     <ImageButton
         android:id="@+id/starSession"
         android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/timeColumn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/timeColumn"
         tools:ignore="ContentDescription"
         tools:src="@drawable/ic_star_empty_24dp" />
 

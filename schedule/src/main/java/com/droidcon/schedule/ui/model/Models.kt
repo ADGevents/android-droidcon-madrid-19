@@ -5,6 +5,7 @@ data class SessionState(
     val title: String,
     val additionalInfo: String,
     val time: String,
+    val timePeriod: String,
     val favouritesEnabled: Boolean,
     val starred: Boolean,
     val onStarClicked: (String, Boolean) -> Unit,

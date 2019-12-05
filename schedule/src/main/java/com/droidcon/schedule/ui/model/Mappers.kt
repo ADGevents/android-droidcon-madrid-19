@@ -14,6 +14,7 @@ fun Session.toState(
     title = title,
     additionalInfo = "${TimeUnit.MILLISECONDS.toMinutes(durationInMillis)} min / $roomName",
     time = sessionStartTimeStamp.toFormattedTime(),
+    timePeriod = "AM",
     favouritesEnabled = favouritesEnabled,
     starred = starred,
     onStarClicked = onStartClicked,

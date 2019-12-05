@@ -36,6 +36,7 @@ class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.findViewById<TextView>(R.id.sessionTitle).text = session.title
         itemView.findViewById<TextView>(R.id.sessionAdditionalInfo).text = session.additionalInfo
         itemView.findViewById<TextView>(R.id.sessionTime).text = session.time
+        itemView.findViewById<TextView>(R.id.timePeriod).text = session.timePeriod
 
         val starSessionButton = itemView.findViewById<ImageButton>(R.id.starSession)
 
