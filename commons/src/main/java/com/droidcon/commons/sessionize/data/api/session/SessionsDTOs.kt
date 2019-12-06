@@ -11,7 +11,13 @@ data class SessionDto(
     val endsAt: String,
     val isServiceSession: Boolean,
     val isPlenumSession: Boolean,
-    val speakers: List<String> = emptyList(),
+    val speakers: List<SpeakerDto> = emptyList(),
     val roomId: Int?,
     val room: String
+)
+
+@Serializable
+data class SpeakerDto(
+    val id: String,
+    val name: String
 )
