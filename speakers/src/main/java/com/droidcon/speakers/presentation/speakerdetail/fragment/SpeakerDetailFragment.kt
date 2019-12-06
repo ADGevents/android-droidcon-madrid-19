@@ -69,6 +69,7 @@ class SpeakerDetailFragment : DaggerFragment() {
             context?.let {
                 Glide.with(it)
                     .load(speakerDetailState.speakerAvatar)
+                    .placeholder(R.drawable.ic_default_avatar)
                     .transform(CircleCrop())
                     .into(speakerAvatar)
             }
