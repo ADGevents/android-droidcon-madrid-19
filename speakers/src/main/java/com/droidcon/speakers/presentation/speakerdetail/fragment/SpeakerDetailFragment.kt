@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.droidcon.speakers.R
+import com.droidcon.speakers.presentation.speakerdetail.model.getSpeakerDetailRows
 import com.droidcon.speakers.presentation.speakerdetail.recyclerview.SpeakerTalksAdapter
 import com.droidcon.speakers.presentation.speakerdetail.viewmodel.SpeakerDetailViewModel
 import com.droidcon.speakers.presentation.speakerdetail.viewmodel.SpeakerDetailViewModelFactory
@@ -30,7 +31,6 @@ class SpeakerDetailFragment : DaggerFragment() {
 
     private lateinit var speakerAvatar: ImageView
     private lateinit var speakerName: TextView
-    private lateinit var speakerDescription: TextView
     private lateinit var speakerTalks: RecyclerView
 
     override fun onCreateView(
@@ -47,7 +47,6 @@ class SpeakerDetailFragment : DaggerFragment() {
 
         speakerAvatar = view.findViewById(R.id.speakerAvatar)
         speakerName = view.findViewById(R.id.speakerName)
-        speakerDescription = view.findViewById(R.id.speakerDescription)
         speakerTalks = view.findViewById(R.id.speakerTalks)
         speakerTalks.run {
             layoutManager = LinearLayoutManager(context)
@@ -74,8 +73,7 @@ class SpeakerDetailFragment : DaggerFragment() {
                     .into(speakerAvatar)
             }
             speakerName.text = speakerDetailState.speakerName
-            speakerDescription.text = speakerDetailState.speakerDescription
-            speakerTalksAdapter.submitList(speakerDetailState.speakerSessions)
+            speakerTalksAdapter.submitList(speakerDetailState.getSpeakerDetailRows())
         }
     }
 }
