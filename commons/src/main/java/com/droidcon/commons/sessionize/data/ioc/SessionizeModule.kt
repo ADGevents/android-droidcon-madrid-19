@@ -51,7 +51,7 @@ class SessionizeModule {
         appContext,
         SessionizeDatabase::class.java,
         SessionizeDatabase.NAME
-    ).build()
+    ).createFromAsset("databases/prepopulated_droidcon_madrid.db").build()
 
     @Provides
     fun provideSessionDao(sessionizeDatabase: SessionizeDatabase): SessionDao =
