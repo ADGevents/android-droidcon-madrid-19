@@ -21,7 +21,7 @@ import javax.inject.Singleton
         SessionAndSpeakerEntity::class
     ],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class SessionizeDatabase : RoomDatabase() {
 

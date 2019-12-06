@@ -32,6 +32,12 @@ android {
         buildConfigField("String", "API_ENDPOINT", apiProperties["endpoint"])
         buildConfigField("String", "API_SPEAKERS_PATH", apiProperties["speakersPath"])
         buildConfigField("String", "API_SESSIONS_PATH", apiProperties["sessionsPath"])
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
 
     buildTypes {
