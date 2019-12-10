@@ -42,6 +42,7 @@ class ScheduleDayFragment : DaggerFragment() {
         sessions = view.findViewById(R.id.sessions_recycler_view)
         sessions.apply {
             layoutManager = LinearLayoutManager(context)
+            itemAnimator = null
             adapter = sessionsAdapter
         }
     }
