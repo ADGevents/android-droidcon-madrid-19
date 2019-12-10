@@ -14,7 +14,7 @@ fun Session.toState(
     title = title,
     additionalInfo = "${TimeUnit.MILLISECONDS.toMinutes(durationInMillis)} min / $roomName",
     time = sessionStartTimeStamp.toFormattedTime(),
-    timePeriod = "AM",
+    timePeriod = sessionStartTimeStamp.getTimePeriod(),
     favouritesEnabled = favouritesEnabled,
     starred = starred,
     onStarClicked = onStartClicked,
@@ -26,4 +26,16 @@ fun Long.toFormattedTime(): String {
     val date = Date(this)
     val formatter = SimpleDateFormat("HH:mm")
     return formatter.format(date)
+}
+
+@Throws(IllegalStateException::class)
+fun Long.getTimePeriod(): String {
+    val calendar = Calendar.getInstance(Locale.forLanguageTag("es-ES"))
+    calendar.timeInMillis = this
+
+    return when (calendar.get(Calendar.AM_PM)) {
+        Calendar.PM -> "PM"
+        Calendar.AM -> "AM"
+        else -> error("Invalid time period")
+    }
 }
