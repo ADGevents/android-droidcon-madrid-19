@@ -5,20 +5,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/appBarLayoutBackground"
+            android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/speakersAppBarLayout"
-                style="@style/AppTheme.AppBarLayout"
+        <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_scrollFlags="scroll|snap|enterAlways">
+
 
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -33,28 +31,30 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="@string/schedule"
-                        tools:text="Speakers" />
+                        tools:text="Schedule" />
             </androidx.appcompat.widget.Toolbar>
 
-            <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabs"
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize" />
-        </com.google.android.material.appbar.AppBarLayout>
+        </FrameLayout>
 
-
-        <androidx.viewpager.widget.ViewPager
-                android:id="@+id/schedule_days_viewpager"
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="?actionBarSize"/>
 
-    </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/scheduleDaysViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <ProgressBar
-            android:id="@+id/progress_indicator"
+            android:id="@+id/progressIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminate="true" />
+            android:indeterminate="true"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

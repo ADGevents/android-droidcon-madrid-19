@@ -47,8 +47,8 @@ class ScheduleFragment : DaggerFragment() {
 
     private fun initViews(view: View) {
         tabs = view.findViewById(R.id.tabs)
-        viewPager = view.findViewById(R.id.schedule_days_viewpager)
-        progress = view.findViewById(R.id.progress_indicator)
+        viewPager = view.findViewById(R.id.scheduleDaysViewPager)
+        progress = view.findViewById(R.id.progressIndicator)
         setUpViewPager()
         setUpMenu(view)
         progress.visibility = View.GONE

@@ -52,6 +52,7 @@ class SpeakerDetailFragment : DaggerFragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = speakerTalksAdapter
         }
+
         view.findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener {
             findNavController().navigateUp()
         }
