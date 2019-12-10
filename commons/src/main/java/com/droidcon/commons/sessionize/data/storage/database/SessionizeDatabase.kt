@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.droidcon.commons.sessionize.data.storage.database.session.SessionDao
 import com.droidcon.commons.sessionize.data.storage.database.session.SessionEntity
+import com.droidcon.commons.sessionize.data.storage.database.session.SessionFtsEntity
 import com.droidcon.commons.sessionize.data.storage.database.sessionandspeaker.SessionAndSpeakerEntity
 import com.droidcon.commons.sessionize.data.storage.database.speaker.LinkEntity
 import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerDao
@@ -15,12 +16,13 @@ import javax.inject.Singleton
 @Database(
     entities = [
         SessionEntity::class,
+        SessionFtsEntity::class,
         SpeakerEntity::class,
         SpeakerFtsEntity::class,
         LinkEntity::class,
         SessionAndSpeakerEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class SessionizeDatabase : RoomDatabase() {

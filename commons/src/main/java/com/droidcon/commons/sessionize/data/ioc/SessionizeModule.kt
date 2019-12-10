@@ -47,11 +47,11 @@ class SessionizeModule {
     }
 
     @Provides
-    fun provideDatabase(appContext: Context): SessionizeDatabase = Room.databaseBuilder(
-        appContext,
-        SessionizeDatabase::class.java,
-        SessionizeDatabase.NAME
-    ).createFromAsset("databases/prepopulated_droidcon_madrid.db").build()
+    fun provideDatabase(appContext: Context): SessionizeDatabase =
+        Room.databaseBuilder(appContext, SessionizeDatabase::class.java, SessionizeDatabase.NAME)
+            .fallbackToDestructiveMigration()
+            .createFromAsset("databases/prepopulated_droidcon_madrid.db")
+            .build()
 
     @Provides
     fun provideSessionDao(sessionizeDatabase: SessionizeDatabase): SessionDao =

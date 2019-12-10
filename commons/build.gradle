@@ -79,8 +79,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$rootProject.roomDatabase"
 
     // arrow core
-    implementation "io.arrow-kt:arrow-core:$rootProject.arrow"
-    implementation "io.arrow-kt:arrow-syntax:$rootProject.arrow"
+    api "io.arrow-kt:arrow-core:$rootProject.arrow"
+    api "io.arrow-kt:arrow-syntax:$rootProject.arrow"
     kapt "io.arrow-kt:arrow-meta:$rootProject.arrow"
 
     // coroutines

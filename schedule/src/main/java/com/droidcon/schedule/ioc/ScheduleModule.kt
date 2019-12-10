@@ -7,7 +7,10 @@ import dagger.Module
 import dagger.Provides
 
 
-@Module(includes = [ScheduleFragmentModule::class])
+@Module(includes = [
+    ScheduleFragmentModule::class,
+    SearchSessionsFragmentModule::class
+])
 class ScheduleModule {
 
     @Provides

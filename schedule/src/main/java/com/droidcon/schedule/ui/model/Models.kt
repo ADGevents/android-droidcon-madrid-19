@@ -19,6 +19,10 @@ sealed class SessionRow {
     ) : SessionRow()
 }
 
+sealed class ScheduleDayEffect {
+    object ShowUpdateStarredStateError : ScheduleDayEffect()
+}
+
 sealed class ScheduleEffect {
-    object ShowUpdateStarredStateError : ScheduleEffect()
+    object NavigateToSearchSessions: ScheduleEffect()
 }
