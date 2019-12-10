@@ -5,11 +5,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-fun Session.toState(
+fun Session.toRow(
     favouritesEnabled: Boolean,
     onStartClicked: (String, Boolean) -> Unit = { _, _ -> },
     onSessionClicked: (String) -> Unit = {}
-): SessionState = SessionState(
+): SessionRow.Session = SessionRow.Session(
     id = id,
     title = title,
     additionalInfo = "${TimeUnit.MILLISECONDS.toMinutes(durationInMillis)} min / $roomName",
