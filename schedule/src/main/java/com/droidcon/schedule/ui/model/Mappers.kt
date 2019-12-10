@@ -24,7 +24,7 @@ fun Session.toState(
 
 fun Long.toFormattedTime(): String {
     val date = Date(this)
-    val formatter = SimpleDateFormat("HH:mm")
+    val formatter = SimpleDateFormat("HH:mm", Locale.forLanguageTag("es-ES"))
     return formatter.format(date)
 }
 
