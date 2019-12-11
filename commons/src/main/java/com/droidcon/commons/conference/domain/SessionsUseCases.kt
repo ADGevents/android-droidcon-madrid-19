@@ -1,6 +1,6 @@
-package com.droidcon.commons.sessionize.domain
+package com.droidcon.commons.conference.domain
 
-import com.droidcon.commons.sessionize.data.repository.session.SessionsRepository
+import com.droidcon.commons.conference.data.repository.session.SessionsRepository
 import javax.inject.Inject
 
 class UpdateSessionStarredValue @Inject constructor(

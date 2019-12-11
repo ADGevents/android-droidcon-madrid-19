@@ -1,4 +1,4 @@
-package com.droidcon.commons.sessionize.data.repository.speaker
+package com.droidcon.commons.conference.data.repository.speaker
 
 inline class Url(val rawUrl: String)
 

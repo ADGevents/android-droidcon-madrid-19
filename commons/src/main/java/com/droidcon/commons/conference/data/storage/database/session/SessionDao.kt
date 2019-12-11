@@ -1,8 +1,8 @@
-package com.droidcon.commons.sessionize.data.storage.database.session
+package com.droidcon.commons.conference.data.storage.database.session
 
 import androidx.room.*
-import com.droidcon.commons.sessionize.data.storage.database.sessionandspeaker.SessionAndSpeaker
-import com.droidcon.commons.sessionize.data.storage.database.sessionandspeaker.SessionAndSpeakerEntity
+import com.droidcon.commons.conference.data.storage.database.sessionandspeaker.SessionAndSpeaker
+import com.droidcon.commons.conference.data.storage.database.sessionandspeaker.SessionAndSpeakerEntity
 
 
 @Dao

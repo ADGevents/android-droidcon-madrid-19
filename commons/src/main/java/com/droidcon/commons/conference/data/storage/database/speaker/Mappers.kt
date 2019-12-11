@@ -1,7 +1,7 @@
-package com.droidcon.commons.sessionize.data.storage.database.speaker
+package com.droidcon.commons.conference.data.storage.database.speaker
 
-import com.droidcon.commons.sessionize.data.storage.LinkDO
-import com.droidcon.commons.sessionize.data.storage.SpeakerDO
+import com.droidcon.commons.conference.data.storage.LinkDO
+import com.droidcon.commons.conference.data.storage.SpeakerDO
 
 fun SpeakerEntity.toDO(linkEntities: List<LinkEntity>): SpeakerDO =
     SpeakerDO(

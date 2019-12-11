@@ -1,5 +1,7 @@
 package com.droidcon.schedule.domain
 
+import com.droidcon.schedule.ui.model.ScheduleTab
+
 data class Session(
     val id: String,
     val title: String,

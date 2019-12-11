@@ -1,4 +1,4 @@
-package com.droidcon.commons.sessionize.data.api.session
+package com.droidcon.commons.conference.data.api.session
 
 import com.droidcon.commons.BuildConfig
 import retrofit2.http.GET

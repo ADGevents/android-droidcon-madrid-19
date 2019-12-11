@@ -1,7 +1,7 @@
-package com.droidcon.commons.sessionize.data.api
+package com.droidcon.commons.conference.data.api
 
 import arrow.core.orNull
-import com.droidcon.commons.sessionize.data.api.speaker.*
+import com.droidcon.commons.conference.data.api.speaker.*
 import com.droidcon.commons.testutils.leftOrNull
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi

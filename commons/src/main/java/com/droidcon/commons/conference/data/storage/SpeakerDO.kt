@@ -1,4 +1,4 @@
-package com.droidcon.commons.sessionize.data.storage
+package com.droidcon.commons.conference.data.storage
 
 object LinkConstants {
     const val ID_NOT_SET = 0L

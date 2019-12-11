@@ -1,9 +1,9 @@
-package com.droidcon.commons.sessionize.data.repository.speaker
+package com.droidcon.commons.conference.data.repository.speaker
 
 import arrow.core.Either
 import com.droidcon.commons.datatypes.runRight
-import com.droidcon.commons.sessionize.data.api.speaker.*
-import com.droidcon.commons.sessionize.data.storage.SpeakersStorage
+import com.droidcon.commons.conference.data.api.speaker.*
+import com.droidcon.commons.conference.data.storage.SpeakersStorage
 import javax.inject.Inject
 
 class SpeakersRepository @Inject constructor(

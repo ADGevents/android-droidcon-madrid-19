@@ -1,8 +1,8 @@
 package com.droidcon.schedule.domain
 
 import arrow.core.Either
-import com.droidcon.commons.sessionize.data.repository.session.SearchSessionsError
-import com.droidcon.commons.sessionize.data.repository.session.SessionsRepository
+import com.droidcon.commons.conference.data.repository.session.SearchSessionsError
+import com.droidcon.commons.conference.data.repository.session.SessionsRepository
 import java.util.*
 import javax.inject.Inject
 

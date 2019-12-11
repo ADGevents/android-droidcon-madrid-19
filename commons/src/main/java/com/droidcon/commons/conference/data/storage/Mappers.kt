@@ -1,8 +1,8 @@
-package com.droidcon.commons.sessionize.data.storage
+package com.droidcon.commons.conference.data.storage
 
-import com.droidcon.commons.sessionize.data.storage.database.speaker.LinkEntity
-import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerEntity
-import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerFtsEntity
+import com.droidcon.commons.conference.data.storage.database.speaker.LinkEntity
+import com.droidcon.commons.conference.data.storage.database.speaker.SpeakerEntity
+import com.droidcon.commons.conference.data.storage.database.speaker.SpeakerFtsEntity
 
 fun SpeakerDO.toEntity(): SpeakerEntity =
     SpeakerEntity(

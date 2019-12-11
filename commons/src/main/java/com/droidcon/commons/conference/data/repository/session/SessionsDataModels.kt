@@ -1,4 +1,4 @@
-package com.droidcon.commons.sessionize.data.repository.session
+package com.droidcon.commons.conference.data.repository.session
 
 data class SessionData(
     val id: String,

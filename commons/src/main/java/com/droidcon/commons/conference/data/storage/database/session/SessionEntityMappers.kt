@@ -1,6 +1,6 @@
-package com.droidcon.commons.sessionize.data.storage.database.session
+package com.droidcon.commons.conference.data.storage.database.session
 
-import com.droidcon.commons.sessionize.data.repository.session.SessionData
+import com.droidcon.commons.conference.data.repository.session.SessionData
 
 
 fun SessionEntity.toSessionData(): SessionData =

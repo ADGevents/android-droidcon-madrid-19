@@ -1,9 +1,9 @@
-package com.droidcon.commons.sessionize.data.storage
+package com.droidcon.commons.conference.data.storage
 
-import com.droidcon.commons.sessionize.data.storage.database.speaker.LinkEntity
-import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerDao
-import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerEntity
-import com.droidcon.commons.sessionize.data.storage.database.speaker.toDO
+import com.droidcon.commons.conference.data.storage.database.speaker.LinkEntity
+import com.droidcon.commons.conference.data.storage.database.speaker.SpeakerDao
+import com.droidcon.commons.conference.data.storage.database.speaker.SpeakerEntity
+import com.droidcon.commons.conference.data.storage.database.speaker.toDO
 import javax.inject.Inject
 
 class SpeakersStorage @Inject constructor(

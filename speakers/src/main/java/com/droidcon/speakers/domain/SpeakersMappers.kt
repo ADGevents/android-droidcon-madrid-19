@@ -1,6 +1,6 @@
 package com.droidcon.speakers.domain
 
-import com.droidcon.commons.sessionize.data.repository.session.SessionData
+import com.droidcon.commons.conference.data.repository.session.SessionData
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 

@@ -1,15 +1,15 @@
-package com.droidcon.commons.sessionize.data.storage.database
+package com.droidcon.commons.conference.data.storage.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.droidcon.commons.sessionize.data.storage.database.session.SessionDao
-import com.droidcon.commons.sessionize.data.storage.database.session.SessionEntity
-import com.droidcon.commons.sessionize.data.storage.database.session.SessionFtsEntity
-import com.droidcon.commons.sessionize.data.storage.database.sessionandspeaker.SessionAndSpeakerEntity
-import com.droidcon.commons.sessionize.data.storage.database.speaker.LinkEntity
-import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerDao
-import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerEntity
-import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerFtsEntity
+import com.droidcon.commons.conference.data.storage.database.session.SessionDao
+import com.droidcon.commons.conference.data.storage.database.session.SessionEntity
+import com.droidcon.commons.conference.data.storage.database.session.SessionFtsEntity
+import com.droidcon.commons.conference.data.storage.database.sessionandspeaker.SessionAndSpeakerEntity
+import com.droidcon.commons.conference.data.storage.database.speaker.LinkEntity
+import com.droidcon.commons.conference.data.storage.database.speaker.SpeakerDao
+import com.droidcon.commons.conference.data.storage.database.speaker.SpeakerEntity
+import com.droidcon.commons.conference.data.storage.database.speaker.SpeakerFtsEntity
 import javax.inject.Singleton
 
 @Singleton

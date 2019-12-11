@@ -1,9 +1,9 @@
-package com.droidcon.commons.sessionize.data.repository.session
+package com.droidcon.commons.conference.data.repository.session
 
 import arrow.core.Either
-import com.droidcon.commons.sessionize.data.api.session.SessionsApiClient
-import com.droidcon.commons.sessionize.data.api.session.toSessionData
-import com.droidcon.commons.sessionize.data.storage.SessionsStorage
+import com.droidcon.commons.conference.data.api.session.SessionsApiClient
+import com.droidcon.commons.conference.data.api.session.toSessionData
+import com.droidcon.commons.conference.data.storage.SessionsStorage
 import javax.inject.Inject
 import javax.inject.Singleton
 

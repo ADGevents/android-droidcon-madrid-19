@@ -1,6 +1,6 @@
 package com.droidcon.speakers.domain
 
-import com.droidcon.commons.sessionize.data.repository.speaker.SpeakerData
+import com.droidcon.commons.conference.data.repository.speaker.SpeakerData
 
 typealias Speaker = SpeakerData
 

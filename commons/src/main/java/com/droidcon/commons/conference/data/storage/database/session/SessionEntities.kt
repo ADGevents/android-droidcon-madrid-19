@@ -1,4 +1,4 @@
-package com.droidcon.commons.sessionize.data.storage.database.session
+package com.droidcon.commons.conference.data.storage.database.session
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

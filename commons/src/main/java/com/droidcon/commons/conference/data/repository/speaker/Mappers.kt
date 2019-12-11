@@ -1,9 +1,9 @@
-package com.droidcon.commons.sessionize.data.repository.speaker
+package com.droidcon.commons.conference.data.repository.speaker
 
-import com.droidcon.commons.sessionize.data.api.speaker.LinkDto
-import com.droidcon.commons.sessionize.data.api.speaker.SpeakerDto
-import com.droidcon.commons.sessionize.data.storage.LinkDO
-import com.droidcon.commons.sessionize.data.storage.SpeakerDO
+import com.droidcon.commons.conference.data.api.speaker.LinkDto
+import com.droidcon.commons.conference.data.api.speaker.SpeakerDto
+import com.droidcon.commons.conference.data.storage.LinkDO
+import com.droidcon.commons.conference.data.storage.SpeakerDO
 
 // DTO Mappers
 

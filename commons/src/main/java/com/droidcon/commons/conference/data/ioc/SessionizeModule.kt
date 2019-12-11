@@ -1,13 +1,13 @@
-package com.droidcon.commons.sessionize.data.ioc
+package com.droidcon.commons.conference.data.ioc
 
 import android.content.Context
 import androidx.room.Room
 import com.droidcon.commons.BuildConfig
-import com.droidcon.commons.sessionize.data.api.session.SessionsApiClient
-import com.droidcon.commons.sessionize.data.api.speaker.ApiConfig
-import com.droidcon.commons.sessionize.data.storage.database.SessionizeDatabase
-import com.droidcon.commons.sessionize.data.storage.database.session.SessionDao
-import com.droidcon.commons.sessionize.data.storage.database.speaker.SpeakerDao
+import com.droidcon.commons.conference.data.api.session.SessionsApiClient
+import com.droidcon.commons.conference.data.api.speaker.ApiConfig
+import com.droidcon.commons.conference.data.storage.database.SessionizeDatabase
+import com.droidcon.commons.conference.data.storage.database.session.SessionDao
+import com.droidcon.commons.conference.data.storage.database.speaker.SpeakerDao
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

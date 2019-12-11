@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.droidcon.commons.sessionize.domain.UpdateSessionStarredValue
+import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.speakers.domain.GetSpeaker
 import com.droidcon.speakers.domain.GetSpeakerSessions
 import com.droidcon.speakers.domain.Speaker

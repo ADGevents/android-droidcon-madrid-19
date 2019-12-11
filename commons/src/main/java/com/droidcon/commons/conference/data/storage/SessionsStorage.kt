@@ -1,10 +1,10 @@
-package com.droidcon.commons.sessionize.data.storage
+package com.droidcon.commons.conference.data.storage
 
-import com.droidcon.commons.sessionize.data.repository.session.SessionData
-import com.droidcon.commons.sessionize.data.storage.database.session.SessionDao
-import com.droidcon.commons.sessionize.data.storage.database.session.toSessionData
-import com.droidcon.commons.sessionize.data.storage.database.session.toSessionEntity
-import com.droidcon.commons.sessionize.data.storage.database.sessionandspeaker.SessionAndSpeakerEntity
+import com.droidcon.commons.conference.data.repository.session.SessionData
+import com.droidcon.commons.conference.data.storage.database.session.SessionDao
+import com.droidcon.commons.conference.data.storage.database.session.toSessionData
+import com.droidcon.commons.conference.data.storage.database.session.toSessionEntity
+import com.droidcon.commons.conference.data.storage.database.sessionandspeaker.SessionAndSpeakerEntity
 import javax.inject.Inject
 
 class SessionsStorage @Inject constructor(

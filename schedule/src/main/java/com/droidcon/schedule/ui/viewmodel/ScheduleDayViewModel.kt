@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.droidcon.commons.sessionize.domain.UpdateSessionStarredValue
+import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.schedule.domain.GetSessionsByDay
 import com.droidcon.schedule.ui.model.ScheduleDayEffect
+import com.droidcon.schedule.ui.model.ScheduleTab
 import com.droidcon.schedule.ui.model.SessionRow
 import com.droidcon.schedule.ui.model.toRow
 import kotlinx.coroutines.launch
@@ -22,14 +23,15 @@ class ScheduleDayViewModel(
     private val mutableScheduleEffects = MutableLiveData<ScheduleDayEffect>()
     val scheduleEffects: LiveData<ScheduleDayEffect> = mutableScheduleEffects
 
-    fun onScheduleVisible(scheduleDay: Int) {
+    fun onScheduleVisible(scheduleTab: ScheduleTab) {
         viewModelScope.launch {
-            val sessions = getSessionsByDay(scheduleDay).map { session ->
-                session.toRow(
-                    favouritesEnabled = true,
-                    onStartClicked = ::onSessionStarred
-                )
-            }
+            val sessions = getSessionsByDay(scheduleTab.conferenceDayDate.dayOfMonth)
+                .map { session ->
+                    session.toRow(
+                        favouritesEnabled = true,
+                        onStartClicked = ::onSessionStarred
+                    )
+                }
             mutableSessions.value = sessions
         }
     }
