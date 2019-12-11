@@ -1,6 +1,7 @@
 package com.droidcon.schedule.ioc
 
 import com.droidcon.schedule.ui.DayDividerItemDiffCallback
+import com.droidcon.schedule.ui.logic.GetScheduleTabs
 import com.droidcon.schedule.ui.SessionItemDiffCallback
 import com.droidcon.schedule.ui.SessionRowDiffItemCallback
 import dagger.Module
@@ -19,4 +20,7 @@ class ScheduleModule {
             SessionItemDiffCallback,
             DayDividerItemDiffCallback
         )
+
+    @Provides
+    fun getSchedulesTabs(): GetScheduleTabs = GetScheduleTabs
 }

@@ -1,6 +1,6 @@
 package com.droidcon.schedule.domain
 
-import com.droidcon.commons.sessionize.data.repository.session.SessionData
+import com.droidcon.commons.conference.data.repository.session.SessionData
 import java.text.SimpleDateFormat
 
 
@@ -16,7 +16,9 @@ fun SessionData.toSession(): Session =
         speakers,
         roomId,
         roomName,
-        isStarred
+        isStarred,
+        startsAt,
+        endsAt
     )
 
 private fun String.toTimeStamp(): Long =

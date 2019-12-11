@@ -2,7 +2,7 @@ package com.droidcon.schedule.ioc
 
 import com.droidcon.commons.ioc.ChildFragmentScope
 import com.droidcon.commons.ioc.FragmentScope
-import com.droidcon.commons.sessionize.data.ioc.SessionizeModule
+import com.droidcon.commons.conference.data.ioc.SessionizeModule
 import com.droidcon.schedule.ui.fragment.ScheduleDayFragment
 import com.droidcon.schedule.ui.fragment.ScheduleFragment
 import dagger.Module

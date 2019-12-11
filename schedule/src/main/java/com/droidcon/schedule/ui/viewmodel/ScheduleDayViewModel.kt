@@ -4,35 +4,62 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.droidcon.commons.sessionize.domain.UpdateSessionStarredValue
-import com.droidcon.schedule.domain.GetSessionsByDay
+import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
+import com.droidcon.commons.lifecycle.SingleLiveEvent
+import com.droidcon.schedule.domain.*
 import com.droidcon.schedule.ui.model.ScheduleDayEffect
+import com.droidcon.schedule.ui.model.ScheduleTab
 import com.droidcon.schedule.ui.model.SessionRow
 import com.droidcon.schedule.ui.model.toRow
 import kotlinx.coroutines.launch
 
 class ScheduleDayViewModel(
     private val getSessionsByDay: GetSessionsByDay,
-    private val updateSessionStarredValue: UpdateSessionStarredValue
+    private val updateSessionStarredValue: UpdateSessionStarredValue,
+    private val getFirstInProgressSessionOrNull: GetFirstInProgressSessionOrNull,
+    private val shouldTryScrollingToInProgressSession: ShouldTryScrollingToInProgressSession,
+    private val registerScrollToInProgressSessionTry: RegisterScrollToInProgressSessionTry
 ) : ViewModel() {
 
     private val mutableSessions = MutableLiveData<List<SessionRow.Session>>()
     val sessions: LiveData<List<SessionRow.Session>> = mutableSessions
 
-    private val mutableScheduleEffects = MutableLiveData<ScheduleDayEffect>()
+    private val mutableScheduleEffects = SingleLiveEvent<ScheduleDayEffect>()
     val scheduleEffects: LiveData<ScheduleDayEffect> = mutableScheduleEffects
 
-    fun onScheduleVisible(scheduleDay: Int) {
+    fun onScheduleVisible(scheduleTab: ScheduleTab) {
         viewModelScope.launch {
-            val sessions = getSessionsByDay(scheduleDay).map { session ->
-                session.toRow(
-                    favouritesEnabled = true,
-                    onStartClicked = ::onSessionStarred
-                )
+            val sessionsByDay = getSessionsByDay(scheduleTab.conferenceDayDate.dayOfMonth)
+            emitSessions(sessionsByDay)
+
+            if (!shouldTryScrollingToInProgressSession(scheduleTab.conferenceDayDate)) {
+                return@launch
             }
-            mutableSessions.value = sessions
+
+            registerScrollToInProgressSessionTry(scheduleTab.conferenceDayDate)
+
+            val inProgressSession = getFirstInProgressSessionOrNull(sessionsByDay)
+            if (inProgressSession != null) {
+                emitScrollToSessionEffect(inProgressSession.id)
+            }
         }
     }
+
+    private fun emitSessions(sessions: List<Session>) {
+        mutableSessions.value = sessions.toRows()
+    }
+
+    private fun emitScrollToSessionEffect(sessionId: String) {
+        mutableScheduleEffects.setValue(ScheduleDayEffect.ScrollToSession(sessionId))
+    }
+
+    private fun List<Session>.toRows(): List<SessionRow.Session> =
+        map { session ->
+            session.toRow(
+                favouritesEnabled = true,
+                onStartClicked = ::onSessionStarred
+            )
+        }
 
     private fun onSessionStarred(sessionId: String, isStarred: Boolean) {
         viewModelScope.launch {

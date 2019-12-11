@@ -5,15 +5,21 @@ import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
 
-fun List<Session>.toSessionsSearchState(): SessionsSearchState {
+fun List<Session>.toSessionsSearchState(
+    favouritesEnabled: Boolean = false,
+    onStarClicked: (String, Boolean) -> Unit = { _, _ -> }
+): SessionsSearchState {
     if (isEmpty()) {
         return SessionsSearchState.Empty
     }
 
-    return SessionsSearchState.Content(toRowsWithDayDividers())
+    return SessionsSearchState.Content(toRowsWithDayDividers(favouritesEnabled, onStarClicked))
 }
 
-fun List<Session>.toRowsWithDayDividers(): List<SessionRow> {
+fun List<Session>.toRowsWithDayDividers(
+    favouritesEnabled: Boolean = false,
+    onStarClicked: (String, Boolean) -> Unit = { _, _ -> }
+): List<SessionRow> {
     fun Long.getDayAndMonth(): String {
         val formatter = DateTimeFormatter.ofPattern("dd MMM")
         val localDate = Instant.ofEpochMilli(this).atZone(ZoneId.of("GMT+1")).toLocalDate()
@@ -36,7 +42,10 @@ fun List<Session>.toRowsWithDayDividers(): List<SessionRow> {
                 }
             }
         }
-        sessionRows.add(session.toRow(favouritesEnabled = false))
+        sessionRows.add(session.toRow(
+            favouritesEnabled = favouritesEnabled,
+            onStartClicked = onStarClicked
+        ))
     }
 
     return sessionRows

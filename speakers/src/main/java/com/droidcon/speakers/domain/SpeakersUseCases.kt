@@ -1,11 +1,11 @@
 package com.droidcon.speakers.domain
 
 import arrow.core.Either
-import com.droidcon.commons.sessionize.data.api.speaker.GetSpeakerError
-import com.droidcon.commons.sessionize.data.api.speaker.GetSpeakersError
-import com.droidcon.commons.sessionize.data.api.speaker.SearchSpeakersError
-import com.droidcon.commons.sessionize.data.repository.session.SessionsRepository
-import com.droidcon.commons.sessionize.data.repository.speaker.SpeakersRepository
+import com.droidcon.commons.conference.data.api.speaker.GetSpeakerError
+import com.droidcon.commons.conference.data.api.speaker.GetSpeakersError
+import com.droidcon.commons.conference.data.api.speaker.SearchSpeakersError
+import com.droidcon.commons.conference.data.repository.session.SessionsRepository
+import com.droidcon.commons.conference.data.repository.speaker.SpeakersRepository
 import javax.inject.Inject
 
 class GetAllSpeakers @Inject constructor(

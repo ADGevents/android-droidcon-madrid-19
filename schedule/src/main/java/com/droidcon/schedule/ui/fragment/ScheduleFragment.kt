@@ -12,7 +12,10 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.droidcon.schedule.R
+import com.droidcon.schedule.ui.logic.GetScheduleTabs
 import com.droidcon.schedule.ui.model.ScheduleEffect
+import com.droidcon.schedule.ui.model.ScheduleTab
+import com.droidcon.schedule.ui.model.getTitle
 import com.droidcon.schedule.ui.viewmodel.ScheduleViewModel
 import com.droidcon.schedule.ui.viewmodel.ScheduleViewModelFactory
 import com.google.android.material.tabs.TabLayout
@@ -43,6 +46,7 @@ class ScheduleFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
         bindViewModel()
+        scheduleViewModel.onScheduleVisible()
     }
 
     private fun initViews(view: View) {
@@ -56,7 +60,7 @@ class ScheduleFragment : DaggerFragment() {
 
     private fun setUpViewPager() {
         tabs.setupWithViewPager(viewPager)
-        viewPager.offscreenPageLimit = CONFERENCE_DAYS - 1
+        viewPager.offscreenPageLimit = SCHEDULE_TABS.count() - 1
         scheduleAdapter = ScheduleAdapter(childFragmentManager)
         viewPager.adapter = scheduleAdapter
     }
@@ -81,6 +85,7 @@ class ScheduleFragment : DaggerFragment() {
         scheduleViewModel.scheduleEffects.observe(::getLifecycle) { effect ->
             when (effect) {
                 ScheduleEffect.NavigateToSearchSessions -> navigateToSearch()
+                is ScheduleEffect.SwitchToTab -> switchToTab(effect.tab)
             }
         }
     }
@@ -91,24 +96,29 @@ class ScheduleFragment : DaggerFragment() {
         )
     }
 
+    private fun switchToTab(tab: ScheduleTab) {
+        val tabPosition = SCHEDULE_TABS.indexOf(tab)
+        if (tabPosition != -1) {
+            viewPager.currentItem = tabPosition
+        }
+    }
+
     /**
      * Adapter that builds a page for each conference day.
      */
     inner class ScheduleAdapter(fm: FragmentManager) :
         FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-        override fun getCount() = CONFERENCE_DAYS
+        override fun getCount(): Int = SCHEDULE_TABS.count()
 
         override fun getItem(position: Int): Fragment = ScheduleDayFragment.newInstance(
-            CONFERENCE_DAYS_OF_MONTH[position]
+            SCHEDULE_TABS[position]
         )
 
-        override fun getPageTitle(position: Int): CharSequence = CONFERENCE_DAYS_TAB_TITLE[position]
+        override fun getPageTitle(position: Int): CharSequence = SCHEDULE_TABS[position].getTitle()
     }
 
     companion object {
-        private const val CONFERENCE_DAYS = 2
-        private val CONFERENCE_DAYS_TAB_TITLE = listOf("20 dec", "21 dec")
-        private val CONFERENCE_DAYS_OF_MONTH = listOf(20, 21)
+        private val SCHEDULE_TABS = GetScheduleTabs()
     }
 }

@@ -11,5 +11,7 @@ data class Session(
     val speakers: List<String>,
     val roomId: Int?,
     val roomName: String,
-    val starred: Boolean = false
+    val starred: Boolean = false,
+    val startsAt: String,
+    val endsAt: String
 )
