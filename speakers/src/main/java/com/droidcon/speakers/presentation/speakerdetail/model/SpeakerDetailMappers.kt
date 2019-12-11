@@ -8,6 +8,7 @@ fun Speaker.toDetailState(
     onStarClicked: (String, Boolean) -> Unit
 ): SpeakerDetailState =
     SpeakerDetailState(
+        id = id,
         speakerAvatar = profilePicture.rawUrl,
         speakerName = name.fullName,
         speakerDescription = bio,
@@ -22,3 +23,20 @@ fun SpeakerSession.toState(onStarClicked: (String, Boolean) -> Unit): SpeakerSes
         isStarred = isStarred,
         onStarClicked = onStarClicked
     )
+
+fun SpeakerDetailState.getSpeakerDetailRows(): List<SpeakerDetailRow> {
+    val speakerDescription: SpeakerDetailRow = SpeakerDetailRow.Description(this.speakerDescription)
+    val speakerSessions: List<SpeakerDetailRow> = speakerSessions.map { it.toRow() }
+
+    return if (speakerSessions.isEmpty()) {
+        listOf(speakerDescription)
+    } else {
+        listOf(speakerDescription)
+            .plus(SpeakerDetailRow.SessionsHeader)
+            .plus(speakerSessions)
+    }
+}
+
+
+fun SpeakerSessionState.toRow(): SpeakerDetailRow =
+    SpeakerDetailRow.Session(id, talkTitle, talkSubtitle, isStarred, onStarClicked)

@@ -1,5 +1,6 @@
 package com.droidcon.commons.sessionize.data.repository.session
 
+import arrow.core.Either
 import com.droidcon.commons.sessionize.data.api.session.SessionsApiClient
 import com.droidcon.commons.sessionize.data.api.session.toSessionData
 import com.droidcon.commons.sessionize.data.storage.SessionsStorage
@@ -29,6 +30,10 @@ class SessionsRepository @Inject constructor(
 
     suspend fun getBySpeakerId(speakerId: String): List<SessionData> =
         sessionsStorage.getBySpeakerId(speakerId)
+
+
+    suspend fun search(query: String): Either<SearchSessionsError, List<SessionData>> =
+        Either.right(sessionsStorage.search(query))
 
     private suspend fun getAllSessionsFromDisk(): List<SessionData> =
         sessionsStorage.getAllSessionsData()

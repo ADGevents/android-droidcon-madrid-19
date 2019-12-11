@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui
+package com.droidcon.schedule.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
-import com.droidcon.schedule.ui.model.ScheduleEffect
+import com.droidcon.schedule.ui.SessionsAdapter
+import com.droidcon.schedule.ui.model.ScheduleDayEffect
 import com.droidcon.schedule.ui.viewmodel.ScheduleDayViewModel
-import com.droidcon.schedule.ui.viewmodel.ScheduleViewModelFactory
+import com.droidcon.schedule.ui.viewmodel.ScheduleDayViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -18,7 +19,7 @@ import javax.inject.Inject
 class ScheduleDayFragment : DaggerFragment() {
 
     @Inject
-    lateinit var scheduleViewModelFactory: ScheduleViewModelFactory
+    lateinit var scheduleDayViewModelFactory: ScheduleDayViewModelFactory
     private lateinit var scheduleFragmentViewModel: ScheduleDayViewModel
 
     @Inject
@@ -42,12 +43,13 @@ class ScheduleDayFragment : DaggerFragment() {
         sessions = view.findViewById(R.id.sessions_recycler_view)
         sessions.apply {
             layoutManager = LinearLayoutManager(context)
+            itemAnimator = null
             adapter = sessionsAdapter
         }
     }
 
     private fun setUpScheduleViewModel(conferenceDay: Int) {
-        scheduleFragmentViewModel = scheduleViewModelFactory.get(this)
+        scheduleFragmentViewModel = scheduleDayViewModelFactory.get(this)
         scheduleFragmentViewModel =
             ViewModelProviders.of(this).get(ScheduleDayViewModel::class.java)
         scheduleFragmentViewModel.scheduleEffects.observe(::getLifecycle) { scheduleEffect ->
@@ -57,9 +59,9 @@ class ScheduleDayFragment : DaggerFragment() {
         scheduleFragmentViewModel.onScheduleVisible(conferenceDay)
     }
 
-    private fun onScheduleEffectReceived(scheduleEffect: ScheduleEffect) {
-        when (scheduleEffect) {
-            ScheduleEffect.ShowUpdateStarredStateError -> showSnackbarError()
+    private fun onScheduleEffectReceived(scheduleDayEffect: ScheduleDayEffect) {
+        when (scheduleDayEffect) {
+            ScheduleDayEffect.ShowUpdateStarredStateError -> showSnackbarError()
         }
     }
 

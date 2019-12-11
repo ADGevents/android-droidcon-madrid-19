@@ -1,77 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/speakerDetailHeader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/headerBackground">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/speakerAvatar"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:contentDescription="@string/speaker_avatar_content_descriptipon"
-            app:layout_constraintBottom_toTopOf="@+id/speakerName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/speakerName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:textColor="@android:color/black"
-            android:textSize="32sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="Chet Haase" />
-
-        <!-- Toolbar needs to be on top for the back button to be tappable -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
-            app:layout_collapseMode="pin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_arrow_back" />
+            android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/headerBackground"
+                app:contentScrim="@color/appBarLayoutBackground"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <TextView
-        android:id="@+id/speakerDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        tools:text="Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla " />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/speakerTalksTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/talks"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+                <ImageView
+                        android:id="@+id/speakerAvatar"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:contentDescription="@string/speaker_avatar_content_descriptipon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars" />
+
+                <TextView
+                        android:id="@+id/speakerName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="32sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/speakerAvatar"
+                        tools:text="Chet Haase" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Toolbar needs to be on top for the back button to be tappable -->
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+                    app:layout_collapseMode="pin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navigationIcon="@drawable/ic_arrow_back" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/speakerTalks"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/speaker_talk_row" />
-
-</LinearLayout>
+            android:id="@+id/speakerTalks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/speaker_talk_row" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -32,6 +32,12 @@ android {
         buildConfigField("String", "API_ENDPOINT", apiProperties["endpoint"])
         buildConfigField("String", "API_SPEAKERS_PATH", apiProperties["speakersPath"])
         buildConfigField("String", "API_SESSIONS_PATH", apiProperties["sessionsPath"])
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
 
     buildTypes {
@@ -73,8 +79,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$rootProject.roomDatabase"
 
     // arrow core
-    implementation "io.arrow-kt:arrow-core:$rootProject.arrow"
-    implementation "io.arrow-kt:arrow-syntax:$rootProject.arrow"
+    api "io.arrow-kt:arrow-core:$rootProject.arrow"
+    api "io.arrow-kt:arrow-syntax:$rootProject.arrow"
     kapt "io.arrow-kt:arrow-meta:$rootProject.arrow"
 
     // coroutines
@@ -86,6 +92,9 @@ dependencies {
 
     // okhttp
     implementation("com.squareup.okhttp3:okhttp:4.2.2")
+
+    // time APIs
+    api 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
     // tests
     testImplementation 'junit:junit:4.12'

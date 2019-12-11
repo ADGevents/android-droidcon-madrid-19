@@ -17,6 +17,7 @@ class SpeakerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val avatarView = itemView.findViewById<ImageView>(R.id.speakerAvatar)
         Glide.with(itemView)
             .load(speaker.avatar.rawUrl)
+            .placeholder(R.drawable.ic_default_avatar)
             .transform(CircleCrop())
             .into(avatarView)
         itemView.setOnClickListener { speaker.onClickAction(speaker.id) }

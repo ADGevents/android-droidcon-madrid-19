@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.favourites.R
 import com.droidcon.schedule.ui.SessionsAdapter
-import com.droidcon.schedule.ui.model.SessionState
+import com.droidcon.schedule.ui.model.SessionRow
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -58,7 +58,7 @@ class FavouritesFragment : DaggerFragment() {
     private fun onFavouritesStateUpdated(favouritesState: FavouritesState) {
         when (favouritesState) {
             FavouritesState.Empty -> onEmptyFavourites()
-            is FavouritesState.Content -> onFavouritesContent(favouritesState.sessions)
+            is FavouritesState.Content -> onFavouritesContent(favouritesState.sessionRows)
         }
     }
 
@@ -67,9 +67,9 @@ class FavouritesFragment : DaggerFragment() {
         emptyFavouritesDescription.visibility = View.VISIBLE
     }
 
-    private fun onFavouritesContent(favourites: List<SessionState>) {
+    private fun onFavouritesContent(sessionRows: List<SessionRow>) {
         emptyFavouritesDescription.visibility = View.GONE
         favouriteSessions.visibility = View.VISIBLE
-        sessionsAdapter.submitList(favourites)
+        sessionsAdapter.submitList(sessionRows)
     }
 }

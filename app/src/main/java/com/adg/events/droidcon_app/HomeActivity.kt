@@ -12,8 +12,17 @@ class HomeActivity : DaggerAppCompatActivity() {
     private var currentNavController: LiveData<NavController>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        if (savedInstanceState == null) {
+            setUpNavigationBar()
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
         setUpNavigationBar()
     }
 

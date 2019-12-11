@@ -46,4 +46,10 @@ class SessionsStorage @Inject constructor(
             it.toSessionData()
         }
 
+    suspend fun search(query: String): List<SessionData> {
+        val searchResults = sessionDao.search("*$query*")
+        return searchResults.mapNotNull { sessionId ->
+            sessionDao.getById(sessionId)?.toSessionData()
+        }
+    }
 }

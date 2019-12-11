@@ -12,7 +12,7 @@ fun SessionDto.toSessionData(): SessionData =
         endsAt,
         isServiceSession,
         isPlenumSession,
-        speakers,
+        speakers.map { it.id },
         roomId,
         room
     )

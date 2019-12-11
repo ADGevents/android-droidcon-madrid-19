@@ -8,10 +8,10 @@ import com.droidcon.commons.sessionize.data.storage.database.sessionandspeaker.S
 @Dao
 interface SessionDao {
 
-    @Query("SELECT * from $SESSIONS_TABLE_NAME")
+    @Query("SELECT * from ${Session.TABLE_NAME}")
     suspend fun getSessions(): List<SessionEntity>
 
-    @Query("SELECT * FROM $SESSIONS_TABLE_NAME WHERE id = :id")
+    @Query("SELECT * FROM ${Session.TABLE_NAME} WHERE id = :id")
     suspend fun getById(id: String): SessionEntity?
 
     @Transaction
@@ -23,13 +23,13 @@ interface SessionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllSessions(sessions: List<SessionEntity>)
 
-    @Query("DELETE FROM $SESSIONS_TABLE_NAME")
+    @Query("DELETE FROM ${Session.TABLE_NAME}")
     fun clearSessions()
 
-    @Query("UPDATE $SESSIONS_TABLE_NAME SET isStarred = :isStarred WHERE id = :id")
+    @Query("UPDATE ${Session.TABLE_NAME} SET isStarred = :isStarred WHERE id = :id")
     suspend fun updateStarredValue(id: String, isStarred: Boolean): Int
 
-    @Query("SELECT * from $SESSIONS_TABLE_NAME WHERE isStarred = 1 ORDER BY startsAt ASC")
+    @Query("SELECT * from ${Session.TABLE_NAME} WHERE isStarred = 1 ORDER BY startsAt ASC")
     suspend fun getFavourites(): List<SessionEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -47,4 +47,7 @@ interface SessionDao {
         val sessionIds = getSessionIdsBySpeakerId(speakerId)
         return sessionIds.mapNotNull { getById(it) }
     }
+
+    @Query("SELECT ${Session.COLUMN_ID} FROM ${Session.FTS_TABLE_NAME} WHERE ${Session.FTS_TABLE_NAME} MATCH :query")
+    suspend fun search(query: String): List<String>
 }

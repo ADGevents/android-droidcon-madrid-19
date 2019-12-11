@@ -1,5 +1,7 @@
 package com.droidcon.schedule.domain
 
+import arrow.core.Either
+import com.droidcon.commons.sessionize.data.repository.session.SearchSessionsError
 import com.droidcon.commons.sessionize.data.repository.session.SessionsRepository
 import java.util.*
 import javax.inject.Inject
@@ -21,6 +23,14 @@ class GetSessionsByDay @Inject constructor(
             .map { it.toSession() }
             .sortedBy { it.sessionStartTimeStamp }
             .filter { it.sessionStartTimeStamp.getDayOfTheMonth() == sessionDay }
+}
+
+class SearchSessions @Inject constructor(
+    private val sessionsRepository: SessionsRepository
+) {
+
+    suspend operator fun invoke(query: String): Either<SearchSessionsError, List<Session>> =
+        sessionsRepository.search(query).map { sessions -> sessions.map { it.toSession() } }
 }
 
 private fun Long.getDayOfTheMonth(): Int {

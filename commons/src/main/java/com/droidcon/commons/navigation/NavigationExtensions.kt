@@ -21,7 +21,6 @@ fun BottomNavigationView.setupWithNavController(
 
     // Map of tags
     val graphIdToTagMap = SparseArray<String>()
-
     // Result. Mutable live data with the selected controller
     val selectedNavController = MutableLiveData<NavController>()
 
@@ -78,7 +77,7 @@ fun BottomNavigationView.setupWithNavController(
                     FragmentManager.POP_BACK_STACK_INCLUSIVE
                 )
                 val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
-                        as NavHostFragment
+                    as NavHostFragment
 
                 // Exclude the first fragment tag because it's always in the back stack.
                 if (firstFragmentTag != newlySelectedItemTag) {
@@ -115,6 +114,8 @@ fun BottomNavigationView.setupWithNavController(
         }
     }
 
+    // Optional: on item reselected, pop back stack to the destination of the graph
+    setupItemReselected(graphIdToTagMap, fragmentManager)
 
     // Finally, ensure that we update our BottomNavigationView when the back stack changes
     fragmentManager.addOnBackStackChangedListener {
@@ -130,8 +131,23 @@ fun BottomNavigationView.setupWithNavController(
             }
         }
     }
-
     return selectedNavController
+}
+
+private fun BottomNavigationView.setupItemReselected(
+    graphIdToTagMap: SparseArray<String>,
+    fragmentManager: FragmentManager
+) {
+    setOnNavigationItemReselectedListener { item ->
+        val newlySelectedItemTag = graphIdToTagMap[item.itemId]
+        val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
+            as NavHostFragment
+        val navController = selectedFragment.navController
+        // Pop the back stack to the start destination of the current navController graph
+        navController.popBackStack(
+            navController.graph.startDestination, false
+        )
+    }
 }
 
 private fun detachNavHostFragment(
@@ -186,4 +202,4 @@ private fun FragmentManager.isOnBackStack(backStackName: String): Boolean {
     return false
 }
 
-private fun getFragmentTag(index: Int) = "bottomNavigationFragment:$index"
+private fun getFragmentTag(index: Int) = "bottomNavigation#$index"

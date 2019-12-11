@@ -13,3 +13,5 @@ data class SessionData(
     val roomName: String,
     val isStarred: Boolean = false
 )
+
+object SearchSessionsError

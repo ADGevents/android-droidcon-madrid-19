@@ -1,12 +1,14 @@
 package com.droidcon.favourites.presentation
 
 import com.droidcon.schedule.domain.Session
-import com.droidcon.schedule.ui.model.toState
+import com.droidcon.schedule.ui.model.toRowsWithDayDividers
 
-fun Iterable<Session>.toState(): FavouritesState {
-    if (this.count() == 0) return FavouritesState.Empty
+fun List<Session>.toState(): FavouritesState {
+    if (count() == 0) {
+        return FavouritesState.Empty
+    }
 
-    return FavouritesState.Content(
-        map { session -> session.toState(favouritesEnabled = false) }
-    )
+    val sessionRows = toRowsWithDayDividers()
+
+    return FavouritesState.Content(sessionRows)
 }
