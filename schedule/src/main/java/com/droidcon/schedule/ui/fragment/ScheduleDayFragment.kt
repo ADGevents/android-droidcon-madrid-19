@@ -39,7 +39,7 @@ class ScheduleDayFragment : DaggerFragment() {
         val scheduleTab = arguments?.getSerializable(ARG_SCHEDULE_TAB) as? ScheduleTab
             ?: error("Missing arguments!!")
         setUpViews(view)
-        setUpScheduleViewModel(scheduleTab, isRestored = savedInstanceState != null)
+        setUpScheduleViewModel(scheduleTab)
     }
 
     private fun setUpViews(view: View) {
@@ -51,7 +51,7 @@ class ScheduleDayFragment : DaggerFragment() {
         }
     }
 
-    private fun setUpScheduleViewModel(scheduleTab: ScheduleTab, isRestored: Boolean) {
+    private fun setUpScheduleViewModel(scheduleTab: ScheduleTab) {
         scheduleFragmentViewModel = scheduleDayViewModelFactory.get(this)
         scheduleFragmentViewModel =
             ViewModelProviders.of(this).get(ScheduleDayViewModel::class.java)
@@ -59,7 +59,7 @@ class ScheduleDayFragment : DaggerFragment() {
             onScheduleEffectReceived(scheduleEffect)
         }
         scheduleFragmentViewModel.sessions.observe(::getLifecycle, sessionsAdapter::submitList)
-        scheduleFragmentViewModel.onScheduleVisible(scheduleTab, isRestored)
+        scheduleFragmentViewModel.onScheduleVisible(scheduleTab)
     }
 
     private fun onScheduleEffectReceived(scheduleDayEffect: ScheduleDayEffect) {

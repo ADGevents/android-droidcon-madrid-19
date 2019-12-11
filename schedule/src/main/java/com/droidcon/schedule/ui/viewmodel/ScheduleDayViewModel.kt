@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.commons.lifecycle.SingleLiveEvent
-import com.droidcon.schedule.domain.GetFirstInProgressSessionOrNull
-import com.droidcon.schedule.domain.GetSessionsByDay
-import com.droidcon.schedule.domain.Session
+import com.droidcon.schedule.domain.*
 import com.droidcon.schedule.ui.model.ScheduleDayEffect
 import com.droidcon.schedule.ui.model.ScheduleTab
 import com.droidcon.schedule.ui.model.SessionRow
@@ -18,7 +16,9 @@ import kotlinx.coroutines.launch
 class ScheduleDayViewModel(
     private val getSessionsByDay: GetSessionsByDay,
     private val updateSessionStarredValue: UpdateSessionStarredValue,
-    private val getFirstInProgressSessionOrNull: GetFirstInProgressSessionOrNull
+    private val getFirstInProgressSessionOrNull: GetFirstInProgressSessionOrNull,
+    private val shouldTryScrollingToInProgressSession: ShouldTryScrollingToInProgressSession,
+    private val registerScrollToInProgressSessionTry: RegisterScrollToInProgressSessionTry
 ) : ViewModel() {
 
     private val mutableSessions = MutableLiveData<List<SessionRow.Session>>()
@@ -27,14 +27,16 @@ class ScheduleDayViewModel(
     private val mutableScheduleEffects = SingleLiveEvent<ScheduleDayEffect>()
     val scheduleEffects: LiveData<ScheduleDayEffect> = mutableScheduleEffects
 
-    fun onScheduleVisible(scheduleTab: ScheduleTab, isRestored: Boolean) {
+    fun onScheduleVisible(scheduleTab: ScheduleTab) {
         viewModelScope.launch {
             val sessionsByDay = getSessionsByDay(scheduleTab.conferenceDayDate.dayOfMonth)
             emitSessions(sessionsByDay)
 
-            if (isRestored) {
+            if (!shouldTryScrollingToInProgressSession(scheduleTab.conferenceDayDate)) {
                 return@launch
             }
+
+            registerScrollToInProgressSessionTry(scheduleTab.conferenceDayDate)
 
             val inProgressSession = getFirstInProgressSessionOrNull(sessionsByDay)
             if (inProgressSession != null) {
