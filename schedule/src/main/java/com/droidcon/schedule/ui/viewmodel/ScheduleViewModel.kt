@@ -15,7 +15,11 @@ class ScheduleViewModel(
     private val mutableScheduleEffects = SingleLiveEvent<ScheduleEffect>()
     val scheduleEffects: LiveData<ScheduleEffect> = mutableScheduleEffects
 
-    fun onScheduleVisible() {
+    fun onScheduleVisible(isRestored: Boolean) {
+        if (isRestored) {
+            return
+        }
+
         when (val initialScheduleTab = getInitialScheduleTab()) {
             InitialScheduleTab.None -> Unit
             is InitialScheduleTab.Some -> emitSwitchToTabEffect(initialScheduleTab.scheduleTab)

@@ -16,7 +16,9 @@ fun SessionData.toSession(): Session =
         speakers,
         roomId,
         roomName,
-        isStarred
+        isStarred,
+        startsAt,
+        endsAt
     )
 
 private fun String.toTimeStamp(): Long =

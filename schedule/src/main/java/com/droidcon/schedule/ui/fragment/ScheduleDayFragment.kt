@@ -11,6 +11,7 @@ import com.droidcon.schedule.R
 import com.droidcon.schedule.ui.SessionsAdapter
 import com.droidcon.schedule.ui.model.ScheduleDayEffect
 import com.droidcon.schedule.ui.model.ScheduleTab
+import com.droidcon.schedule.ui.model.SessionRow
 import com.droidcon.schedule.ui.viewmodel.ScheduleDayViewModel
 import com.droidcon.schedule.ui.viewmodel.ScheduleDayViewModelFactory
 import com.google.android.material.snackbar.Snackbar
@@ -35,9 +36,10 @@ class ScheduleDayFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val scheduleTab = arguments?.getSerializable(ARG_SCHEDULE_TAB) as? ScheduleTab ?: error("Missing arguments!!")
+        val scheduleTab = arguments?.getSerializable(ARG_SCHEDULE_TAB) as? ScheduleTab
+            ?: error("Missing arguments!!")
         setUpViews(view)
-        setUpScheduleViewModel(scheduleTab)
+        setUpScheduleViewModel(scheduleTab, isRestored = savedInstanceState != null)
     }
 
     private fun setUpViews(view: View) {
@@ -49,7 +51,7 @@ class ScheduleDayFragment : DaggerFragment() {
         }
     }
 
-    private fun setUpScheduleViewModel(scheduleTab: ScheduleTab) {
+    private fun setUpScheduleViewModel(scheduleTab: ScheduleTab, isRestored: Boolean) {
         scheduleFragmentViewModel = scheduleDayViewModelFactory.get(this)
         scheduleFragmentViewModel =
             ViewModelProviders.of(this).get(ScheduleDayViewModel::class.java)
@@ -57,22 +59,31 @@ class ScheduleDayFragment : DaggerFragment() {
             onScheduleEffectReceived(scheduleEffect)
         }
         scheduleFragmentViewModel.sessions.observe(::getLifecycle, sessionsAdapter::submitList)
-        scheduleFragmentViewModel.onScheduleVisible(scheduleTab)
+        scheduleFragmentViewModel.onScheduleVisible(scheduleTab, isRestored)
     }
 
     private fun onScheduleEffectReceived(scheduleDayEffect: ScheduleDayEffect) {
         when (scheduleDayEffect) {
-            ScheduleDayEffect.ShowUpdateStarredStateError -> showSnackbarError()
+            ScheduleDayEffect.ShowUpdateStarredStateError -> showError()
+            is ScheduleDayEffect.ScrollToSession -> scrollToSession(scheduleDayEffect.sessionId)
         }
     }
 
-    private fun showSnackbarError() {
+    private fun showError() {
         view?.let {
-            Snackbar.make(
-                it,
-                "There was an error starring the session. Please try again.",
-                Snackbar.LENGTH_SHORT
-            ).show()
+            Snackbar.make(it, getString(R.string.bookmark_error_description), Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun scrollToSession(sessionId: String) {
+        val sessionPosition = sessionsAdapter
+            .currentList
+            .asSequence()
+            .filterIsInstance(SessionRow.Session::class.java)
+            .indexOfFirst { it.id == sessionId }
+
+        if (sessionPosition != -1) {
+            sessions.scrollToPosition(sessionPosition)
         }
     }
 

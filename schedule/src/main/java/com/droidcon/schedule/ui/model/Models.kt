@@ -25,11 +25,12 @@ sealed class SessionRow {
 
 sealed class ScheduleDayEffect {
     object ShowUpdateStarredStateError : ScheduleDayEffect()
+    data class ScrollToSession(val sessionId: String) : ScheduleDayEffect()
 }
 
 sealed class ScheduleEffect {
     object NavigateToSearchSessions : ScheduleEffect()
-    data class SwitchToTab(val tab: ScheduleTab): ScheduleEffect()
+    data class SwitchToTab(val tab: ScheduleTab) : ScheduleEffect()
 }
 
 data class ScheduleTab(val conferenceDayDate: LocalDate) : Serializable
@@ -40,6 +41,6 @@ fun ScheduleTab.getTitle(): String {
 }
 
 sealed class InitialScheduleTab {
-    object None: InitialScheduleTab()
-    data class Some(val scheduleTab: ScheduleTab): InitialScheduleTab()
+    object None : InitialScheduleTab()
+    data class Some(val scheduleTab: ScheduleTab) : InitialScheduleTab()
 }

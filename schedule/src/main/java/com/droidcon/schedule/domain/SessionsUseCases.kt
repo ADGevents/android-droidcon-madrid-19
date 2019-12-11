@@ -3,6 +3,12 @@ package com.droidcon.schedule.domain
 import arrow.core.Either
 import com.droidcon.commons.conference.data.repository.session.SearchSessionsError
 import com.droidcon.commons.conference.data.repository.session.SessionsRepository
+import com.droidcon.commons.date.GetNowDate
+import com.droidcon.commons.ioc.IoDispatcher
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 
@@ -31,6 +37,29 @@ class SearchSessions @Inject constructor(
 
     suspend operator fun invoke(query: String): Either<SearchSessionsError, List<Session>> =
         sessionsRepository.search(query).map { sessions -> sessions.map { it.toSession() } }
+}
+
+class GetFirstInProgressSessionOrNull @Inject constructor(
+    private val getNowDate: GetNowDate,
+    @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
+) {
+
+    suspend operator fun invoke(sessions: List<Session>): Session? = withContext(coroutineDispatcher) {
+        sessions.firstOrNull {
+            val startDate = LocalDate.parse(it.startsAt, DateTimeFormatter.ISO_DATE_TIME)
+            val endDate = LocalDate.parse(it.endsAt, DateTimeFormatter.ISO_DATE_TIME)
+            val nowDate = getNowDate()
+            return@firstOrNull nowDate.isBetween(startDate, endDate)
+        }
+    }
+
+    private fun LocalDate.isBetween(startDate: LocalDate, endDate: LocalDate): Boolean =
+        when {
+            isEqual(startDate) -> true
+            isEqual(endDate) -> true
+            isAfter(startDate) && isBefore(endDate) -> true
+            else -> false
+        }
 }
 
 private fun Long.getDayOfTheMonth(): Int {

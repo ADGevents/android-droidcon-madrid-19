@@ -46,7 +46,7 @@ class ScheduleFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
         bindViewModel()
-        scheduleViewModel.onScheduleVisible()
+        scheduleViewModel.onScheduleVisible(isRestored = savedInstanceState != null)
     }
 
     private fun initViews(view: View) {
