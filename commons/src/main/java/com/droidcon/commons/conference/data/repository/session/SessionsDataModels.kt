@@ -14,4 +14,5 @@ data class SessionData(
     val isStarred: Boolean = false
 )
 
+object GetSessionsError
 object SearchSessionsError

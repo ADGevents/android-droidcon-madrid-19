@@ -2,8 +2,8 @@ package com.droidcon.speakers.presentation.speakerlist.model
 
 import com.droidcon.speakers.domain.Speaker
 
-fun Iterable<Speaker>.toState(onClickAction: (String) -> Unit): SpeakersState =
-    SpeakersState(map {
+fun Iterable<Speaker>.toState(onClickAction: (String) -> Unit): SpeakersState.Content =
+    SpeakersState.Content(map {
         it.toState(
             onClickAction
         )

@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.io.IOException
 import javax.inject.Inject
 
 class SpeakersApiClient @Inject constructor(
@@ -25,23 +26,27 @@ class SpeakersApiClient @Inject constructor(
                 .url("${apiConfig.baseUrl}$GET_SPEAKERS_PATH")
                 .build()
 
-            val response = okHttpClient.newCall(getSpeakersRequest).execute()
+            try {
+                val response = okHttpClient.newCall(getSpeakersRequest).execute()
 
-            if (response.code != 200) return@withContext getSpeakersApiError()
+                if (response.code != 200) return@withContext getSpeakersApiError()
 
-            val jsonResponse = response.body?.string()
-                ?: return@withContext getSpeakersApiError()
+                val jsonResponse = response.body?.string()
+                    ?: return@withContext getSpeakersApiError()
 
-            val getSpeakersType = Types.newParameterizedType(
-                List::class.java,
-                SpeakerDto::class.java
-            )
-            val getSpeakersAdapter = moshi.adapter<List<SpeakerDto>>(getSpeakersType)
+                val getSpeakersType = Types.newParameterizedType(
+                    List::class.java,
+                    SpeakerDto::class.java
+                )
+                val getSpeakersAdapter = moshi.adapter<List<SpeakerDto>>(getSpeakersType)
 
-            val getSpeakersDto: List<SpeakerDto> = getSpeakersAdapter.fromJson(jsonResponse)
-                ?: return@withContext getSpeakersApiError()
+                val getSpeakersDto: List<SpeakerDto> = getSpeakersAdapter.fromJson(jsonResponse)
+                    ?: return@withContext getSpeakersApiError()
 
-            return@withContext Either.right(getSpeakersDto)
+                return@withContext Either.right(getSpeakersDto)
+            } catch (ioException: IOException) {
+                return@withContext getSpeakersApiError()
+            }
         }
 
     suspend fun getSpeaker(speakerId: String): Either<GetSpeakerError, SpeakerDto> =

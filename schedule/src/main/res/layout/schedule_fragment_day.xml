@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sessions_recycler_view"
@@ -9,4 +10,18 @@
         android:layout_height="match_parent"
         android:paddingTop="8dp"
         android:clipToPadding="false"/>
+
+
+    <TextView
+            android:id="@+id/fatalError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:drawableTop="@drawable/ic_no_results"
+            android:gravity="center"
+            android:text="@string/fatal_error"
+            android:textSize="20sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
 </FrameLayout>

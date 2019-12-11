@@ -112,7 +112,7 @@ class SearchSpeakersFragment : DaggerFragment() {
             SpeakersSearchResult.Empty -> speakersAdapter.submitList(emptyList())
             SpeakersSearchResult.Error -> {
             }
-            is SpeakersSearchResult.Content -> speakersAdapter.submitList(speakersSearchResult.speakers.speakers)
+            is SpeakersSearchResult.Content -> speakersAdapter.submitList(speakersSearchResult.speakersStateContent.speakers)
         }
     }
 

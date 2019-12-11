@@ -4,7 +4,7 @@ import com.droidcon.speakers.presentation.speakerlist.model.SpeakersState
 
 sealed class SpeakersSearchResult {
     object Empty : SpeakersSearchResult()
-    data class Content(val speakers: SpeakersState) : SpeakersSearchResult()
+    data class Content(val speakersStateContent: SpeakersState.Content) : SpeakersSearchResult()
     object Error : SpeakersSearchResult()
 }
 

@@ -4,6 +4,7 @@ import arrow.core.Either
 import com.droidcon.commons.conference.data.api.session.SessionsApiClient
 import com.droidcon.commons.conference.data.api.session.toSessionData
 import com.droidcon.commons.conference.data.storage.SessionsStorage
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,13 +14,13 @@ class SessionsRepository @Inject constructor(
     private val sessionsStorage: SessionsStorage
 ) {
 
-    suspend fun getAllSessions(): List<SessionData> {
+    suspend fun getAllSessions(): Either<GetSessionsError, List<SessionData>> {
         val sessions = getAllSessionsFromDisk()
 
         return if (sessions.isNullOrEmpty()) {
             getAllSessionsFromApi()
         } else {
-            sessions
+            Either.right(sessions)
         }
     }
 
@@ -38,13 +39,13 @@ class SessionsRepository @Inject constructor(
     private suspend fun getAllSessionsFromDisk(): List<SessionData> =
         sessionsStorage.getAllSessionsData()
 
-    private suspend fun getAllSessionsFromApi(): List<SessionData> {
-        val sessionsDataFromApi = sessionsApiClient.getSessions().map {
-            it.toSessionData()
+    private suspend fun getAllSessionsFromApi(): Either<GetSessionsError, List<SessionData>> =
+        try {
+            val sessions = sessionsApiClient.getSessions().map { it.toSessionData() }
+            sessionsStorage.storeSessions(sessions)
+            Either.right(sessions)
+        } catch (ioException: IOException) {
+            Either.left(GetSessionsError)
         }
 
-        sessionsStorage.storeSessions(sessionsDataFromApi)
-
-        return sessionsDataFromApi
-    }
 }
