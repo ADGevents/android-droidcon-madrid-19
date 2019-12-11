@@ -81,7 +81,6 @@ class SearchSessionsFragment : DaggerFragment() {
         rootView.findViewById<RecyclerView>(R.id.sessions).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = sessionsAdapter
-            setDivider(R.drawable.row_divider)
         }
     }
 
