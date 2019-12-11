@@ -1,6 +1,7 @@
 package com.droidcon.schedule.domain
 
 import arrow.core.Either
+import com.droidcon.commons.conference.data.repository.session.GetSessionsError
 import com.droidcon.commons.conference.data.repository.session.SearchSessionsError
 import com.droidcon.commons.conference.data.repository.session.SessionsRepository
 import com.droidcon.commons.date.GetNowDate
@@ -12,23 +13,16 @@ import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 
-class GetSessions @Inject constructor(
-    private val sessionsRepository: SessionsRepository
-) {
-    suspend operator fun invoke(): List<Session> =
-        sessionsRepository.getAllSessions().map {
-            it.toSession()
-        }
-}
-
 class GetSessionsByDay @Inject constructor(
     private val sessionsRepository: SessionsRepository
 ) {
-    suspend operator fun invoke(sessionDay: Int): List<Session> =
-        sessionsRepository.getAllSessions()
-            .map { it.toSession() }
-            .sortedBy { it.sessionStartTimeStamp }
-            .filter { it.sessionStartTimeStamp.getDayOfTheMonth() == sessionDay }
+    suspend operator fun invoke(sessionDay: Int): Either<GetSessionsError, List<Session>> =
+        sessionsRepository.getAllSessions().map { sessions ->
+            sessions.map { it.toSession() }
+                .sortedBy { it.sessionStartTimeStamp }
+                .filter { it.sessionStartTimeStamp.getDayOfTheMonth() == sessionDay }
+        }
+
 }
 
 class SearchSessions @Inject constructor(

@@ -2,9 +2,10 @@ package com.droidcon.speakers.presentation.speakerlist.model
 
 import com.droidcon.commons.conference.data.repository.speaker.Url
 
-data class SpeakersState(
-    val speakers: List<SpeakerState>
-)
+sealed class SpeakersState {
+    data class Content(val speakers: List<SpeakerState>) : SpeakersState()
+    object Error : SpeakersState()
+}
 
 data class SpeakerState(
     val id: String,
@@ -16,5 +17,5 @@ data class SpeakerState(
 
 sealed class SpeakersEffect {
     class NavigateToDetail(val speakerId: String) : SpeakersEffect()
-    object NavigateToSearch: SpeakersEffect()
+    object NavigateToSearch : SpeakersEffect()
 }

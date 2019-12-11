@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
 import com.droidcon.schedule.ui.SessionsAdapter
 import com.droidcon.schedule.ui.model.ScheduleDayEffect
+import com.droidcon.schedule.ui.model.ScheduleState
 import com.droidcon.schedule.ui.model.ScheduleTab
 import com.droidcon.schedule.ui.model.SessionRow
 import com.droidcon.schedule.ui.viewmodel.ScheduleDayViewModel
@@ -27,6 +29,7 @@ class ScheduleDayFragment : DaggerFragment() {
     @Inject
     lateinit var sessionsAdapter: SessionsAdapter
     private lateinit var sessions: RecyclerView
+    private lateinit var errorView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +47,7 @@ class ScheduleDayFragment : DaggerFragment() {
 
     private fun setUpViews(view: View) {
         sessions = view.findViewById(R.id.sessions_recycler_view)
+        errorView = view.findViewById(R.id.fatalError)
         sessions.apply {
             layoutManager = LinearLayoutManager(context)
             itemAnimator = null
@@ -55,14 +59,26 @@ class ScheduleDayFragment : DaggerFragment() {
         scheduleFragmentViewModel = scheduleDayViewModelFactory.get(this)
         scheduleFragmentViewModel =
             ViewModelProviders.of(this).get(ScheduleDayViewModel::class.java)
-        scheduleFragmentViewModel.scheduleEffects.observe(::getLifecycle) { scheduleEffect ->
-            onScheduleEffectReceived(scheduleEffect)
-        }
-        scheduleFragmentViewModel.sessions.observe(::getLifecycle, sessionsAdapter::submitList)
+        scheduleFragmentViewModel.scheduleState.observe(::getLifecycle, ::onScheduleState)
+        scheduleFragmentViewModel.scheduleEffects.observe(::getLifecycle, ::onScheduleEffect)
         scheduleFragmentViewModel.onScheduleVisible(scheduleTab)
     }
 
-    private fun onScheduleEffectReceived(scheduleDayEffect: ScheduleDayEffect) {
+    private fun onScheduleState(scheduleState: ScheduleState) {
+        when (scheduleState) {
+            is ScheduleState.Content -> {
+                sessions.visibility = View.VISIBLE
+                errorView.visibility = View.GONE
+                sessionsAdapter.submitList(scheduleState.sessionRows)
+            }
+            ScheduleState.Error -> {
+                sessions.visibility = View.GONE
+                errorView.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun onScheduleEffect(scheduleDayEffect: ScheduleDayEffect) {
         when (scheduleDayEffect) {
             ScheduleDayEffect.ShowUpdateStarredStateError -> showError()
             is ScheduleDayEffect.ScrollToSession -> scrollToSession(scheduleDayEffect.sessionId)

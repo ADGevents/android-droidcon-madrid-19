@@ -1,10 +1,10 @@
 package com.droidcon.speakers.presentation.speakerlist.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +28,9 @@ class SpeakersFragment : DaggerFragment() {
     lateinit var speakersViewModelFactory: SpeakersViewModelFactory
     private lateinit var speakersViewModel: SpeakersViewModel
 
+    private lateinit var speakers: RecyclerView
+    private lateinit var errorView: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,12 +46,13 @@ class SpeakersFragment : DaggerFragment() {
     }
 
     private fun setUpView(rootView: View) {
-        rootView.findViewById<RecyclerView>(R.id.speakers).apply {
+        speakers = rootView.findViewById<RecyclerView>(R.id.speakers).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = speakersAdapter
             itemAnimator = null
             setDivider(R.drawable.row_divider)
         }
+        errorView = rootView.findViewById(R.id.fatalError)
     }
 
     private fun setUpMenu(rootView: View) {
@@ -73,13 +77,22 @@ class SpeakersFragment : DaggerFragment() {
     }
 
     private fun bindViewModel() {
-        speakersViewModel.speakers.observe(::getLifecycle, ::onSpeakersUpdated)
+        speakersViewModel.speakersState.observe(::getLifecycle, ::onSpeakersUpdated)
         speakersViewModel.speakersEffects.observe(::getLifecycle, ::onSpeakersEffect)
     }
 
-    private fun onSpeakersUpdated(speakersModel: SpeakersState) {
-        Log.d("Speaker", "model = $speakersModel")
-        speakersAdapter.submitList(speakersModel.speakers)
+    private fun onSpeakersUpdated(speakersState: SpeakersState) {
+        when (speakersState) {
+            is SpeakersState.Content -> {
+                speakers.visibility = View.VISIBLE
+                errorView.visibility = View.GONE
+                speakersAdapter.submitList(speakersState.speakers)
+            }
+            SpeakersState.Error -> {
+                speakers.visibility = View.GONE
+                errorView.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun onSpeakersEffect(speakersEffect: SpeakersEffect) {

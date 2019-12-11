@@ -7,11 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.commons.lifecycle.SingleLiveEvent
 import com.droidcon.schedule.domain.*
-import com.droidcon.schedule.ui.model.ScheduleDayEffect
-import com.droidcon.schedule.ui.model.ScheduleTab
-import com.droidcon.schedule.ui.model.SessionRow
-import com.droidcon.schedule.ui.model.toRow
+import com.droidcon.schedule.ui.model.*
 import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDate
 
 class ScheduleDayViewModel(
     private val getSessionsByDay: GetSessionsByDay,
@@ -21,32 +19,44 @@ class ScheduleDayViewModel(
     private val registerScrollToInProgressSessionTry: RegisterScrollToInProgressSessionTry
 ) : ViewModel() {
 
-    private val mutableSessions = MutableLiveData<List<SessionRow.Session>>()
-    val sessions: LiveData<List<SessionRow.Session>> = mutableSessions
+    private val mutableScheduleState = MutableLiveData<ScheduleState>()
+    val scheduleState: LiveData<ScheduleState> = mutableScheduleState
 
     private val mutableScheduleEffects = SingleLiveEvent<ScheduleDayEffect>()
     val scheduleEffects: LiveData<ScheduleDayEffect> = mutableScheduleEffects
 
     fun onScheduleVisible(scheduleTab: ScheduleTab) {
         viewModelScope.launch {
-            val sessionsByDay = getSessionsByDay(scheduleTab.conferenceDayDate.dayOfMonth)
-            emitSessions(sessionsByDay)
+            val sessionsByDayResult = getSessionsByDay(scheduleTab.conferenceDayDate.dayOfMonth)
 
-            if (!shouldTryScrollingToInProgressSession(scheduleTab.conferenceDayDate)) {
-                return@launch
-            }
-
-            registerScrollToInProgressSessionTry(scheduleTab.conferenceDayDate)
-
-            val inProgressSession = getFirstInProgressSessionOrNull(sessionsByDay)
-            if (inProgressSession != null) {
-                emitScrollToSessionEffect(inProgressSession.id)
-            }
+            sessionsByDayResult.fold(
+                ifLeft = { onGetSessionsByDayError() },
+                ifRight = { sessions -> onGetSessionsByDaySuccess(sessions, scheduleTab.conferenceDayDate) }
+            )
         }
     }
 
+    private suspend fun onGetSessionsByDaySuccess(sessionsByDay: List<Session>, conferenceDayDate: LocalDate) {
+        emitSessions(sessionsByDay)
+
+        if (!shouldTryScrollingToInProgressSession(conferenceDayDate)) {
+            return
+        }
+
+        registerScrollToInProgressSessionTry(conferenceDayDate)
+
+        val inProgressSession = getFirstInProgressSessionOrNull(sessionsByDay)
+        if (inProgressSession != null) {
+            emitScrollToSessionEffect(inProgressSession.id)
+        }
+    }
+
+    private fun onGetSessionsByDayError() {
+        mutableScheduleState.value = ScheduleState.Error
+    }
+
     private fun emitSessions(sessions: List<Session>) {
-        mutableSessions.value = sessions.toRows()
+        mutableScheduleState.value = ScheduleState.Content(sessions.toRows())
     }
 
     private fun emitScrollToSessionEffect(sessionId: String) {
@@ -75,8 +85,9 @@ class ScheduleDayViewModel(
     }
 
     private fun updateSessionStarredState(sessionId: String, isStarred: Boolean) {
-        val sessions = mutableSessions.value ?: return
-        val updatedSessions = sessions.map { session ->
+        val scheduleStateContent = mutableScheduleState.value as? ScheduleState.Content ?: return
+
+        val updatedSessions = scheduleStateContent.sessionRows.map { session ->
             if (session.id == sessionId) {
                 session.copy(starred = isStarred)
             } else {
@@ -84,6 +95,6 @@ class ScheduleDayViewModel(
             }
         }
 
-        mutableSessions.value = updatedSessions
+        mutableScheduleState.value = ScheduleState.Content(updatedSessions)
     }
 }
