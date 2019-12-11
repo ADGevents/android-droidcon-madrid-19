@@ -39,7 +39,11 @@
         <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"/>
+                android:layout_height="?actionBarSize"
+                android:background="@null"
+                app:tabIndicator="@drawable/tab_indicator"
+                app:tabTextAppearance="@style/TextAppearance.Tab"
+                app:tabUnboundedRipple="false" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -48,13 +52,13 @@
             android:id="@+id/scheduleDaysViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <ProgressBar
             android:id="@+id/progressIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminate="true"/>
+            android:indeterminate="true" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
