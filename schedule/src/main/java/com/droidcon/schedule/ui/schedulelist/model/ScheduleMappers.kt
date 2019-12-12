@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui.model
+package com.droidcon.schedule.ui.schedulelist.model
 
 import com.droidcon.schedule.domain.Session
 import java.text.SimpleDateFormat

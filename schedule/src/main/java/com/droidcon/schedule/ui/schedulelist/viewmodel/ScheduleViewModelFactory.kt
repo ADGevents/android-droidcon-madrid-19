@@ -1,10 +1,10 @@
-package com.droidcon.schedule.ui.viewmodel
+package com.droidcon.schedule.ui.schedulelist.viewmodel
 
 import androidx.fragment.app.Fragment
 import com.droidcon.commons.ioc.lifecycle.buildViewModel
 import com.droidcon.schedule.domain.RegisterShowInitialScheduleTabTry
 import com.droidcon.schedule.domain.ShouldTrySwitchingToInitialScheduleTab
-import com.droidcon.schedule.ui.logic.GetInitialScheduleTab
+import com.droidcon.schedule.ui.schedulelist.logic.GetInitialScheduleTab
 import javax.inject.Inject
 
 class ScheduleViewModelFactory @Inject constructor(

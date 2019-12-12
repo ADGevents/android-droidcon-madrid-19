@@ -1,10 +1,10 @@
-package com.droidcon.schedule.ui
+package com.droidcon.schedule.ui.schedulelist.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.droidcon.schedule.R
-import com.droidcon.schedule.ui.model.SessionRow
+import com.droidcon.schedule.ui.schedulelist.model.SessionRow
 import javax.inject.Inject
 
 class SessionsAdapter @Inject constructor(

@@ -1,7 +1,7 @@
-package com.droidcon.schedule.ui.logic
+package com.droidcon.schedule.ui.schedulelist.logic
 
 import com.droidcon.commons.date.GetNowDate
-import com.droidcon.schedule.ui.model.InitialScheduleTab
+import com.droidcon.schedule.ui.schedulelist.model.InitialScheduleTab
 import javax.inject.Inject
 
 class GetInitialScheduleTab @Inject constructor(

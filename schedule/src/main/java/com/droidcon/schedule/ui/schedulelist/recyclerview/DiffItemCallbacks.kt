@@ -1,7 +1,7 @@
-package com.droidcon.schedule.ui
+package com.droidcon.schedule.ui.schedulelist.recyclerview
 
 import androidx.recyclerview.widget.DiffUtil
-import com.droidcon.schedule.ui.model.SessionRow
+import com.droidcon.schedule.ui.schedulelist.model.SessionRow
 
 class SessionRowDiffItemCallback(
     private val sessionDiffItemCallback: SessionItemDiffCallback,
@@ -11,18 +11,30 @@ class SessionRowDiffItemCallback(
     override fun areItemsTheSame(oldItem: SessionRow, newItem: SessionRow): Boolean =
         when {
             oldItem is SessionRow.Session && newItem is SessionRow.Session ->
-                sessionDiffItemCallback.areItemsTheSame(oldItem, newItem)
+                SessionItemDiffCallback.areItemsTheSame(
+                    oldItem,
+                    newItem
+                )
             oldItem is SessionRow.DayDivider && newItem is SessionRow.DayDivider ->
-                dayDividerItemDiffCallback.areItemsTheSame(oldItem, newItem)
+                DayDividerItemDiffCallback.areItemsTheSame(
+                    oldItem,
+                    newItem
+                )
             else -> false
         }
 
     override fun areContentsTheSame(oldItem: SessionRow, newItem: SessionRow): Boolean =
         when {
             oldItem is SessionRow.Session && newItem is SessionRow.Session ->
-                sessionDiffItemCallback.areContentsTheSame(oldItem, newItem)
+                SessionItemDiffCallback.areContentsTheSame(
+                    oldItem,
+                    newItem
+                )
             oldItem is SessionRow.DayDivider && newItem is SessionRow.DayDivider ->
-                dayDividerItemDiffCallback.areContentsTheSame(oldItem, newItem)
+                DayDividerItemDiffCallback.areContentsTheSame(
+                    oldItem,
+                    newItem
+                )
             else -> false
         }
 }

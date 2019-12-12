@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui.fragment
+package com.droidcon.schedule.ui.schedulelist.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -9,12 +9,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.droidcon.commons.recyclerview.setDivider
 import com.droidcon.schedule.R
-import com.droidcon.schedule.ui.SessionsAdapter
-import com.droidcon.schedule.ui.model.SessionsSearchState
-import com.droidcon.schedule.ui.viewmodel.SearchSessionsViewModel
-import com.droidcon.schedule.ui.viewmodel.SearchSessionsViewModelFactory
+import com.droidcon.schedule.ui.schedulelist.recyclerview.SessionsAdapter
+import com.droidcon.schedule.ui.schedulelist.model.SessionsSearchState
+import com.droidcon.schedule.ui.schedulelist.viewmodel.SearchSessionsViewModel
+import com.droidcon.schedule.ui.schedulelist.viewmodel.SearchSessionsViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui.viewmodel
+package com.droidcon.schedule.ui.schedulelist.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.schedule.domain.SearchSessions
 import com.droidcon.schedule.domain.Session
-import com.droidcon.schedule.ui.model.SessionRow
-import com.droidcon.schedule.ui.model.SessionsSearchState
-import com.droidcon.schedule.ui.model.toSessionsSearchState
+import com.droidcon.schedule.ui.schedulelist.model.SessionRow
+import com.droidcon.schedule.ui.schedulelist.model.SessionsSearchState
+import com.droidcon.schedule.ui.schedulelist.model.toSessionsSearchState
 import kotlinx.coroutines.launch
 
 class SearchSessionsViewModel(

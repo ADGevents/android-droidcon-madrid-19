@@ -1,7 +1,7 @@
-package com.droidcon.schedule.ui.logic
+package com.droidcon.schedule.ui.schedulelist.logic
 
 import com.droidcon.commons.BuildConfig
-import com.droidcon.schedule.ui.model.ScheduleTab
+import com.droidcon.schedule.ui.schedulelist.model.ScheduleTab
 import org.threeten.bp.LocalDate
 
 object GetScheduleTabs {

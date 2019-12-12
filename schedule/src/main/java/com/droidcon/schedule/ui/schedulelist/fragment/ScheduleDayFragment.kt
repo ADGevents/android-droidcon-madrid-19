@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui.fragment
+package com.droidcon.schedule.ui.schedulelist.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
-import com.droidcon.schedule.ui.SessionsAdapter
-import com.droidcon.schedule.ui.model.ScheduleDayEffect
-import com.droidcon.schedule.ui.model.ScheduleState
-import com.droidcon.schedule.ui.model.ScheduleTab
-import com.droidcon.schedule.ui.model.SessionRow
-import com.droidcon.schedule.ui.viewmodel.ScheduleDayViewModel
-import com.droidcon.schedule.ui.viewmodel.ScheduleDayViewModelFactory
+import com.droidcon.schedule.ui.schedulelist.recyclerview.SessionsAdapter
+import com.droidcon.schedule.ui.schedulelist.model.ScheduleDayEffect
+import com.droidcon.schedule.ui.schedulelist.model.ScheduleState
+import com.droidcon.schedule.ui.schedulelist.model.ScheduleTab
+import com.droidcon.schedule.ui.schedulelist.model.SessionRow
+import com.droidcon.schedule.ui.schedulelist.viewmodel.ScheduleDayViewModel
+import com.droidcon.schedule.ui.schedulelist.viewmodel.ScheduleDayViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

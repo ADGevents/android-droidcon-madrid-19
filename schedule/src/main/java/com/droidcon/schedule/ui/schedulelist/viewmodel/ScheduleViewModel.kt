@@ -1,14 +1,14 @@
-package com.droidcon.schedule.ui.viewmodel
+package com.droidcon.schedule.ui.schedulelist.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.droidcon.commons.lifecycle.SingleLiveEvent
 import com.droidcon.schedule.domain.RegisterShowInitialScheduleTabTry
 import com.droidcon.schedule.domain.ShouldTrySwitchingToInitialScheduleTab
-import com.droidcon.schedule.ui.logic.GetInitialScheduleTab
-import com.droidcon.schedule.ui.model.InitialScheduleTab
-import com.droidcon.schedule.ui.model.ScheduleEffect
-import com.droidcon.schedule.ui.model.ScheduleTab
+import com.droidcon.schedule.ui.schedulelist.logic.GetInitialScheduleTab
+import com.droidcon.schedule.ui.schedulelist.model.InitialScheduleTab
+import com.droidcon.schedule.ui.schedulelist.model.ScheduleEffect
+import com.droidcon.schedule.ui.schedulelist.model.ScheduleTab
 
 class ScheduleViewModel(
     private val getInitialScheduleTab: GetInitialScheduleTab,

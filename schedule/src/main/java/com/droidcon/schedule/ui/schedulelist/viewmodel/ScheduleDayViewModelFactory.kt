@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui.viewmodel
+package com.droidcon.schedule.ui.schedulelist.viewmodel
 
 import androidx.fragment.app.Fragment
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue

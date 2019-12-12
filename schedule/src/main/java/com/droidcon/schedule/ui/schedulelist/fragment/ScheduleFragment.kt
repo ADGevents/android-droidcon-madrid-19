@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui.fragment
+package com.droidcon.schedule.ui.schedulelist.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,12 +12,12 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.droidcon.schedule.R
-import com.droidcon.schedule.ui.logic.GetScheduleTabs
-import com.droidcon.schedule.ui.model.ScheduleEffect
-import com.droidcon.schedule.ui.model.ScheduleTab
-import com.droidcon.schedule.ui.model.getTitle
-import com.droidcon.schedule.ui.viewmodel.ScheduleViewModel
-import com.droidcon.schedule.ui.viewmodel.ScheduleViewModelFactory
+import com.droidcon.schedule.ui.schedulelist.logic.GetScheduleTabs
+import com.droidcon.schedule.ui.schedulelist.model.ScheduleEffect
+import com.droidcon.schedule.ui.schedulelist.model.ScheduleTab
+import com.droidcon.schedule.ui.schedulelist.model.getTitle
+import com.droidcon.schedule.ui.schedulelist.viewmodel.ScheduleViewModel
+import com.droidcon.schedule.ui.schedulelist.viewmodel.ScheduleViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

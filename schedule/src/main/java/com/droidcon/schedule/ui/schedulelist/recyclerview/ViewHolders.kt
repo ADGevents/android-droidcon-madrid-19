@@ -1,11 +1,11 @@
-package com.droidcon.schedule.ui
+package com.droidcon.schedule.ui.schedulelist.recyclerview
 
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
-import com.droidcon.schedule.ui.model.SessionRow
+import com.droidcon.schedule.ui.schedulelist.model.SessionRow
 
 sealed class SessionRowViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

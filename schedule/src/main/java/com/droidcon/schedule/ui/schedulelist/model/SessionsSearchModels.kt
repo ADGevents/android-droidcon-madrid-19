@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui.model
+package com.droidcon.schedule.ui.schedulelist.model
 
 sealed class SessionsSearchState {
     object Empty : SessionsSearchState()

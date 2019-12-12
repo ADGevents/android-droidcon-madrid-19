@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui.viewmodel
+package com.droidcon.schedule.ui.schedulelist.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.commons.lifecycle.SingleLiveEvent
 import com.droidcon.schedule.domain.*
-import com.droidcon.schedule.ui.model.*
+import com.droidcon.schedule.ui.schedulelist.model.*
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 

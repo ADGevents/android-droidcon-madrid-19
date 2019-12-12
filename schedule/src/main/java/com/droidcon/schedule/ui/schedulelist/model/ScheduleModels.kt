@@ -1,4 +1,4 @@
-package com.droidcon.schedule.ui.model
+package com.droidcon.schedule.ui.schedulelist.model
 
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
