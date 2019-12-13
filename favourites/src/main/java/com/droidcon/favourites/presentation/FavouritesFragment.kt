@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.favourites.R
-import com.droidcon.schedule.ui.SessionsAdapter
-import com.droidcon.schedule.ui.model.SessionRow
+import com.droidcon.schedule.ui.schedulelist.model.SessionRow
+import com.droidcon.schedule.ui.schedulelist.recyclerview.SessionsAdapter
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 

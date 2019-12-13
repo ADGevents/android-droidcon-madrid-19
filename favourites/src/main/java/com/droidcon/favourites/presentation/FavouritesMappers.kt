@@ -1,7 +1,7 @@
 package com.droidcon.favourites.presentation
 
 import com.droidcon.schedule.domain.Session
-import com.droidcon.schedule.ui.model.toRowsWithDayDividers
+import com.droidcon.schedule.ui.schedulelist.model.toRowsWithDayDividers
 
 fun List<Session>.toState(): FavouritesState {
     if (count() == 0) {
