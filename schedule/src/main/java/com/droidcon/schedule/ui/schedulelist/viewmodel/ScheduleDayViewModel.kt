@@ -31,12 +31,20 @@ class ScheduleDayViewModel(
 
             sessionsByDayResult.fold(
                 ifLeft = { onGetSessionsByDayError() },
-                ifRight = { sessions -> onGetSessionsByDaySuccess(sessions, scheduleTab.conferenceDayDate) }
+                ifRight = { sessions ->
+                    onGetSessionsByDaySuccess(
+                        sessions,
+                        scheduleTab.conferenceDayDate
+                    )
+                }
             )
         }
     }
 
-    private suspend fun onGetSessionsByDaySuccess(sessionsByDay: List<Session>, conferenceDayDate: LocalDate) {
+    private suspend fun onGetSessionsByDaySuccess(
+        sessionsByDay: List<Session>,
+        conferenceDayDate: LocalDate
+    ) {
         emitSessions(sessionsByDay)
 
         if (!shouldTryScrollingToInProgressSession(conferenceDayDate)) {
@@ -67,9 +75,14 @@ class ScheduleDayViewModel(
         map { session ->
             session.toRow(
                 favouritesEnabled = true,
-                onStartClicked = ::onSessionStarred
+                onStartClicked = ::onSessionStarred,
+                onSessionClicked = ::onSessionClicked
             )
         }
+
+    private fun onSessionClicked(sessionId: String) {
+        mutableScheduleEffects.setValue(ScheduleDayEffect.NavigateToDetail(sessionId))
+    }
 
     private fun onSessionStarred(sessionId: String, isStarred: Boolean) {
         viewModelScope.launch {

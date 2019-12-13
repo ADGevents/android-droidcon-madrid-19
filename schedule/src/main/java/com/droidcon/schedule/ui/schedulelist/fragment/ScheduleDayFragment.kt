@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
-import com.droidcon.schedule.ui.schedulelist.recyclerview.SessionsAdapter
 import com.droidcon.schedule.ui.schedulelist.model.ScheduleDayEffect
 import com.droidcon.schedule.ui.schedulelist.model.ScheduleState
 import com.droidcon.schedule.ui.schedulelist.model.ScheduleTab
 import com.droidcon.schedule.ui.schedulelist.model.SessionRow
+import com.droidcon.schedule.ui.schedulelist.recyclerview.SessionsAdapter
 import com.droidcon.schedule.ui.schedulelist.viewmodel.ScheduleDayViewModel
 import com.droidcon.schedule.ui.schedulelist.viewmodel.ScheduleDayViewModelFactory
 import com.google.android.material.snackbar.Snackbar
@@ -82,12 +83,14 @@ class ScheduleDayFragment : DaggerFragment() {
         when (scheduleDayEffect) {
             ScheduleDayEffect.ShowUpdateStarredStateError -> showError()
             is ScheduleDayEffect.ScrollToSession -> scrollToSession(scheduleDayEffect.sessionId)
+            is ScheduleDayEffect.NavigateToDetail -> navigateToSessionDetail(scheduleDayEffect.sessionId)
         }
     }
 
     private fun showError() {
         view?.let {
-            Snackbar.make(it, getString(R.string.bookmark_error_description), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(it, getString(R.string.bookmark_error_description), Snackbar.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -101,6 +104,14 @@ class ScheduleDayFragment : DaggerFragment() {
         if (sessionPosition != -1) {
             sessions.scrollToPosition(sessionPosition)
         }
+    }
+
+    private fun navigateToSessionDetail(sessionId: String) {
+        findNavController().navigate(
+            ScheduleFragmentDirections.actionScheduleFragmentToSessionDetailFragment(
+                sessionId
+            )
+        )
     }
 
     companion object {

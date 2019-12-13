@@ -17,6 +17,10 @@ class SessionViewHolder(itemView: View) : SessionRowViewHolder(itemView) {
         itemView.findViewById<TextView>(R.id.sessionTime).text = session.time
         itemView.findViewById<TextView>(R.id.timePeriod).text = session.timePeriod
 
+        itemView.setOnClickListener {
+            session.onSessionClicked(session.id)
+        }
+
         val starSessionButton = itemView.findViewById<ImageButton>(R.id.starSession)
 
         if (session.favouritesEnabled) {

@@ -23,4 +23,5 @@ sealed class SessionRow {
 sealed class ScheduleDayEffect {
     object ShowUpdateStarredStateError : ScheduleDayEffect()
     data class ScrollToSession(val sessionId: String) : ScheduleDayEffect()
+    class NavigateToDetail(val sessionId: String) : ScheduleDayEffect()
 }
