@@ -28,6 +28,4 @@ class SessionDetailFragment : DaggerFragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_session_detail, container, false)
     }
-
-
 }
