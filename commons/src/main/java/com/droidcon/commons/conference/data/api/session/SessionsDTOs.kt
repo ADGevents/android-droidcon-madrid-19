@@ -3,6 +3,13 @@ package com.droidcon.commons.conference.data.api.session
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class SessionGroupDto(
+    val groupId: String,
+    val groupName: String,
+    val sessions: List<SessionDto>
+)
+
+@Serializable
 data class SessionDto(
     val id: String,
     val title: String,

@@ -1,9 +1,9 @@
-package com.adg.events.droidcon_app.ioc
+package dev.androidcookers.droidcon.ioc
 
 import android.content.Context
-import com.adg.events.droidcon_app.DroidconApp
 import dagger.Module
 import dagger.Provides
+import dev.androidcookers.droidcon.DroidconApp
 
 @Module
 class AppModule {

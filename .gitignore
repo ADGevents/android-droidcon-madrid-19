@@ -57,3 +57,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+.gitsecret/keys/random_seed
+!*.secret
+api.properties
