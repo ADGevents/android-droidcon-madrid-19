@@ -1,9 +1,9 @@
-package com.adg.events.droidcon_app
+package dev.androidcookers.droidcon
 
-import com.adg.events.droidcon_app.ioc.DaggerDroidconAppComponent
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
+import dev.androidcookers.droidcon.ioc.DaggerDroidconAppComponent
 
 class DroidconApp : DaggerApplication() {
 

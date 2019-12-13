@@ -1,4 +1,4 @@
-package com.adg.events.droidcon_app
+package dev.androidcookers.droidcon
 
 import android.os.Bundle
 import androidx.lifecycle.LiveData
