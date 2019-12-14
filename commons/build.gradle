@@ -32,6 +32,7 @@ android {
         buildConfigField("String", "API_ENDPOINT", apiProperties["endpoint"])
         buildConfigField("String", "API_SPEAKERS_PATH", apiProperties["speakersPath"])
         buildConfigField("String", "API_SESSIONS_PATH", apiProperties["sessionsPath"])
+        buildConfigField("String", "STATIC_MAPS_API_KEY", apiProperties["staticMapsApiKey"])
 
         buildConfigField("String[]", "CONFERENCE_DAYS_DATE", "{\"2019-12-20\", \"2019-12-21\"}")
 
@@ -63,8 +64,8 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
 
     // navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation"
+    api "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation"
+    api "androidx.navigation:navigation-ui-ktx:$rootProject.navigation"
 
     // lifecycle
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.androidLifecycle"
@@ -97,6 +98,10 @@ dependencies {
 
     // time APIs
     api 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+
+    //glide
+    api 'com.github.bumptech.glide:glide:4.10.0'
+    kapt 'com.github.bumptech.glide:compiler:4.10.0'
 
     // tests
     testImplementation 'junit:junit:4.12'

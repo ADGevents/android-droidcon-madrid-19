@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="code_of_conduct">Code of conduct</string>
+    <string name="map">Venue. Universidad Complutense</string>
+    <string name="contacts">Contacts of interest</string>
+    <string name="website">Website</string>
+    <string name="droidcon_organizers">droidcon Organizers:</string>
+    <string name="emergencies">Emergencies: 112</string>
+    <string name="care_unit_family_and_women">Care Unit Family and Women: +34 915 488 130</string>
+    <string name="asantalla_phone_number">- Phone number: +34 628 53 47 36</string>
+    <string name="asantall_email">- Email: asantalla@gmail.com</string>
+    <string name="npatatino_phone_number">- Phone number: +34 622 52 89 38</string>
+    <string name="npatarino_email">- Email: npatarino@gmail.com</string>
+    <string name="map_of_the_venue">Map of the venue</string>
+</resources>
