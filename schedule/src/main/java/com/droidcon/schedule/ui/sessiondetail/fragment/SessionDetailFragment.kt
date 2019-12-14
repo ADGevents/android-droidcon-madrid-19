@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.droidcon.schedule.R
@@ -41,6 +43,11 @@ class SessionDetailFragment : DaggerFragment() {
             ?: error("Cannot open session detail without session id")
         bindViews(view)
         bindViewModel()
+
+        view.findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+        
         sessionDetailViewModel.onSessionDetailVisible(sessionId)
     }
 
