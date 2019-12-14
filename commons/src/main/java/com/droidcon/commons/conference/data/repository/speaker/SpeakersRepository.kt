@@ -40,9 +40,6 @@ class SpeakersRepository @Inject constructor(
         }
     }
 
-    suspend fun getPersistedSpeaker(speakerId: String): SpeakerData? =
-        speakersStorage.get(speakerId)?.toDataModel()
-
     suspend fun search(query: String): Either<SearchSpeakersError, List<SpeakerData>> =
         Either.right(speakersStorage.search(query).map { it.toDataModel() })
 
