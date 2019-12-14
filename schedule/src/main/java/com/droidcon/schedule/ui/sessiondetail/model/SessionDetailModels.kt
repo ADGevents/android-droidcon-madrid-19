@@ -24,3 +24,7 @@ data class SessionSpeakerRow(
     val onSpeakerSelected: (String) -> Unit
 )
 
+sealed class SessionDetailEffect {
+    class NavigateToSpeakerDetail(val speakerId: String) : SessionDetailEffect()
+}
+

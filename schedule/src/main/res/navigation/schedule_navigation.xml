@@ -27,5 +27,8 @@
         <argument
             android:name="sessionId"
             app:argType="string" />
+
+        <deepLink app:uri="droidconApp://sessionDetailFragment"/>
+
     </fragment>
 </navigation>

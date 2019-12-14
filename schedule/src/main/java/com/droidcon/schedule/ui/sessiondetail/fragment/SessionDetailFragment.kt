@@ -1,15 +1,19 @@
 package com.droidcon.schedule.ui.sessiondetail.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.droidcon.schedule.R
+import com.droidcon.schedule.ui.sessiondetail.model.SessionDetail
+import com.droidcon.schedule.ui.sessiondetail.model.SessionDetailEffect
 import com.droidcon.schedule.ui.sessiondetail.model.SessionSpeakerRow
 import com.droidcon.schedule.ui.sessiondetail.viewmodel.SessionDetailViewModel
 import com.droidcon.schedule.ui.sessiondetail.viewmodel.SessionDetailViewModelFactory
@@ -47,7 +51,7 @@ class SessionDetailFragment : DaggerFragment() {
         view.findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-        
+
         sessionDetailViewModel.onSessionDetailVisible(sessionId)
     }
 
@@ -60,12 +64,23 @@ class SessionDetailFragment : DaggerFragment() {
     }
 
     private fun bindViewModel() {
-        sessionDetailViewModel.sessionDetailState.observe(::getLifecycle) { sessionDetail ->
-            sessionTitle.text = sessionDetail.title
-            sessionDuration.text = sessionDetail.duration
-            sessionRoom.text = "Room: ${sessionDetail.roomName}"
-            sessionDescription.text = sessionDetail.description
-            sessionDetail.speakers.forEach { addSessionSpeakerRow(it) }
+        sessionDetailViewModel.sessionDetailEffects.observe(::getLifecycle, ::onSessionDetailEffect)
+        sessionDetailViewModel.sessionDetailState.observe(::getLifecycle, ::onSessionDetailState)
+    }
+
+    private fun onSessionDetailState(sessionDetail: SessionDetail) {
+        sessionTitle.text = sessionDetail.title
+        sessionDuration.text = sessionDetail.duration
+        sessionRoom.text = "Room: ${sessionDetail.roomName}"
+        sessionDescription.text = sessionDetail.description
+        sessionDetail.speakers.forEach { addSessionSpeakerRow(it) }
+    }
+
+    private fun onSessionDetailEffect(sessionDetailEffect: SessionDetailEffect) {
+        when (sessionDetailEffect) {
+            is SessionDetailEffect.NavigateToSpeakerDetail -> navigateToSpeakerDetail(
+                sessionDetailEffect.speakerId
+            )
         }
     }
 
@@ -75,15 +90,24 @@ class SessionDetailFragment : DaggerFragment() {
 
         speakerRow.findViewById<TextView>(R.id.speakerName).text = sessionSpeaker.fullName
         speakerRow.findViewById<TextView>(R.id.speakerDescription).text = sessionSpeaker.tagLine
-
+        val speakerAvatar = speakerRow.findViewById<ImageView>(R.id.speakerAvatar)
         context?.let {
             Glide.with(it)
                 .load(sessionSpeaker.profilePicture)
                 .placeholder(R.drawable.ic_default_avatar)
                 .transform(CircleCrop())
-                .into(speakerRow.findViewById(R.id.speakerAvatar))
+                .into(speakerAvatar)
+        }
+
+        speakerRow.setOnClickListener {
+            sessionSpeaker.onSpeakerSelected(sessionSpeaker.id)
         }
 
         sessionDetailsContainer.addView(speakerRow)
+    }
+
+    private fun navigateToSpeakerDetail(speakerId: String) {
+        val uri = Uri.parse("droidconApp://speakerDetailFragment")
+        findNavController().navigate(uri)
     }
 }

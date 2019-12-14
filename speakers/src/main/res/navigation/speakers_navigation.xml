@@ -21,6 +21,9 @@
         <argument
             android:name="speakerId"
             app:argType="string" />
+
+        <deepLink app:uri="droidconApp://speakerDetailFragment"/>
+
     </fragment>
     <fragment
         android:id="@+id/searchSpeakersFragment"
