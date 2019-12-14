@@ -24,6 +24,15 @@ class SessionsRepository @Inject constructor(
         }
     }
 
+    suspend fun getSession(sessionId: String): Either<GetSessionError, SessionData> {
+        val session = sessionsStorage.getSession(sessionId)
+        return if (session == null) {
+            Either.left(GetSessionError)
+        } else {
+            Either.right(session)
+        }
+    }
+
     suspend fun updateStarredValue(id: String, isStarred: Boolean): Boolean =
         sessionsStorage.updateStarredValue(id, isStarred)
 

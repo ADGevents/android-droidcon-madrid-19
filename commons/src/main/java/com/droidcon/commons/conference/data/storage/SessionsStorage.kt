@@ -16,6 +16,9 @@ class SessionsStorage @Inject constructor(
             it.toSessionData()
         }
 
+    suspend fun getSession(sessionId: String): SessionData? =
+        sessionDao.getById(sessionId)?.toSessionData()
+
     suspend fun storeSessions(sessions: List<SessionData>) {
         val sessionsEntity = sessions.map { it.toSessionEntity() }
         sessionDao.updatePersistedSessions(sessionsEntity)

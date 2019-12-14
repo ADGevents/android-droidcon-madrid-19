@@ -1,9 +1,11 @@
 package com.droidcon.schedule.domain
 
 import arrow.core.Either
+import com.droidcon.commons.conference.data.repository.session.GetSessionError
 import com.droidcon.commons.conference.data.repository.session.GetSessionsError
 import com.droidcon.commons.conference.data.repository.session.SearchSessionsError
 import com.droidcon.commons.conference.data.repository.session.SessionsRepository
+import com.droidcon.commons.conference.data.repository.speaker.SpeakersRepository
 import com.droidcon.commons.date.GetNowDate
 import com.droidcon.commons.ioc.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -38,14 +40,15 @@ class GetFirstInProgressSessionOrNull @Inject constructor(
     @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
 ) {
 
-    suspend operator fun invoke(sessions: List<Session>): Session? = withContext(coroutineDispatcher) {
-        sessions.firstOrNull {
-            val startDate = LocalDate.parse(it.startsAt, DateTimeFormatter.ISO_DATE_TIME)
-            val endDate = LocalDate.parse(it.endsAt, DateTimeFormatter.ISO_DATE_TIME)
-            val nowDate = getNowDate()
-            return@firstOrNull nowDate.isBetween(startDate, endDate)
+    suspend operator fun invoke(sessions: List<Session>): Session? =
+        withContext(coroutineDispatcher) {
+            sessions.firstOrNull {
+                val startDate = LocalDate.parse(it.startsAt, DateTimeFormatter.ISO_DATE_TIME)
+                val endDate = LocalDate.parse(it.endsAt, DateTimeFormatter.ISO_DATE_TIME)
+                val nowDate = getNowDate()
+                return@firstOrNull nowDate.isBetween(startDate, endDate)
+            }
         }
-    }
 
     private fun LocalDate.isBetween(startDate: LocalDate, endDate: LocalDate): Boolean =
         when {
@@ -60,4 +63,21 @@ private fun Long.getDayOfTheMonth(): Int {
     val calendar = Calendar.getInstance()
     calendar.timeInMillis = this
     return calendar.get(Calendar.DAY_OF_MONTH)
+}
+
+class GetSessionSpeakers @Inject constructor(
+    private val speakersRepository: SpeakersRepository
+) {
+    suspend operator fun invoke(speakerIds: List<String>): List<SessionSpeaker> =
+        speakerIds.map { speakersRepository.getPersistedSpeaker(it) }
+            .mapNotNull { it?.toSessionSpeaker() }
+}
+
+class GetSession @Inject constructor(
+    private val sessionsRepository: SessionsRepository
+) {
+    suspend operator fun invoke(sessionId: String): Either<GetSessionError, Session> =
+        sessionsRepository.getSession(sessionId).map {
+            it.toSession()
+        }
 }

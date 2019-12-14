@@ -15,4 +15,5 @@ data class SessionData(
 )
 
 object GetSessionsError
+object GetSessionError
 object SearchSessionsError

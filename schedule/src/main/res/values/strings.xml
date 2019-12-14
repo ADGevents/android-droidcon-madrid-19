@@ -4,5 +4,6 @@
     <string name="unmark_as_favourite">Unmark as favourite</string>
     <string name="mark_as_favourite">Mark as favourite</string>
     <string name="sessions_search">Search sessions</string>
+    <string name="speakers">SPEAKERS</string>
     <string name="bookmark_error_description">There was an error starring the session. Please try again.</string>
 </resources>
