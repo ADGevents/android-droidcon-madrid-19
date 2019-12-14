@@ -71,7 +71,7 @@ class SessionDetailFragment : DaggerFragment() {
 
     private fun addSessionSpeakerRow(sessionSpeaker: SessionSpeakerRow) {
         val speakerRow = LayoutInflater.from(context)
-            .inflate(R.layout.session_row, sessionDetailsContainer, false)
+            .inflate(R.layout.session_speaker_row, sessionDetailsContainer, false)
 
         speakerRow.findViewById<TextView>(R.id.speakerName).text = sessionSpeaker.fullName
         speakerRow.findViewById<TextView>(R.id.speakerDescription).text = sessionSpeaker.tagLine

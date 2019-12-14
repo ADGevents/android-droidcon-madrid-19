@@ -30,13 +30,13 @@ class SessionDetailViewModel(
         }
     }
 
-   private suspend fun onSessionLoaded(session: Session) {
-        val sessionSpeakers = getSessionSpeakers(session.speakerIds)
+    private suspend fun onSessionLoaded(session: Session) {
+        val sessionSpeakers = getSessionSpeakers(session.id)
         val sessionDetail = session.toSessionDetail(sessionSpeakers, ::onSpeakerSelected)
         mutableSessionDetailState.value = sessionDetail
     }
 
-   private fun onSpeakerSelected(speakerId: String) {
+    private fun onSpeakerSelected(speakerId: String) {
 
     }
 

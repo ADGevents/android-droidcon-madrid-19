@@ -65,12 +65,21 @@ private fun Long.getDayOfTheMonth(): Int {
     return calendar.get(Calendar.DAY_OF_MONTH)
 }
 
+//class GetSessionSpeakers @Inject constructor(
+//    private val speakersRepository: SpeakersRepository
+//) {
+//    suspend operator fun invoke(speakerIds: List<String>): List<SessionSpeaker> =
+//        speakerIds.map { speakersRepository.getPersistedSpeaker(it) }
+//            .mapNotNull { it?.toSessionSpeaker() }
+//}
+
 class GetSessionSpeakers @Inject constructor(
     private val speakersRepository: SpeakersRepository
 ) {
-    suspend operator fun invoke(speakerIds: List<String>): List<SessionSpeaker> =
-        speakerIds.map { speakersRepository.getPersistedSpeaker(it) }
-            .mapNotNull { it?.toSessionSpeaker() }
+    suspend operator fun invoke(sessionId: String): List<SessionSpeaker> =
+        speakersRepository.getBySessionId(sessionId).map {
+            it.toSessionSpeaker()
+        }
 }
 
 class GetSession @Inject constructor(

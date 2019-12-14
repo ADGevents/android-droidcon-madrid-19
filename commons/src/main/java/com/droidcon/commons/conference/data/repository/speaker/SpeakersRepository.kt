@@ -45,4 +45,7 @@ class SpeakersRepository @Inject constructor(
 
     suspend fun search(query: String): Either<SearchSpeakersError, List<SpeakerData>> =
         Either.right(speakersStorage.search(query).map { it.toDataModel() })
+
+    suspend fun getBySessionId(sessionId: String): List<SpeakerData> =
+        speakersStorage.getSpeakersBySessionId(sessionId).map { it.toDataModel() }
 }
