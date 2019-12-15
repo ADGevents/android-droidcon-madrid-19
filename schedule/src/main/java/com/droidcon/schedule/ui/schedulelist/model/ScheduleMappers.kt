@@ -15,12 +15,12 @@ fun Session.toRow(
     additionalInfo = "${TimeUnit.MILLISECONDS.toMinutes(durationInMillis)} min / $roomName",
     time = sessionStartTimeStamp.toFormattedTime(),
     timePeriod = sessionStartTimeStamp.getTimePeriod(),
-    favouritesEnabled = favouritesEnabled,
+    favouritesEnabled = !isServiceSession && favouritesEnabled,
     starred = starred,
+    hasSessionDetail = !isServiceSession && speakerIds.isNullOrEmpty(),
     onStarClicked = onStarClicked,
     onSessionClicked = onSessionClicked
 )
-
 
 fun Long.toFormattedTime(): String {
     val date = Date(this)

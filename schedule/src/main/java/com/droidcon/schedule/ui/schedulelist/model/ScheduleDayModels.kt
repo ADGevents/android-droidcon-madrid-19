@@ -15,6 +15,7 @@ sealed class SessionRow {
         val timePeriod: String,
         val favouritesEnabled: Boolean,
         val starred: Boolean,
+        val hasSessionDetail : Boolean,
         val onStarClicked: (String, Boolean) -> Unit,
         val onSessionClicked: (String) -> Unit
     ) : SessionRow()
