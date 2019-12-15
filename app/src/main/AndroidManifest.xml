@@ -23,9 +23,6 @@
         <activity
                 android:name=".HomeActivity"
                 android:theme="@style/AppTheme.Launcher">
-
-            <nav-graph android:value="@navigation/inter_module_navigation" />
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,15 +1,15 @@
 package com.adg.events.droidcon_app
 
 import android.os.Bundle
-import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import com.droidcon.commons.navigation.setupWithNavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : DaggerAppCompatActivity() {
 
-    private var currentNavController: LiveData<NavController>? = null
+    private val navController: NavController by lazy { findNavController(R.id.fragmentContainer) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -27,23 +27,10 @@ class HomeActivity : DaggerAppCompatActivity() {
     }
 
     private fun setUpNavigationBar() {
-        val navigationGraphsIds = listOf(
-            R.navigation.schedule_navigation,
-            R.navigation.favourites_navigation,
-            R.navigation.speakers_navigation,
-            R.navigation.info_navigation
-        )
-
-        val navController = bottomNavigation.setupWithNavController(
-            navGraphIds = navigationGraphsIds,
-            fragmentManager = supportFragmentManager,
-            containerId = R.id.fragmentContainer
-        )
-
-        currentNavController = navController
+        bottomNavigation.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return currentNavController?.value?.navigateUp() ?: false
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

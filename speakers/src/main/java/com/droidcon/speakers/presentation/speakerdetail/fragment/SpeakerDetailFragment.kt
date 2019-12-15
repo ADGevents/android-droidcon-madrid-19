@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.droidcon.speakers.R
+import com.droidcon.speakers.presentation.speakerdetail.model.SpeakerDetailEffect
 import com.droidcon.speakers.presentation.speakerdetail.model.getSpeakerDetailRows
 import com.droidcon.speakers.presentation.speakerdetail.recyclerview.SpeakerTalksAdapter
 import com.droidcon.speakers.presentation.speakerdetail.viewmodel.SpeakerDetailViewModel
@@ -76,5 +78,15 @@ class SpeakerDetailFragment : DaggerFragment() {
             speakerName.text = speakerDetailState.speakerName
             speakerTalksAdapter.submitList(speakerDetailState.getSpeakerDetailRows())
         }
+
+        speakerDetailViewModel.speakerDetailEffects.observe(::getLifecycle) { speakerDetailEffect ->
+            when (speakerDetailEffect) {
+                is SpeakerDetailEffect.NavigateToSession -> navigateToSessionDetail(speakerDetailEffect.sessionId)
+            }
+        }
+    }
+
+    private fun navigateToSessionDetail(sessionId: String) {
+        findNavController().navigate("droidconApp://sessionDetailFragment/$sessionId".toUri())
     }
 }

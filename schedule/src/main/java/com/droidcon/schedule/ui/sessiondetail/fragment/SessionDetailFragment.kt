@@ -1,6 +1,5 @@
 package com.droidcon.schedule.ui.sessiondetail.fragment
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -84,6 +84,7 @@ class SessionDetailFragment : DaggerFragment() {
         }
     }
 
+    // TODO("Fix this, or a new row is added on every navigation to the screen or recreation of the fragment")
     private fun addSessionSpeakerRow(sessionSpeaker: SessionSpeakerRow) {
         val speakerRow = LayoutInflater.from(context)
             .inflate(R.layout.session_speaker_row, sessionDetailsContainer, false)
@@ -107,7 +108,6 @@ class SessionDetailFragment : DaggerFragment() {
     }
 
     private fun navigateToSpeakerDetail(speakerId: String) {
-        val uri = Uri.parse("droidconApp://speakerDetailFragment")
-        findNavController().navigate(uri)
+        findNavController().navigate("droidconApp://speakerDetailFragment/$speakerId".toUri())
     }
 }
