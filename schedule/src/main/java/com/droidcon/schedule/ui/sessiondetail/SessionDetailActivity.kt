@@ -49,6 +49,7 @@ class SessionDetailActivity : DaggerAppCompatActivity() {
         findViewById<RecyclerView>(R.id.sessionDetailRows).run {
             layoutManager = LinearLayoutManager(context)
             adapter = sessionDetailAdapter
+            itemAnimator = null
         }
         findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener {
             onBackPressed()
