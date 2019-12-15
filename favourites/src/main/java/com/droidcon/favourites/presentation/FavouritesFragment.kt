@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.droidcon.commons.presentation.Navigator
 import com.droidcon.favourites.R
 import com.droidcon.schedule.ui.schedulelist.model.SessionRow
 import com.droidcon.schedule.ui.schedulelist.recyclerview.SessionsAdapter
@@ -14,6 +15,9 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class FavouritesFragment : DaggerFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     @Inject
     lateinit var favouritesViewModelFactory: FavouritesViewModelFactory
@@ -51,7 +55,8 @@ class FavouritesFragment : DaggerFragment() {
     }
 
     private fun bindViewModel() {
-        favouritesViewModel.state.observe(::getLifecycle, ::onFavouritesStateUpdated)
+        favouritesViewModel.favouritesState.observe(::getLifecycle, ::onFavouritesStateUpdated)
+        favouritesViewModel.favouritesEffect.observe(::getLifecycle, ::onFavouritesEffect)
         favouritesViewModel.onFavouritesVisible()
     }
 
@@ -71,5 +76,15 @@ class FavouritesFragment : DaggerFragment() {
         emptyFavouritesDescription.visibility = View.GONE
         favouriteSessions.visibility = View.VISIBLE
         sessionsAdapter.submitList(sessionRows)
+    }
+
+    private fun onFavouritesEffect(favouritesEffect: FavouritesEffect) {
+        when (favouritesEffect) {
+            is FavouritesEffect.NavigateToSessionDetail -> navigateToSessionDetail(favouritesEffect.sessionid)
+        }
+    }
+
+    private fun navigateToSessionDetail(sessionId: String) {
+        context?.let { navigator.toSessionDetail(it, sessionId) }
     }
 }
