@@ -31,7 +31,7 @@ fun SessionSpeaker.toSessionSpeakerRow(onSpeakerSelected: (String) -> Unit = {})
         id,
         fullName,
         tagLine,
-        profilePicture,
+        profilePicture.rawUrl,
         links,
         onSpeakerSelected = onSpeakerSelected
     )

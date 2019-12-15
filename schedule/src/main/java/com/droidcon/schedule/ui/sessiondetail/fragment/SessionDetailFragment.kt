@@ -107,18 +107,14 @@ class SessionDetailFragment : DaggerFragment() {
         speakerRow.findViewById<TextView>(R.id.speakerName).text = sessionSpeaker.fullName
         speakerRow.findViewById<TextView>(R.id.speakerDescription).text = sessionSpeaker.tagLine
         val speakerAvatar = speakerRow.findViewById<ImageView>(R.id.speakerAvatar)
-        context?.let {
-            Glide.with(it)
-                .load(sessionSpeaker.profilePicture)
-                .placeholder(R.drawable.ic_default_avatar)
-                .transform(CircleCrop())
-                .into(speakerAvatar)
-        }
-
+        Glide.with(speakerRow)
+            .load(sessionSpeaker.profilePicture)
+            .placeholder(R.drawable.ic_default_avatar)
+            .transform(CircleCrop())
+            .into(speakerAvatar)
         speakerRow.setOnClickListener {
             sessionSpeaker.onSpeakerSelected(sessionSpeaker.id)
         }
-
         sessionSpeakersContainer.addView(speakerRow)
     }
 
