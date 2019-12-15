@@ -31,6 +31,7 @@ class SessionViewHolder(itemView: View) : SessionRowViewHolder(itemView) {
                     com.droidcon.schedule.R.color.service_session_row_background
                 )
             )
+            itemView.setOnClickListener(null)
         }
 
         val starSessionButton =
