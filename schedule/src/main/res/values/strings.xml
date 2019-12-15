@@ -6,4 +6,5 @@
     <string name="sessions_search">Search sessions</string>
     <string name="speaker_picture">speaker profile picture</string>
     <string name="bookmark_error_description">There was an error starring the session. Please try again.</string>
+    <string name="session_detail_room">Room: %1$s</string>
 </resources>
