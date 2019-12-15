@@ -26,7 +26,7 @@ class SessionDetailFragment : DaggerFragment() {
     lateinit var sessionDetailViewModelFactory: SessionDetailViewModelFactory
     private lateinit var sessionDetailViewModel: SessionDetailViewModel
 
-    private lateinit var sessionDetailsContainer: ViewGroup
+    private lateinit var sessionSpeakersContainer: ViewGroup
     private lateinit var sessionTitle: TextView
     private lateinit var sessionDescription: TextView
     private lateinit var sessionDuration: TextView
@@ -56,7 +56,7 @@ class SessionDetailFragment : DaggerFragment() {
     }
 
     private fun bindViews(view: View) {
-        sessionDetailsContainer = view.findViewById(R.id.sessionDetailsContainer)
+        sessionSpeakersContainer = view.findViewById(R.id.sessionSpeakersContainer)
         sessionTitle = view.findViewById(R.id.sessionTitle)
         sessionDuration = view.findViewById(R.id.sessionDetailDuration)
         sessionRoom = view.findViewById(R.id.sessionDetailRoom)
@@ -73,6 +73,7 @@ class SessionDetailFragment : DaggerFragment() {
         sessionDuration.text = sessionDetail.duration
         sessionRoom.text = "Room: ${sessionDetail.roomName}"
         sessionDescription.text = sessionDetail.description
+        sessionSpeakersContainer.removeAllViews()
         sessionDetail.speakers.forEach { addSessionSpeakerRow(it) }
     }
 
@@ -84,10 +85,9 @@ class SessionDetailFragment : DaggerFragment() {
         }
     }
 
-    // TODO("Fix this, or a new row is added on every navigation to the screen or recreation of the fragment")
     private fun addSessionSpeakerRow(sessionSpeaker: SessionSpeakerRow) {
         val speakerRow = LayoutInflater.from(context)
-            .inflate(R.layout.session_speaker_row, sessionDetailsContainer, false)
+            .inflate(R.layout.session_speaker_row, sessionSpeakersContainer, false)
 
         speakerRow.findViewById<TextView>(R.id.speakerName).text = sessionSpeaker.fullName
         speakerRow.findViewById<TextView>(R.id.speakerDescription).text = sessionSpeaker.tagLine
@@ -104,7 +104,7 @@ class SessionDetailFragment : DaggerFragment() {
             sessionSpeaker.onSpeakerSelected(sessionSpeaker.id)
         }
 
-        sessionDetailsContainer.addView(speakerRow)
+        sessionSpeakersContainer.addView(speakerRow)
     }
 
     private fun navigateToSpeakerDetail(speakerId: String) {

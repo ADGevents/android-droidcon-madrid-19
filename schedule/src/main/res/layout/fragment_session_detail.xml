@@ -51,7 +51,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:id="@+id/sessionDetailsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_screen_margin"
@@ -95,6 +94,12 @@
                 android:text="@string/speakers"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/sessionSpeakersContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
 
         </LinearLayout>
 
