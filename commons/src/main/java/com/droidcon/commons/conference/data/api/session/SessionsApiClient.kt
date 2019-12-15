@@ -6,7 +6,7 @@ import retrofit2.http.GET
 interface SessionsApiClient {
 
     @GET(SESSIONS)
-    suspend fun getSessions(): List<SessionDto>
+    suspend fun getSessionGroups(): List<SessionGroupDto>
 
     companion object {
         const val SESSIONS = BuildConfig.API_SESSIONS_PATH

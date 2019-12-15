@@ -50,7 +50,11 @@ class SessionsRepository @Inject constructor(
 
     private suspend fun getAllSessionsFromApi(): Either<GetSessionsError, List<SessionData>> =
         try {
-            val sessions = sessionsApiClient.getSessions().map { it.toSessionData() }
+            val sessions = sessionsApiClient.getSessionGroups().flatMap { sessionGroup ->
+                sessionGroup.sessions.map { session ->
+                    session.toSessionData()
+                }
+            }
             sessionsStorage.storeSessions(sessions)
             Either.right(sessions)
         } catch (ioException: IOException) {

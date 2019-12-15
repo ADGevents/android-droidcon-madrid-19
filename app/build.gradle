@@ -8,7 +8,7 @@ android {
     buildToolsVersion rootProject.buildTools
 
     defaultConfig {
-        applicationId "com.adg.events.droidcon_app"
+        applicationId "dev.androidcookers.droidcon"
         minSdkVersion rootProject.minSdk
         targetSdkVersion rootProject.targetSdk
         versionCode rootProject.versionCode
@@ -18,7 +18,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

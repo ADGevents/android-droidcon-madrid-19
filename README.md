@@ -119,5 +119,5 @@ Installation failed due to: '-27'
 Retry
 ```
 
-Just execute ` adb uninstall com.adg.events.droidcon_app` and retry
+Just execute ` adb uninstall dev.androidcookers.droidcon` and retry
 
