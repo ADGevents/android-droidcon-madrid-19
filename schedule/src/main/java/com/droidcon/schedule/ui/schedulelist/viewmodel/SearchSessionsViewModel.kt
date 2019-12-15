@@ -8,6 +8,7 @@ import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.schedule.domain.SearchSessions
 import com.droidcon.schedule.domain.Session
 import com.droidcon.schedule.ui.schedulelist.model.SessionRow
+import com.droidcon.schedule.ui.schedulelist.model.SessionsSearchEffect
 import com.droidcon.schedule.ui.schedulelist.model.SessionsSearchState
 import com.droidcon.schedule.ui.schedulelist.model.toSessionsSearchState
 import kotlinx.coroutines.launch
@@ -19,6 +20,9 @@ class SearchSessionsViewModel(
 
     private val mutableSessionsSearchState = MutableLiveData<SessionsSearchState>()
     val sessionsSearchState: LiveData<SessionsSearchState> = mutableSessionsSearchState
+
+    private val mutableSessionsSearchEffect = MutableLiveData<SessionsSearchEffect>()
+    val sessionsSearchEffect: LiveData<SessionsSearchEffect> = mutableSessionsSearchEffect
 
     fun onSearchQueryChanged(queryText: String) {
         if (queryText.isBlank()) {
@@ -38,7 +42,8 @@ class SearchSessionsViewModel(
     private fun onSearchSuccess(sessions: List<Session>) {
         mutableSessionsSearchState.value = sessions.toSessionsSearchState(
             favouritesEnabled = true,
-            onStarClicked = ::onSessionStarred
+            onStarClicked = ::onSessionStarred,
+            onSessionClicked = ::onSessionClicked
         )
     }
 
@@ -73,5 +78,9 @@ class SearchSessionsViewModel(
             }
 
         mutableSessionsSearchState.value = SessionsSearchState.Content(updatedSessions)
+    }
+
+    private fun onSessionClicked(sessionId: String) {
+        mutableSessionsSearchEffect.value = SessionsSearchEffect.NavigateToSessionDetail(sessionId)
     }
 }

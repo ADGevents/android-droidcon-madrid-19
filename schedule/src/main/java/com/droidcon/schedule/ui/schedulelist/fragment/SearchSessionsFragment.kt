@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.schedule.R
-import com.droidcon.schedule.ui.schedulelist.recyclerview.SessionsAdapter
+import com.droidcon.schedule.ui.schedulelist.model.SessionsSearchEffect
 import com.droidcon.schedule.ui.schedulelist.model.SessionsSearchState
+import com.droidcon.schedule.ui.schedulelist.recyclerview.SessionsAdapter
 import com.droidcon.schedule.ui.schedulelist.viewmodel.SearchSessionsViewModel
 import com.droidcon.schedule.ui.schedulelist.viewmodel.SearchSessionsViewModelFactory
 import dagger.android.support.DaggerFragment
@@ -28,7 +30,11 @@ class SearchSessionsFragment : DaggerFragment() {
 
     private var searchView: SearchView? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         searchSessionsViewModel = searchSessionsViewModelFactory.get(this)
         return inflater.inflate(R.layout.fragment_search_sessions, container, false)
     }
@@ -84,7 +90,14 @@ class SearchSessionsFragment : DaggerFragment() {
     }
 
     private fun bindViewModel() {
-        searchSessionsViewModel.sessionsSearchState.observe(::getLifecycle, ::onSearchSessionsState)
+        searchSessionsViewModel.sessionsSearchState.observe(
+            ::getLifecycle,
+            ::onSearchSessionsState
+        )
+        searchSessionsViewModel.sessionsSearchEffect.observe(
+            ::getLifecycle,
+            ::onSessionsSearchEffect
+        )
     }
 
     private fun onSearchSessionsState(sessionsSearchState: SessionsSearchState) {
@@ -93,5 +106,21 @@ class SearchSessionsFragment : DaggerFragment() {
             is SessionsSearchState.Content -> sessionsAdapter.submitList(sessionsSearchState.searchResults)
             SessionsSearchState.Error -> Unit
         }
+    }
+
+    private fun onSessionsSearchEffect(sessionsSearchEffect: SessionsSearchEffect) {
+        when (sessionsSearchEffect) {
+            is SessionsSearchEffect.NavigateToSessionDetail -> navigateToSessionDetail(
+                sessionsSearchEffect.sessionId
+            )
+        }
+    }
+
+    private fun navigateToSessionDetail(sessionId: String) {
+        findNavController().navigate(
+            SearchSessionsFragmentDirections.actionSearchSessionsFragmentToSessionDetailFragment(
+                sessionId
+            )
+        )
     }
 }

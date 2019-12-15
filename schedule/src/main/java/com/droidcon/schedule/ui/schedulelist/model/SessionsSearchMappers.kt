@@ -7,18 +7,27 @@ import org.threeten.bp.format.DateTimeFormatter
 
 fun List<Session>.toSessionsSearchState(
     favouritesEnabled: Boolean = false,
-    onStarClicked: (String, Boolean) -> Unit = { _, _ -> }
+    onStarClicked: (String, Boolean) -> Unit = { _, _ -> },
+    onSessionClicked: (String) -> Unit = {}
 ): SessionsSearchState {
+
     if (isEmpty()) {
         return SessionsSearchState.Empty
     }
 
-    return SessionsSearchState.Content(toRowsWithDayDividers(favouritesEnabled, onStarClicked))
+    return SessionsSearchState.Content(
+        toRowsWithDayDividers(
+            favouritesEnabled,
+            onStarClicked,
+            onSessionClicked
+        )
+    )
 }
 
 fun List<Session>.toRowsWithDayDividers(
     favouritesEnabled: Boolean = false,
-    onStarClicked: (String, Boolean) -> Unit = { _, _ -> }
+    onStarClicked: (String, Boolean) -> Unit = { _, _ -> },
+    onSessionClicked: (String) -> Unit = {}
 ): List<SessionRow> {
     fun Long.getDayAndMonth(): String {
         val formatter = DateTimeFormatter.ofPattern("dd MMM")
@@ -42,10 +51,13 @@ fun List<Session>.toRowsWithDayDividers(
                 }
             }
         }
-        sessionRows.add(session.toRow(
-            favouritesEnabled = favouritesEnabled,
-            onStartClicked = onStarClicked
-        ))
+        sessionRows.add(
+            session.toRow(
+                favouritesEnabled = favouritesEnabled,
+                onStartClicked = onStarClicked,
+                onSessionClicked = onSessionClicked
+            )
+        )
     }
 
     return sessionRows
