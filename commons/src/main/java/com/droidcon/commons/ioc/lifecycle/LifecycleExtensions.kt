@@ -1,11 +1,15 @@
 package com.droidcon.commons.ioc.lifecycle
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
 inline fun <reified T : ViewModel> Fragment.buildViewModel(crossinline factory: () -> T): T =
+    ViewModelProviders.of(this, getViewModelFactory(factory)).get(T::class.java)
+
+inline fun <reified T : ViewModel> FragmentActivity.buildViewModel(crossinline factory: () -> T): T =
     ViewModelProviders.of(this, getViewModelFactory(factory)).get(T::class.java)
 
 inline fun <reified T : ViewModel> getViewModelFactory(crossinline factory: () -> T): ViewModelProvider.Factory =

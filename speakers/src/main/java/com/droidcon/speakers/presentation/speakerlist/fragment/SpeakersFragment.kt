@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.droidcon.commons.presentation.Navigator
 import com.droidcon.commons.recyclerview.setDivider
 import com.droidcon.speakers.R
 import com.droidcon.speakers.presentation.speakerlist.model.SpeakersEffect
@@ -20,6 +21,9 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class SpeakersFragment : DaggerFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     @Inject
     lateinit var speakersAdapter: SpeakersAdapter
@@ -103,11 +107,7 @@ class SpeakersFragment : DaggerFragment() {
     }
 
     private fun navigateToSpeakerDetail(speakerId: String) {
-        findNavController().navigate(
-            SpeakersFragmentDirections.actionSpeakersFragmentToSpeakerDetailFragment(
-                speakerId
-            )
-        )
+        context?.let { navigator.toSpeakerDetail(it, speakerId) }
     }
 
     private fun navigateToSearch() {
