@@ -1,16 +1,14 @@
-package com.droidcon.schedule.ui.sessiondetail.fragment
+package com.droidcon.schedule.ui.sessiondetail
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.net.toUri
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.droidcon.commons.presentation.Navigator
 import com.droidcon.schedule.R
 import com.droidcon.schedule.ui.sessiondetail.model.SessionDetail
 import com.droidcon.schedule.ui.sessiondetail.model.SessionDetailEffect
@@ -18,14 +16,17 @@ import com.droidcon.schedule.ui.sessiondetail.model.SessionSpeakerRow
 import com.droidcon.schedule.ui.sessiondetail.viewmodel.SessionDetailViewModel
 import com.droidcon.schedule.ui.sessiondetail.viewmodel.SessionDetailViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import dagger.android.support.DaggerFragment
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class SessionDetailFragment : DaggerFragment() {
+class SessionDetailActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var sessionDetailViewModelFactory: SessionDetailViewModelFactory
     private lateinit var sessionDetailViewModel: SessionDetailViewModel
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private lateinit var sessionSpeakersContainer: ViewGroup
     private lateinit var sessionTitle: TextView
@@ -34,41 +35,35 @@ class SessionDetailFragment : DaggerFragment() {
     private lateinit var sessionRoom: TextView
     private lateinit var sessionFavorite: FloatingActionButton
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_session_detail)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        sessionDetailViewModel = sessionDetailViewModelFactory.get(this)
-        return inflater.inflate(R.layout.fragment_session_detail, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val sessionId = arguments?.let { SessionDetailFragmentArgs.fromBundle(it).sessionId }
+        val sessionId = intent.extras?.getString("sessionId")
             ?: error("Cannot open session detail without session id")
-        bindViews(view)
-        bindViewModel()
 
-        view.findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener {
-            findNavController().navigateUp()
+        setUpViews()
+        setUpViewModel(sessionId)
+    }
+
+
+    private fun setUpViews() {
+        sessionSpeakersContainer = findViewById(R.id.sessionSpeakersContainer)
+        sessionTitle = findViewById(R.id.sessionTitle)
+        sessionDuration = findViewById(R.id.sessionDetailDuration)
+        sessionRoom = findViewById(R.id.sessionDetailRoom)
+        sessionDescription = findViewById(R.id.sessionDetailDescription)
+        sessionFavorite = findViewById(R.id.sessionDetailStarButton)
+        findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener {
+            onBackPressed()
         }
-
-        sessionDetailViewModel.onSessionDetailVisible(sessionId)
     }
 
-    private fun bindViews(view: View) {
-        sessionSpeakersContainer = view.findViewById(R.id.sessionSpeakersContainer)
-        sessionTitle = view.findViewById(R.id.sessionTitle)
-        sessionDuration = view.findViewById(R.id.sessionDetailDuration)
-        sessionRoom = view.findViewById(R.id.sessionDetailRoom)
-        sessionDescription = view.findViewById(R.id.sessionDetailDescription)
-        sessionFavorite = view.findViewById(R.id.sessionDetailStarButton)
-    }
-
-    private fun bindViewModel() {
+    private fun setUpViewModel(sessionId: String) {
+        sessionDetailViewModel = sessionDetailViewModelFactory.get(this)
         sessionDetailViewModel.sessionDetailEffects.observe(::getLifecycle, ::onSessionDetailEffect)
         sessionDetailViewModel.sessionDetailState.observe(::getLifecycle, ::onSessionDetailState)
+        sessionDetailViewModel.onSessionDetailVisible(sessionId)
     }
 
     private fun onSessionDetailState(sessionDetail: SessionDetail) {
@@ -101,7 +96,7 @@ class SessionDetailFragment : DaggerFragment() {
     }
 
     private fun addSessionSpeakerRow(sessionSpeaker: SessionSpeakerRow) {
-        val speakerRow = LayoutInflater.from(context)
+        val speakerRow = LayoutInflater.from(this)
             .inflate(R.layout.session_speaker_row, sessionSpeakersContainer, false)
 
         speakerRow.findViewById<TextView>(R.id.speakerName).text = sessionSpeaker.fullName
@@ -119,6 +114,6 @@ class SessionDetailFragment : DaggerFragment() {
     }
 
     private fun navigateToSpeakerDetail(speakerId: String) {
-        findNavController().navigate("droidconApp://speakerDetailFragment/$speakerId".toUri())
+        navigator.toSpeakerDetail(this, speakerId)
     }
 }

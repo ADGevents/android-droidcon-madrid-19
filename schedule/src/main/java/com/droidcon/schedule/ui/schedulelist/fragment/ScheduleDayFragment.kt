@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.droidcon.commons.presentation.Navigator
 import com.droidcon.schedule.R
 import com.droidcon.schedule.ui.schedulelist.model.ScheduleDayEffect
 import com.droidcon.schedule.ui.schedulelist.model.ScheduleState
@@ -22,6 +22,9 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class ScheduleDayFragment : DaggerFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     @Inject
     lateinit var scheduleDayViewModelFactory: ScheduleDayViewModelFactory
@@ -107,11 +110,7 @@ class ScheduleDayFragment : DaggerFragment() {
     }
 
     private fun navigateToSessionDetail(sessionId: String) {
-        findNavController().navigate(
-            ScheduleFragmentDirections.actionScheduleFragmentToSessionDetailFragment(
-                sessionId
-            )
-        )
+        context?.let { navigator.toSessionDetail(it, sessionId) }
     }
 
     companion object {

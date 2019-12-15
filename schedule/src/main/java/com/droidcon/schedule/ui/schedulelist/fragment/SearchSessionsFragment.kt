@@ -10,6 +10,7 @@ import android.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.droidcon.commons.presentation.Navigator
 import com.droidcon.schedule.R
 import com.droidcon.schedule.ui.schedulelist.model.SessionsSearchEffect
 import com.droidcon.schedule.ui.schedulelist.model.SessionsSearchState
@@ -20,6 +21,9 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class SearchSessionsFragment : DaggerFragment() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     @Inject
     lateinit var sessionsAdapter: SessionsAdapter
@@ -117,10 +121,6 @@ class SearchSessionsFragment : DaggerFragment() {
     }
 
     private fun navigateToSessionDetail(sessionId: String) {
-        findNavController().navigate(
-            SearchSessionsFragmentDirections.actionSearchSessionsFragmentToSessionDetailFragment(
-                sessionId
-            )
-        )
+        context?.let {navigator.toSessionDetail(it, sessionId)}
     }
 }

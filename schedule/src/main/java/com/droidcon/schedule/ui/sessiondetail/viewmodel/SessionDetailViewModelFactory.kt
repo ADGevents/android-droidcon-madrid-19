@@ -1,12 +1,11 @@
 package com.droidcon.schedule.ui.sessiondetail.viewmodel
 
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.commons.ioc.lifecycle.buildViewModel
 import com.droidcon.schedule.domain.GetSession
 import com.droidcon.schedule.domain.GetSessionSpeakers
 import javax.inject.Inject
-
 
 class SessionDetailViewModelFactory @Inject constructor(
     private val getSession: GetSession,
@@ -14,8 +13,8 @@ class SessionDetailViewModelFactory @Inject constructor(
     private val updateSessionStarredValue: UpdateSessionStarredValue
 ) {
 
-    fun get(fragment: Fragment): SessionDetailViewModel =
-        fragment.buildViewModel {
+    fun get(activity: AppCompatActivity): SessionDetailViewModel =
+        activity.buildViewModel {
             SessionDetailViewModel(
                 getSession,
                 getSpeakerSessions,

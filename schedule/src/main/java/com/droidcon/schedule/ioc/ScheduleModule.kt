@@ -11,8 +11,7 @@ import dagger.Provides
 @Module(
     includes = [
         ScheduleFragmentModule::class,
-        SearchSessionsFragmentModule::class,
-        SessionDetailFragmentModule::class
+        SearchSessionsFragmentModule::class
     ]
 )
 class ScheduleModule {
