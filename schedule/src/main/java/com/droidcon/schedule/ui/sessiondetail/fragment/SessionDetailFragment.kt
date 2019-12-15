@@ -17,6 +17,7 @@ import com.droidcon.schedule.ui.sessiondetail.model.SessionDetailEffect
 import com.droidcon.schedule.ui.sessiondetail.model.SessionSpeakerRow
 import com.droidcon.schedule.ui.sessiondetail.viewmodel.SessionDetailViewModel
 import com.droidcon.schedule.ui.sessiondetail.viewmodel.SessionDetailViewModelFactory
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -31,6 +32,7 @@ class SessionDetailFragment : DaggerFragment() {
     private lateinit var sessionDescription: TextView
     private lateinit var sessionDuration: TextView
     private lateinit var sessionRoom: TextView
+    private lateinit var sessionFavorite: FloatingActionButton
 
 
     override fun onCreateView(
@@ -61,6 +63,7 @@ class SessionDetailFragment : DaggerFragment() {
         sessionDuration = view.findViewById(R.id.sessionDetailDuration)
         sessionRoom = view.findViewById(R.id.sessionDetailRoom)
         sessionDescription = view.findViewById(R.id.sessionDetailDescription)
+        sessionFavorite = view.findViewById(R.id.sessionDetailStarButton)
     }
 
     private fun bindViewModel() {
@@ -74,7 +77,19 @@ class SessionDetailFragment : DaggerFragment() {
         sessionRoom.text = "Room: ${sessionDetail.roomName}"
         sessionDescription.text = sessionDetail.description
         sessionSpeakersContainer.removeAllViews()
+        setUpSessionStarredUI(sessionDetail)
         sessionDetail.speakers.forEach { addSessionSpeakerRow(it) }
+    }
+
+    private fun setUpSessionStarredUI(sessionDetail: SessionDetail) {
+        if (sessionDetail.starred) {
+            sessionFavorite.setImageResource(R.drawable.ic_star_filled_24dp)
+        } else {
+            sessionFavorite.setImageResource(R.drawable.ic_star_empty_24dp)
+        }
+        sessionFavorite.setOnClickListener {
+            sessionDetail.onStarClicked(sessionDetail.id, sessionDetail.starred)
+        }
     }
 
     private fun onSessionDetailEffect(sessionDetailEffect: SessionDetailEffect) {

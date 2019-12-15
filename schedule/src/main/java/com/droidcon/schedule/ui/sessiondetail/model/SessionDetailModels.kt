@@ -8,11 +8,13 @@ data class SessionDetail(
     val title: String,
     val description: String?,
     val time: String,
-    val timePeriod : String,
+    val timePeriod: String,
     val duration: String,
     val isServiceSession: Boolean,
     val speakers: List<SessionSpeakerRow>,
-    val roomName: String
+    val roomName: String,
+    val starred: Boolean = false,
+    val onStarClicked: (String, Boolean) -> Unit
 )
 
 data class SessionSpeakerRow(

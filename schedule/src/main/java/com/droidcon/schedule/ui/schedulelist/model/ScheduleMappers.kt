@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 
 fun Session.toRow(
     favouritesEnabled: Boolean,
-    onStartClicked: (String, Boolean) -> Unit = { _, _ -> },
+    onStarClicked: (String, Boolean) -> Unit = { _, _ -> },
     onSessionClicked: (String) -> Unit = {}
 ): SessionRow.Session = SessionRow.Session(
     id = id,
@@ -17,7 +17,7 @@ fun Session.toRow(
     timePeriod = sessionStartTimeStamp.getTimePeriod(),
     favouritesEnabled = favouritesEnabled,
     starred = starred,
-    onStarClicked = onStartClicked,
+    onStarClicked = onStarClicked,
     onSessionClicked = onSessionClicked
 )
 

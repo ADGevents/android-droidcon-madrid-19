@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit
 
 fun Session.toSessionDetail(
     sessionSpeakers: List<SessionSpeaker>,
-    onSpeakerSelected: (String) -> Unit = {}
+    onSpeakerSelected: (String) -> Unit = {},
+    onStarClicked: (String, Boolean) -> Unit
 ): SessionDetail =
     SessionDetail(
         id = id,
@@ -20,7 +21,9 @@ fun Session.toSessionDetail(
         duration = "${TimeUnit.MILLISECONDS.toMinutes(durationInMillis)} min",
         isServiceSession = isServiceSession,
         speakers = sessionSpeakers.map { it.toSessionSpeakerRow(onSpeakerSelected) },
-        roomName = roomName
+        roomName = roomName,
+        starred = starred,
+        onStarClicked = onStarClicked
     )
 
 fun SessionSpeaker.toSessionSpeakerRow(onSpeakerSelected: (String) -> Unit = {}): SessionSpeakerRow =

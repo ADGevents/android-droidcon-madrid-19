@@ -54,7 +54,7 @@ fun List<Session>.toRowsWithDayDividers(
         sessionRows.add(
             session.toRow(
                 favouritesEnabled = favouritesEnabled,
-                onStartClicked = onStarClicked,
+                onStarClicked = onStarClicked,
                 onSessionClicked = onSessionClicked
             )
         )

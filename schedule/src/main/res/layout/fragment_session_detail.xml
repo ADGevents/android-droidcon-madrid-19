@@ -99,11 +99,24 @@
                 android:id="@+id/sessionSpeakersContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sessionDetailStarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/default_screen_margin"
+        android:fitsSystemWindows="true"
+        app:backgroundTint="@color/appBarLayoutBackground"
+        app:layout_anchorGravity="bottom|end"
+        android:clickable="true"
+        android:focusable="true"
+        app:srcCompat="@drawable/ic_star_empty_24dp" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -75,7 +75,7 @@ class ScheduleDayViewModel(
         map { session ->
             session.toRow(
                 favouritesEnabled = true,
-                onStartClicked = ::onSessionStarred,
+                onStarClicked = ::onSessionStarred,
                 onSessionClicked = ::onSessionClicked
             )
         }
