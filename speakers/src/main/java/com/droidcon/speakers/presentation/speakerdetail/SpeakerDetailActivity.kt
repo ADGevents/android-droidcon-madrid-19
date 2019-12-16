@@ -38,13 +38,14 @@ class SpeakerDetailActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_speaker_detail)
         setUpViews()
+        val speakerId = intent.extras?.getString("speakerId")
+            ?: error("Cannot use SpeakerDetailFragment without speakerId")
+        setUpViewModel(speakerId)
     }
 
     override fun onStart() {
         super.onStart()
-        val speakerId = intent.extras?.getString("speakerId")
-            ?: error("Cannot use SpeakerDetailFragment without speakerId")
-        setUpViewModel(speakerId)
+
     }
 
     private fun setUpViews() {
