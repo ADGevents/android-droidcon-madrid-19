@@ -43,9 +43,13 @@ class ScheduleDayFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpViews(view)
+    }
+
+    override fun onStart() {
+        super.onStart()
         val scheduleTab = arguments?.getSerializable(ARG_SCHEDULE_TAB) as? ScheduleTab
             ?: error("Missing arguments!!")
-        setUpViews(view)
         setUpScheduleViewModel(scheduleTab)
     }
 
