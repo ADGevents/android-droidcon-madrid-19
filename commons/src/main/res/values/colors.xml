@@ -8,4 +8,6 @@
     <color name="headerBackground">#ddd</color>
     <color name="service_session_row_background">#e1f5fe</color>
     <color name="textTitle">@android:color/black</color>
+    <color name="text_white">@android:color/white</color>
+    <color name="white">@android:color/white</color>
 </resources>

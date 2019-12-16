@@ -17,21 +17,25 @@
             app:contentScrim="@color/appBarLayoutBackground"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+
             <ImageView
-                android:id="@+id/sessionHeaderBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="248dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header_session"
+                app:layout_collapseMode="parallax" />
 
             <TextView
                 android:id="@+id/sessionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="80dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:textColor="@android:color/black"
-                android:textSize="32sp"
+                android:paddingBottom="16dp"
+                android:textColor="@color/text_white"
+                android:textSize="28sp"
+                android:layout_gravity="bottom"
                 tools:text="Whats new in room" />
 
             <!-- Toolbar needs to be on top for the back button to be tappable -->
@@ -39,7 +43,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+                app:theme="@style/HomeAsUpIndicatorWhiteStyled"
                 app:layout_collapseMode="pin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

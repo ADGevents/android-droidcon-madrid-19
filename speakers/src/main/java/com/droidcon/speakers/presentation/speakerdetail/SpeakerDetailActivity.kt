@@ -37,11 +37,13 @@ class SpeakerDetailActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_speaker_detail)
+        setUpViews()
+    }
 
+    override fun onStart() {
+        super.onStart()
         val speakerId = intent.extras?.getString("speakerId")
             ?: error("Cannot use SpeakerDetailFragment without speakerId")
-
-        setUpViews()
         setUpViewModel(speakerId)
     }
 
@@ -74,7 +76,9 @@ class SpeakerDetailActivity : DaggerAppCompatActivity() {
 
         speakerDetailViewModel.speakerDetailEffects.observe(::getLifecycle) { speakerDetailEffect ->
             when (speakerDetailEffect) {
-                is SpeakerDetailEffect.NavigateToSession -> navigateToSessionDetail(speakerDetailEffect.sessionId)
+                is SpeakerDetailEffect.NavigateToSession -> navigateToSessionDetail(
+                    speakerDetailEffect.sessionId
+                )
             }
         }
         speakerDetailViewModel.onSpeakerDetailVisible(speakerId)
