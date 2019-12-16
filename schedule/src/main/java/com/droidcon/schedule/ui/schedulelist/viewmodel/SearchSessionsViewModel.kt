@@ -51,26 +51,26 @@ class SearchSessionsViewModel(
         mutableSessionsSearchState.value = SessionsSearchState.Error
     }
 
-    private fun onSessionStarred(sessionId: String, isStarred: Boolean) {
+    private fun onSessionStarred(session: SessionRow.Session, isStarred: Boolean) {
         viewModelScope.launch {
             val newIsStarredValue = !isStarred
-            updateSessionStarredState(sessionId, newIsStarredValue)
+            updateSessionStarredState(session, newIsStarredValue)
 
-            val isSessionUpdated = updateSessionStarredValue(sessionId, newIsStarredValue)
+            val isSessionUpdated = updateSessionStarredValue(session.id, newIsStarredValue)
 
             if (!isSessionUpdated) {
-                updateSessionStarredState(sessionId, isStarred)
+                updateSessionStarredState(session, isStarred)
             }
         }
     }
 
-    private fun updateSessionStarredState(sessionId: String, isStarred: Boolean) {
+    private fun updateSessionStarredState(session: SessionRow.Session, isStarred: Boolean) {
         val sessionsSearchState = mutableSessionsSearchState.value as? SessionsSearchState.Content
             ?: return
 
         val updatedSessions = sessionsSearchState.searchResults
             .map { result ->
-                if (result is SessionRow.Session && result.id == sessionId) {
+                if (result is SessionRow.Session && result.id == session.id) {
                     result.copy(starred = isStarred)
                 } else {
                     result
@@ -80,7 +80,7 @@ class SearchSessionsViewModel(
         mutableSessionsSearchState.value = SessionsSearchState.Content(updatedSessions)
     }
 
-    private fun onSessionClicked(sessionId: String) {
-        mutableSessionsSearchEffect.value = SessionsSearchEffect.NavigateToSessionDetail(sessionId)
+    private fun onSessionClicked(session: SessionRow.Session) {
+        mutableSessionsSearchEffect.value = SessionsSearchEffect.NavigateToSessionDetail(session.id)
     }
 }
