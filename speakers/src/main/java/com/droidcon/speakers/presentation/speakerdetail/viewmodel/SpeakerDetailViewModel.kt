@@ -9,6 +9,7 @@ import com.droidcon.speakers.domain.GetSpeaker
 import com.droidcon.speakers.domain.GetSpeakerSessions
 import com.droidcon.speakers.domain.Speaker
 import com.droidcon.speakers.domain.SpeakerSession
+import com.droidcon.speakers.presentation.speakerdetail.model.SpeakerDetailEffect
 import com.droidcon.speakers.presentation.speakerdetail.model.SpeakerDetailState
 import com.droidcon.speakers.presentation.speakerdetail.model.toDetailState
 import kotlinx.coroutines.launch
@@ -22,6 +23,9 @@ class SpeakerDetailViewModel(
     private val mutableSpeakerDetailState = MutableLiveData<SpeakerDetailState>()
     val speakerDetailState: LiveData<SpeakerDetailState> = mutableSpeakerDetailState
 
+    private val mutableSpeakerDetailEffects = MutableLiveData<SpeakerDetailEffect>()
+    val speakerDetailEffects: LiveData<SpeakerDetailEffect> = mutableSpeakerDetailEffects
+
     fun onSpeakerDetailVisible(speakerId: String) {
         viewModelScope.launch {
             val getSpeakerResult = getSpeaker(speakerId)
@@ -32,12 +36,11 @@ class SpeakerDetailViewModel(
                     onGetSpeakerSuccess(speaker, speakerSessions)
                 }
             )
-
         }
     }
 
     private fun onGetSpeakerSuccess(speaker: Speaker, speakerSessions: List<SpeakerSession>) {
-        val speakerDetailState = speaker.toDetailState(speakerSessions, ::onSessionStarred)
+        val speakerDetailState = speaker.toDetailState(speakerSessions, ::onSessionStarred, ::onSessionClicked)
         mutableSpeakerDetailState.value = speakerDetailState
     }
 
@@ -64,5 +67,9 @@ class SpeakerDetailViewModel(
             }
         }
         mutableSpeakerDetailState.value = speakerDetailState.copy(speakerSessions = updatedSessions)
+    }
+
+    private fun onSessionClicked(sessionId: String) {
+        mutableSpeakerDetailEffects.value = SpeakerDetailEffect.NavigateToSession(sessionId)
     }
 }

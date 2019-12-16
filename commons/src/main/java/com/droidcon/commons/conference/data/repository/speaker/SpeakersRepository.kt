@@ -1,9 +1,9 @@
 package com.droidcon.commons.conference.data.repository.speaker
 
 import arrow.core.Either
-import com.droidcon.commons.datatypes.runRight
 import com.droidcon.commons.conference.data.api.speaker.*
 import com.droidcon.commons.conference.data.storage.SpeakersStorage
+import com.droidcon.commons.datatypes.runRight
 import javax.inject.Inject
 
 class SpeakersRepository @Inject constructor(
@@ -42,4 +42,7 @@ class SpeakersRepository @Inject constructor(
 
     suspend fun search(query: String): Either<SearchSpeakersError, List<SpeakerData>> =
         Either.right(speakersStorage.search(query).map { it.toDataModel() })
+
+    suspend fun getBySessionId(sessionId: String): List<SpeakerData> =
+        speakersStorage.getSpeakersBySessionId(sessionId).map { it.toDataModel() }
 }

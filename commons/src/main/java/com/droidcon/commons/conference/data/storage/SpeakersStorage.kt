@@ -34,6 +34,11 @@ class SpeakersStorage @Inject constructor(
         return searchResults.mapNotNull { speakerId -> get(speakerId) }
     }
 
+    suspend fun getSpeakersBySessionId(sessionId: String): List<SpeakerDO> =
+        speakerDao.getSpeakersBySessionId(sessionId).map {
+            it.toDO(emptyList())
+        }
+
     private suspend fun getLinksBySpeakerId(speakers: List<SpeakerEntity>): Map<String, List<LinkEntity>> {
         val linksBySpeakerId = mutableMapOf<String, List<LinkEntity>>()
 

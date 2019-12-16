@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:startDestination="@id/scheduleNavigation">
+
+    <include app:graph="@navigation/schedule_navigation" />
+    <include app:graph="@navigation/favourites_navigation" />
+    <include app:graph="@navigation/speakers_navigation" />
+    <include app:graph="@navigation/info_navigation" />
+
+</navigation>

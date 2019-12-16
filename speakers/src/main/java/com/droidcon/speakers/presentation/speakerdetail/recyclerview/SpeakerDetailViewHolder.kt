@@ -39,6 +39,7 @@ sealed class SpeakerDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(i
                     )
                 }
             }
+            itemView.setOnClickListener { session.onSessionClicked(session.id) }
         }
     }
 }

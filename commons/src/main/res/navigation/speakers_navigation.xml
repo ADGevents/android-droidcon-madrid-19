@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/speakersNavigation"
+        app:startDestination="@id/speakersFragment">
+    <fragment
+            android:id="@+id/speakersFragment"
+            android:name="com.droidcon.speakers.presentation.speakerlist.fragment.SpeakersFragment"
+            android:label="@string/speakers">
+        <action
+                android:id="@+id/action_speakersFragment_to_searchSpeakersFragment"
+                app:destination="@id/searchSpeakersFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/searchSpeakersFragment"
+            android:name="com.droidcon.speakers.presentation.speakersearch.fragment.SearchSpeakersFragment"
+            android:label="SearchSpeakersFragment"/>
+</navigation>

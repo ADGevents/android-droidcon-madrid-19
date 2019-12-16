@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.droidcon.commons.lifecycle.SingleLiveEvent
 import com.droidcon.favourites.domain.GetFavouriteSessions
 import kotlinx.coroutines.launch
 
@@ -11,13 +12,20 @@ class FavouritesViewModel(
     private val getFavouriteSessions: GetFavouriteSessions
 ) : ViewModel() {
 
-    private val mutableState = MutableLiveData<FavouritesState>()
-    val state: LiveData<FavouritesState> = mutableState
+    private val mutableFavouritesState = MutableLiveData<FavouritesState>()
+    val favouritesState: LiveData<FavouritesState> = mutableFavouritesState
+
+    private val mutableFavouritesEffect = SingleLiveEvent<FavouritesEffect>()
+    val favouritesEffect: LiveData<FavouritesEffect> = mutableFavouritesEffect
 
     fun onFavouritesVisible() {
         viewModelScope.launch {
             val favouriteSessions = getFavouriteSessions()
-            mutableState.value = favouriteSessions.toState()
+            mutableFavouritesState.value = favouriteSessions.toState(::onSessionClicked)
         }
+    }
+
+    private fun onSessionClicked(sessionId: String) {
+        mutableFavouritesEffect.setValue(FavouritesEffect.NavigateToSessionDetail(sessionId))
     }
 }

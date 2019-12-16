@@ -1,6 +1,7 @@
 package com.droidcon.commons.conference.data.storage.database.speaker
 
 import androidx.room.*
+import com.droidcon.commons.conference.data.storage.database.sessionandspeaker.SessionAndSpeaker
 
 @Dao
 interface SpeakerDao {
@@ -22,4 +23,17 @@ interface SpeakerDao {
 
     @Query("SELECT ${Speaker.COLUMN_ID} FROM ${Speaker.FTS_TABLE_NAME} WHERE ${Speaker.FTS_TABLE_NAME} MATCH :query")
     suspend fun searchSpeakers(query: String): List<String>
+
+    @Query(
+        """SELECT ${SessionAndSpeaker.COLUMN_SPEAKER_ID} 
+            FROM ${SessionAndSpeaker.TABLE_NAME} 
+            WHERE ${SessionAndSpeaker.COLUMN_SESSION_ID} = :sessionId"""
+    )
+    suspend fun getSpeakerBySessionId(sessionId: String): List<String>
+
+    @Transaction
+    suspend fun getSpeakersBySessionId(speakerId: String): List<SpeakerEntity> {
+        val speakerIds = getSpeakerBySessionId(speakerId)
+        return speakerIds.mapNotNull { getSpeaker(it) }
+    }
 }

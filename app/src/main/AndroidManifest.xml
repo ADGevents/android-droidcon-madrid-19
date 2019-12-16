@@ -4,8 +4,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="dev.androidcookers.droidcon">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -27,6 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.droidcon.speakers.presentation.speakerdetail.SpeakerDetailActivity" />
+        <activity android:name="com.droidcon.schedule.ui.sessiondetail.SessionDetailActivity" />
     </application>
 
 </manifest>

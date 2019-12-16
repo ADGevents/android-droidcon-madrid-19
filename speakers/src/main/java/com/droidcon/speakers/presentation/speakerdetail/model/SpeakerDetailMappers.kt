@@ -5,23 +5,28 @@ import com.droidcon.speakers.domain.SpeakerSession
 
 fun Speaker.toDetailState(
     speakerSessions: List<SpeakerSession>,
-    onStarClicked: (String, Boolean) -> Unit
+    onStarClicked: (String, Boolean) -> Unit,
+    onSessionClicked: (String) -> Unit
 ): SpeakerDetailState =
     SpeakerDetailState(
         id = id,
         speakerAvatar = profilePicture.rawUrl,
         speakerName = name.fullName,
         speakerDescription = bio,
-        speakerSessions = speakerSessions.map { it.toState(onStarClicked) }
+        speakerSessions = speakerSessions.map { it.toState(onStarClicked, onSessionClicked) }
     )
 
-fun SpeakerSession.toState(onStarClicked: (String, Boolean) -> Unit): SpeakerSessionState =
+fun SpeakerSession.toState(
+    onStarClicked: (String, Boolean) -> Unit,
+    onSessionClicked: (String) -> Unit
+): SpeakerSessionState =
     SpeakerSessionState(
         id = id,
         talkTitle = title,
         talkSubtitle = description,
         isStarred = isStarred,
-        onStarClicked = onStarClicked
+        onStarClicked = onStarClicked,
+        onSessionClicked = onSessionClicked
     )
 
 fun SpeakerDetailState.getSpeakerDetailRows(): List<SpeakerDetailRow> {
@@ -39,4 +44,4 @@ fun SpeakerDetailState.getSpeakerDetailRows(): List<SpeakerDetailRow> {
 
 
 fun SpeakerSessionState.toRow(): SpeakerDetailRow =
-    SpeakerDetailRow.Session(id, talkTitle, talkSubtitle, isStarred, onStarClicked)
+    SpeakerDetailRow.Session(id, talkTitle, talkSubtitle, isStarred, onStarClicked, onSessionClicked)
