@@ -1,6 +1,7 @@
 package com.droidcon.schedule.ui.sessiondetail.model
 
 import com.droidcon.commons.conference.data.repository.speaker.LinkData
+import com.droidcon.schedule.ui.sessiondetail.SessionDetailRow
 
 data class SessionDetail(
     val id: String,
@@ -13,7 +14,7 @@ data class SessionDetail(
     val speakers: List<SessionSpeakerRow>,
     val roomName: String,
     val starred: Boolean = false,
-    val onStarClicked: (String, Boolean) -> Unit
+    val onStarClicked: (SessionDetail, Boolean) -> Unit
 )
 
 data class SessionSpeakerRow(
@@ -22,7 +23,7 @@ data class SessionSpeakerRow(
     val tagLine: String,
     val profilePicture: String,
     val links: List<LinkData>,
-    val onSpeakerSelected: (String) -> Unit
+    val onSpeakerSelected: (SessionDetailRow.Speaker) -> Unit
 )
 
 sealed class SessionDetailEffect {

@@ -76,7 +76,7 @@ class SessionDetailActivity : DaggerAppCompatActivity() {
             sessionFavorite.setImageResource(R.drawable.ic_star_empty_24dp)
         }
         sessionFavorite.setOnClickListener {
-            sessionDetail.onStarClicked(sessionDetail.id, sessionDetail.starred)
+            sessionDetail.onStarClicked(sessionDetail, sessionDetail.starred)
         }
     }
 
