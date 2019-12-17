@@ -13,8 +13,8 @@ data class SpeakerSessionState(
     val talkTitle: String,
     val talkSubtitle: String,
     val isStarred: Boolean,
-    val onStarClicked: (String, Boolean) -> Unit,
-    val onSessionClicked: (String) -> Unit
+    val onStarClicked: (SpeakerDetailRow.Session, Boolean) -> Unit,
+    val onSessionClicked: (SpeakerDetailRow.Session) -> Unit
 )
 
 sealed class SpeakerDetailRow {
@@ -30,8 +30,8 @@ sealed class SpeakerDetailRow {
         val talkTitle: String,
         val talkSubtitle: String,
         val isStarred: Boolean,
-        val onStarClicked: (String, Boolean) -> Unit,
-        val onSessionClicked: (String) -> Unit
+        val onStarClicked: (Session, Boolean) -> Unit,
+        val onSessionClicked: (Session) -> Unit
     ) : SpeakerDetailRow()
 }
 

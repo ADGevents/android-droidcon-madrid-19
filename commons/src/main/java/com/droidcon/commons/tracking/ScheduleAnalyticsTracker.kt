@@ -1,6 +1,6 @@
 package com.droidcon.commons.tracking
 
-import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Event.Companion.SESSION_OPENED
+import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Event.Companion.SESSION_TAPPED
 import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Event.Companion.SESSION_STARRED
 import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Origin.Companion.SCHEDULE
 import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Origin.Companion.SCHEDULE_SEARCH
@@ -19,7 +19,7 @@ class ScheduleAnalyticsTracker @Inject constructor(
 
     class Event {
         companion object {
-            const val SESSION_OPENED = "session_opened"
+            const val SESSION_TAPPED = "session_tapped"
             const val SESSION_STARRED = "session_starred"
         }
     }
@@ -27,7 +27,7 @@ class ScheduleAnalyticsTracker @Inject constructor(
     fun trackSessionOpened(sessionTitle: String) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                name = SESSION_OPENED,
+                name = SESSION_TAPPED,
                 origin = SCHEDULE,
                 value = sessionTitle
             )
@@ -47,7 +47,7 @@ class ScheduleAnalyticsTracker @Inject constructor(
     fun trackSessionOpenedFromSearch(sessionTitle: String) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                name = SESSION_OPENED,
+                name = SESSION_TAPPED,
                 origin = SCHEDULE_SEARCH,
                 value = sessionTitle
             )
