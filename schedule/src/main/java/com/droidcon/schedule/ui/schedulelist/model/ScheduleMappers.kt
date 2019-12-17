@@ -6,6 +6,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 fun Session.toRow(
+    previousSessionTimeStamp: Long = 0,
     favouritesEnabled: Boolean,
     onStarClicked: (SessionRow.Session, Boolean) -> Unit = { _, _ -> },
     onSessionClicked: (SessionRow.Session) -> Unit = {}
@@ -13,8 +14,8 @@ fun Session.toRow(
     id = id,
     title = title,
     additionalInfo = "${TimeUnit.MILLISECONDS.toMinutes(durationInMillis)} min / $roomName",
-    time = sessionStartTimeStamp.toFormattedTime(),
-    timePeriod = sessionStartTimeStamp.getTimePeriod(),
+    time = sessionStartTimeStamp.toFormattedTime(previousSessionTimeStamp),
+    timePeriod = sessionStartTimeStamp.getTimePeriod(previousSessionTimeStamp),
     favouritesEnabled = !isServiceSession && favouritesEnabled,
     starred = starred,
     hasSessionDetail = !isServiceSession,
@@ -22,14 +23,16 @@ fun Session.toRow(
     onSessionClicked = onSessionClicked
 )
 
-fun Long.toFormattedTime(): String {
+fun Long.toFormattedTime(previousSessionTimeStamp: Long = 0): String {
+    if (previousSessionTimeStamp == this) return ""
     val date = Date(this)
     val formatter = SimpleDateFormat("HH:mm", Locale.forLanguageTag("es-ES"))
     return formatter.format(date)
 }
 
 @Throws(IllegalStateException::class)
-fun Long.getTimePeriod(): String {
+fun Long.getTimePeriod(previousSessionTimeStamp: Long = 0): String {
+    if (previousSessionTimeStamp == this) return ""
     val calendar = Calendar.getInstance(Locale.forLanguageTag("es-ES"))
     calendar.timeInMillis = this
 

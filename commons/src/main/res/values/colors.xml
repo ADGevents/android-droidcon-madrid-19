@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0d47a1</color>
-    <color name="colorPrimaryDark">#002171</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#4285f4</color>
+    <color name="colorPrimaryDark">#073042</color>
+    <color name="colorAccent">#fff</color>
     <color name="appBarLayoutBackground">@android:color/white</color>
     <color name="rowDivider">#ddd</color>
     <color name="headerBackground">#ddd</color>
-    <color name="service_session_row_background">#e1f5fe</color>
+    <color name="service_session_row_background">#f5f5f5</color>
     <color name="textTitle">@android:color/black</color>
     <color name="text_white">@android:color/white</color>
     <color name="white">@android:color/white</color>
+    <color name="session_detail_toolbar">#043D58</color>
+    <color name="speaker_detail_toolbar">#C6916E</color>
+
 </resources>

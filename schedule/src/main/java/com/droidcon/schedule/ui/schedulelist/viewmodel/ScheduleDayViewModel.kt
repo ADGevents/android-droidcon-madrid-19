@@ -74,12 +74,20 @@ class ScheduleDayViewModel(
     }
 
     private fun List<Session>.toRows(): List<SessionRow.Session> =
-        map { session ->
+        mapIndexed { index, session ->
             session.toRow(
+                previousSessionTimeStamp = getPreviousSessionTimeStamp(index),
                 favouritesEnabled = true,
                 onStarClicked = ::onSessionStarred,
                 onSessionClicked = ::onSessionClicked
             )
+        }
+
+    private fun List<Session>.getPreviousSessionTimeStamp(index: Int) =
+        if (index > 0) {
+            this[index - 1].sessionStartTimeStamp
+        } else {
+            0
         }
 
     private fun onSessionClicked(session: SessionRow.Session) {

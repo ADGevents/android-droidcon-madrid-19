@@ -7,7 +7,7 @@ interface AnalyticsTracker {
 }
 
 data class AnalyticsEvent(
-    val category: String,
-    val action: String,
-    val label: String? = null
+    val name : String,
+    val origin: String,
+    val value: String
 )
