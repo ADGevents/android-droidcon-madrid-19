@@ -3,6 +3,7 @@ package com.droidcon.commons.conference.data.api.speaker
 import arrow.core.Either
 import arrow.core.flatMap
 import com.droidcon.commons.BuildConfig
+import com.droidcon.commons.conference.data.api.ApiConfig
 import com.droidcon.commons.ioc.IoDispatcher
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types

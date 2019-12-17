@@ -3,7 +3,7 @@ package com.droidcon.commons.conference.data.api.session
 import com.droidcon.commons.conference.data.repository.session.SessionData
 
 
-fun SessionDto.toSessionData(): SessionData =
+fun SessionDto.toSessionData(isStarred: Boolean = false): SessionData =
     SessionData(
         id,
         title,
@@ -14,5 +14,6 @@ fun SessionDto.toSessionData(): SessionData =
         isPlenumSession,
         speakers.map { it.id },
         roomId,
-        room
+        room,
+        isStarred
     )

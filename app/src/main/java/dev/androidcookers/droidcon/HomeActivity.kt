@@ -6,10 +6,15 @@ import androidx.navigation.NavController
 import com.droidcon.commons.navigation.setupWithNavController
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
+import javax.inject.Inject
 
 class HomeActivity : DaggerAppCompatActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
+
+    @Inject
+    lateinit var homeViewModelFactory: HomeViewModelFactory
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -19,11 +24,17 @@ class HomeActivity : DaggerAppCompatActivity() {
         if (savedInstanceState == null) {
             setUpNavigationBar()
         }
+
+        setUpHomeViewModel()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         setUpNavigationBar()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false
     }
 
     private fun setUpNavigationBar() {
@@ -43,7 +54,8 @@ class HomeActivity : DaggerAppCompatActivity() {
         currentNavController = navController
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return currentNavController?.value?.navigateUp() ?: false
+    private fun setUpHomeViewModel() {
+        homeViewModel = homeViewModelFactory.get(this)
+        homeViewModel.onHomeVisible()
     }
 }

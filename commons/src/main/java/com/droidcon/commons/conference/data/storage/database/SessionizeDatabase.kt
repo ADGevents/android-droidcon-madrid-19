@@ -2,6 +2,8 @@ package com.droidcon.commons.conference.data.storage.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.droidcon.commons.conference.data.storage.database.favourites.FavouritesDao
+import com.droidcon.commons.conference.data.storage.database.favourites.FavouritesEntity
 import com.droidcon.commons.conference.data.storage.database.session.SessionDao
 import com.droidcon.commons.conference.data.storage.database.session.SessionEntity
 import com.droidcon.commons.conference.data.storage.database.session.SessionFtsEntity
@@ -20,15 +22,18 @@ import javax.inject.Singleton
         SpeakerEntity::class,
         SpeakerFtsEntity::class,
         LinkEntity::class,
-        SessionAndSpeakerEntity::class
+        SessionAndSpeakerEntity::class,
+        FavouritesEntity::class
     ],
-    version = 2,
-    exportSchema = true
+    version = 3,
+    exportSchema = false
 )
 abstract class SessionizeDatabase : RoomDatabase() {
 
     abstract fun sessionDao(): SessionDao
     abstract fun speakerDao(): SpeakerDao
+    abstract fun favouritesDao(): FavouritesDao
+    abstract fun sessionizeDao(): SessionizeDao
 
     companion object {
         const val NAME = "sessionize"

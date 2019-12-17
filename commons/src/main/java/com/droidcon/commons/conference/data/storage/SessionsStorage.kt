@@ -1,6 +1,8 @@
 package com.droidcon.commons.conference.data.storage
 
 import com.droidcon.commons.conference.data.repository.session.SessionData
+import com.droidcon.commons.conference.data.storage.database.favourites.FavouritesDao
+import com.droidcon.commons.conference.data.storage.database.favourites.FavouritesEntity
 import com.droidcon.commons.conference.data.storage.database.session.SessionDao
 import com.droidcon.commons.conference.data.storage.database.session.toSessionData
 import com.droidcon.commons.conference.data.storage.database.session.toSessionEntity
@@ -8,7 +10,8 @@ import com.droidcon.commons.conference.data.storage.database.sessionandspeaker.S
 import javax.inject.Inject
 
 class SessionsStorage @Inject constructor(
-    private val sessionDao: SessionDao
+    private val sessionDao: SessionDao,
+    private val favouritesDao: FavouritesDao
 ) {
 
     suspend fun getAllSessionsData(): List<SessionData> =
@@ -36,6 +39,13 @@ class SessionsStorage @Inject constructor(
 
     suspend fun updateStarredValue(id: String, isStarred: Boolean): Boolean {
         val updatedSessions = sessionDao.updateStarredValue(id, isStarred)
+
+        if (isStarred) {
+            favouritesDao.insert(FavouritesEntity(id))
+        } else {
+            favouritesDao.delete(FavouritesEntity(id))
+        }
+
         return updatedSessions > 0
     }
 
