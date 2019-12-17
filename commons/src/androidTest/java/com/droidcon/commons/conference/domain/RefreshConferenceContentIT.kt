@@ -4,11 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.runner.AndroidJUnit4
-import arrow.core.Either
 import com.droidcon.commons.conference.data.api.session.SessionDto
 import com.droidcon.commons.conference.data.api.session.SessionGroupDto
 import com.droidcon.commons.conference.data.api.session.SessionsApiClient
-import com.droidcon.commons.conference.data.api.speaker.GetSpeakersError
 import com.droidcon.commons.conference.data.api.speaker.SpeakersApiClient
 import com.droidcon.commons.conference.data.repository.session.SessionData
 import com.droidcon.commons.conference.data.repository.session.SessionsRepository
@@ -17,7 +15,6 @@ import com.droidcon.commons.conference.data.storage.SessionsStorage
 import com.droidcon.commons.conference.data.storage.SpeakersStorage
 import com.droidcon.commons.conference.data.storage.database.SessionizeDatabase
 import com.droidcon.commons.conference.data.storage.database.favourites.FavouritesEntity
-import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
@@ -52,7 +49,7 @@ class RefreshConferenceContentIT {
         speakersStorage = speakersStorage
     )
 
-    private val sut = RefreshConferenceContent(
+    private val sut = dev.androidcookers.droidcon.RefreshConferenceContent(
         sessionsRepository = sessionsRepository,
         speakersRepository = speakersRepository,
         ioDispatcher = TestCoroutineDispatcher()

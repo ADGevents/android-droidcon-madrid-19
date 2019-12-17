@@ -17,7 +17,7 @@ fun Session.toRow(
     timePeriod = sessionStartTimeStamp.getTimePeriod(),
     favouritesEnabled = !isServiceSession && favouritesEnabled,
     starred = starred,
-    hasSessionDetail = !isServiceSession && speakerIds.isNullOrEmpty(),
+    hasSessionDetail = !isServiceSession,
     onStarClicked = onStarClicked,
     onSessionClicked = onSessionClicked
 )

@@ -25,14 +25,15 @@ import javax.inject.Singleton
         SessionAndSpeakerEntity::class,
         FavouritesEntity::class
     ],
-    version = 2,
-    exportSchema = true
+    version = 3,
+    exportSchema = false
 )
 abstract class SessionizeDatabase : RoomDatabase() {
 
     abstract fun sessionDao(): SessionDao
     abstract fun speakerDao(): SpeakerDao
     abstract fun favouritesDao(): FavouritesDao
+    abstract fun sessionizeDao(): SessionizeDao
 
     companion object {
         const val NAME = "sessionize"

@@ -1,11 +1,14 @@
 package com.droidcon.commons.conference.data.ioc
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.droidcon.commons.BuildConfig
+import com.droidcon.commons.conference.data.api.ApiConfig
 import com.droidcon.commons.conference.data.api.session.SessionsApiClient
-import com.droidcon.commons.conference.data.api.speaker.ApiConfig
+import com.droidcon.commons.conference.data.storage.database.SessionizeDao
 import com.droidcon.commons.conference.data.storage.database.SessionizeDatabase
+import com.droidcon.commons.conference.data.storage.database.favourites.FavouritesDao
 import com.droidcon.commons.conference.data.storage.database.session.SessionDao
 import com.droidcon.commons.conference.data.storage.database.speaker.SpeakerDao
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -49,7 +52,7 @@ class SessionizeModule {
     @Provides
     fun provideDatabase(appContext: Context): SessionizeDatabase =
         Room.databaseBuilder(appContext, SessionizeDatabase::class.java, SessionizeDatabase.NAME)
-            .createFromAsset("databases/prepopulated_droidcon_madrid.db")
+            .createFromAsset("databases/sessionize.db")
             .build()
 
     @Provides
@@ -59,4 +62,16 @@ class SessionizeModule {
     @Provides
     fun provideSpeakerDao(sessionizeDatabase: SessionizeDatabase): SpeakerDao =
         sessionizeDatabase.speakerDao()
+
+    @Provides
+    fun provideFavouritesDao(sessionizeDatabase: SessionizeDatabase): FavouritesDao =
+        sessionizeDatabase.favouritesDao()
+
+    @Provides
+    fun provideSessionizeDao(sessionizeDatabase: SessionizeDatabase): SessionizeDao =
+        sessionizeDatabase.sessionizeDao()
+
+    @Provides
+    fun provideSharedPreferences(applicationContext: Context): SharedPreferences =
+        applicationContext.getSharedPreferences("appPreferences", 0)
 }
