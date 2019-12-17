@@ -1,21 +1,21 @@
 package com.droidcon.commons.tracking
 
-import com.droidcon.commons.tracking.SessionDetailTracker.Action.Companion.SESSION_STARRED
-import com.droidcon.commons.tracking.SessionDetailTracker.Action.Companion.SPEAKER_TAPPED
-import com.droidcon.commons.tracking.SessionDetailTracker.Category.Companion.SESSION_DETAIL
+import com.droidcon.commons.tracking.SessionDetailTracker.Event.Companion.SESSION_STARRED
+import com.droidcon.commons.tracking.SessionDetailTracker.Event.Companion.SPEAKER_TAPPED
+import com.droidcon.commons.tracking.SessionDetailTracker.Origin.Companion.SESSION_DETAIL
 import javax.inject.Inject
 
 
 class SessionDetailTracker @Inject constructor(
     private val analyticsTracker: AnalyticsTracker
 ) {
-    class Category {
+    class Origin {
         companion object {
             const val SESSION_DETAIL = "session_detail"
         }
     }
 
-    class Action {
+    class Event {
         companion object {
             const val SESSION_STARRED = "session_starred"
             const val SPEAKER_TAPPED = "speaker_opened"
@@ -25,9 +25,9 @@ class SessionDetailTracker @Inject constructor(
     fun trackSessionStarred(sessionTitle: String, starred: Boolean) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                category = SESSION_DETAIL,
-                action = SESSION_STARRED,
-                label = "$sessionTitle is ${if (starred) "starred" else "unstarred"}"
+                name = SESSION_STARRED,
+                origin = SESSION_DETAIL,
+                value = "$sessionTitle is ${if (starred) "starred" else "unstarred"}"
             )
         )
     }
@@ -35,9 +35,9 @@ class SessionDetailTracker @Inject constructor(
     fun trackSpeakerOpened(speakerName: String) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                category = SESSION_DETAIL,
-                action = SPEAKER_TAPPED,
-                label = speakerName
+                name = SPEAKER_TAPPED,
+                origin = SESSION_DETAIL,
+                value = speakerName
             )
         )
     }

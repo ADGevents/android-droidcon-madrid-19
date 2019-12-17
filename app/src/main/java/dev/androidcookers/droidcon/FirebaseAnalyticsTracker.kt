@@ -13,10 +13,9 @@ class FirebaseAnalyticsTracker constructor(
 
     override fun trackEvent(event: AnalyticsEvent) {
         val properties = Bundle()
-        properties.putString(EVENT_PARAM_CATEGORY, event.category)
-        properties.putString(EVENT_PARAM_ACTION, event.action)
-        properties.putString(EVENT_PARAM_LABEL, event.label)
-        trackEvent(event.category, properties)
+        properties.putString(ORIGIN, event.origin)
+        properties.putString(VALUE, event.value)
+        trackEvent(event.name, properties)
     }
 
     private fun trackEvent(event: String, properties: Bundle) {
@@ -26,11 +25,8 @@ class FirebaseAnalyticsTracker constructor(
 
 
     private companion object {
-        const val EVENT_PARAM_CATEGORY = "eventCategory"
-        const val EVENT_PARAM_ACTION = "eventAction"
-        const val EVENT_PARAM_LABEL = "eventLabel"
-
-        const val LOGTAG = "AnalyticsTracker"
-
+        const val ORIGIN = FirebaseAnalytics.Param.ORIGIN
+        const val VALUE = FirebaseAnalytics.Param.VALUE
+        val LOGTAG = "AnalyticsTracker"
     }
 }

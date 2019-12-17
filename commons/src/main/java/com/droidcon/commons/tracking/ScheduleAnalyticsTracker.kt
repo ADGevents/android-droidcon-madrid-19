@@ -1,23 +1,23 @@
 package com.droidcon.commons.tracking
 
-import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Action.Companion.SESSION_OPENED
-import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Action.Companion.SESSION_STARRED
-import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Category.Companion.SCHEDULE
-import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Category.Companion.SCHEDULE_SEARCH
+import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Event.Companion.SESSION_OPENED
+import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Event.Companion.SESSION_STARRED
+import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Origin.Companion.SCHEDULE
+import com.droidcon.commons.tracking.ScheduleAnalyticsTracker.Origin.Companion.SCHEDULE_SEARCH
 import javax.inject.Inject
 
 
 class ScheduleAnalyticsTracker @Inject constructor(
     private val analyticsTracker: AnalyticsTracker
 ) {
-    class Category {
+    class Origin {
         companion object {
             const val SCHEDULE = "schedule"
             const val SCHEDULE_SEARCH = "schedule_search"
         }
     }
 
-    class Action {
+    class Event {
         companion object {
             const val SESSION_OPENED = "session_opened"
             const val SESSION_STARRED = "session_starred"
@@ -27,9 +27,9 @@ class ScheduleAnalyticsTracker @Inject constructor(
     fun trackSessionOpened(sessionTitle: String) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                category = SCHEDULE,
-                action = SESSION_OPENED,
-                label = sessionTitle
+                name = SESSION_OPENED,
+                origin = SCHEDULE,
+                value = sessionTitle
             )
         )
     }
@@ -37,9 +37,9 @@ class ScheduleAnalyticsTracker @Inject constructor(
     fun trackSessionStarred(sessionTitle: String, starred: Boolean) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                category = SCHEDULE,
-                action = SESSION_STARRED,
-                label = "$sessionTitle is ${if (starred) "starred" else "unstarred"}"
+                name = SESSION_STARRED,
+                origin = SCHEDULE,
+                value = "$sessionTitle is ${if (starred) "starred" else "unstarred"}"
             )
         )
     }
@@ -47,9 +47,9 @@ class ScheduleAnalyticsTracker @Inject constructor(
     fun trackSessionOpenedFromSearch(sessionTitle: String) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                category = SCHEDULE_SEARCH,
-                action = SESSION_OPENED,
-                label = sessionTitle
+                name = SESSION_OPENED,
+                origin = SCHEDULE_SEARCH,
+                value = sessionTitle
             )
         )
     }
@@ -57,9 +57,9 @@ class ScheduleAnalyticsTracker @Inject constructor(
     fun trackSessionStarredFromSearch(sessionTitle: String, starred: Boolean) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                category = SCHEDULE_SEARCH,
-                action = SESSION_STARRED,
-                label = "$sessionTitle is ${if (starred) "starred" else "unstarred"}"
+                name = SESSION_STARRED,
+                origin = SCHEDULE_SEARCH,
+                value = "$sessionTitle is ${if (starred) "starred" else "unstarred"}"
             )
         )
     }
