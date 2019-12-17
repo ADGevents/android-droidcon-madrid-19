@@ -5,15 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.lifecycle.SingleLiveEvent
+import com.droidcon.commons.tracking.SpeakersTracker
 import com.droidcon.speakers.domain.SearchSpeakers
 import com.droidcon.speakers.domain.Speaker
+import com.droidcon.speakers.presentation.speakerlist.model.SpeakerState
 import com.droidcon.speakers.presentation.speakersearch.model.SpeakersSearchEffect
 import com.droidcon.speakers.presentation.speakersearch.model.SpeakersSearchResult
 import com.droidcon.speakers.presentation.speakersearch.model.toSpeakersSearchResult
 import kotlinx.coroutines.launch
 
 class SearchSpeakersViewModel(
-    private val searchSpeakers: SearchSpeakers
+    private val searchSpeakers: SearchSpeakers,
+    private val speakersTracker: SpeakersTracker
 ) : ViewModel() {
 
     private val mutableSpeakersSearchEffect = SingleLiveEvent<SpeakersSearchEffect>()
@@ -46,7 +49,8 @@ class SearchSpeakersViewModel(
         mutableSpeakersSearchResult.value = SpeakersSearchResult.Error
     }
 
-    private fun onSpeakerTapped(speakerId: String) {
-        mutableSpeakersSearchEffect.setValue(SpeakersSearchEffect.NavigateToSpeakerDetail(speakerId))
+    private fun onSpeakerTapped(speaker: SpeakerState) {
+        mutableSpeakersSearchEffect.setValue(SpeakersSearchEffect.NavigateToSpeakerDetail(speaker.id))
+        speakersTracker.trackSpeakerOpenedFromSearch(speaker.title)
     }
 }
