@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "d85d48fa37440da276e49df629837806",
+    "identityHash": "724a7dd7b6b7059d9e589e58d58c2bb1",
     "entities": [
       {
         "tableName": "Session",
@@ -298,12 +298,32 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Favourites",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sessionId` TEXT NOT NULL, PRIMARY KEY(`sessionId`))",
+        "fields": [
+          {
+            "fieldPath": "sessionId",
+            "columnName": "sessionId",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "sessionId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd85d48fa37440da276e49df629837806')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '724a7dd7b6b7059d9e589e58d58c2bb1')"
     ]
   }
 }

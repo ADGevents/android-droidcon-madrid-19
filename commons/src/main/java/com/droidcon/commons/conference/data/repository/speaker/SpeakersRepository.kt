@@ -15,19 +15,10 @@ class SpeakersRepository @Inject constructor(
         val storedSpeakers = speakersStorage.getAll()
 
         return if (storedSpeakers.isNullOrEmpty()) {
-            speakersApiClient.getSpeakers()
-                .runRight(::storeSpeakers)
-                .map { speakers ->
-                    speakers.map { it.toDataModel() }
-                }
+            getFromApi()
         } else {
             Either.right(storedSpeakers.map { it.toDataModel() })
         }
-    }
-
-    private suspend fun storeSpeakers(speakers: List<SpeakerDto>) {
-        val storageSpeakers = speakers.map { it.toDO() }
-        speakersStorage.add(storageSpeakers)
     }
 
     suspend fun get(speakerId: String): Either<GetSpeakerError, SpeakerData> {
@@ -45,4 +36,22 @@ class SpeakersRepository @Inject constructor(
 
     suspend fun getBySessionId(sessionId: String): List<SpeakerData> =
         speakersStorage.getSpeakersBySessionId(sessionId).map { it.toDataModel() }
+
+    suspend fun refreshSpeakers(): Boolean =
+        getFromApi().fold(
+            ifLeft = { false },
+            ifRight = { true }
+        )
+
+    private suspend fun getFromApi(): Either<GetSpeakersError, List<SpeakerData>> =
+        speakersApiClient.getSpeakers()
+            .runRight(::storeSpeakers)
+            .map { speakers ->
+                speakers.map { it.toDataModel() }
+            }
+
+    private suspend fun storeSpeakers(speakers: List<SpeakerDto>) {
+        val storageSpeakers = speakers.map { it.toDO() }
+        speakersStorage.add(storageSpeakers)
+    }
 }

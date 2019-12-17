@@ -4,6 +4,7 @@ import arrow.core.Either
 import com.droidcon.commons.conference.data.api.session.SessionsApiClient
 import com.droidcon.commons.conference.data.api.session.toSessionData
 import com.droidcon.commons.conference.data.storage.SessionsStorage
+import com.droidcon.commons.conference.data.storage.database.favourites.FavouritesDao
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -11,7 +12,8 @@ import javax.inject.Singleton
 @Singleton
 class SessionsRepository @Inject constructor(
     private val sessionsApiClient: SessionsApiClient,
-    private val sessionsStorage: SessionsStorage
+    private val sessionsStorage: SessionsStorage,
+    private val favouritesDao: FavouritesDao
 ) {
 
     suspend fun getAllSessions(): Either<GetSessionsError, List<SessionData>> {
@@ -41,9 +43,23 @@ class SessionsRepository @Inject constructor(
     suspend fun getBySpeakerId(speakerId: String): List<SessionData> =
         sessionsStorage.getBySpeakerId(speakerId)
 
-
     suspend fun search(query: String): Either<SearchSessionsError, List<SessionData>> =
         Either.right(sessionsStorage.search(query))
+
+    suspend fun refreshSessions(): Boolean =
+        try {
+            val apiSessions = sessionsApiClient.getSessionGroups().flatMap { sessionGroup ->
+                sessionGroup.sessions.map { session ->
+                    val favourite = favouritesDao.getBySessionId(session.id)
+                    val isStarred = favourite != null
+                    session.toSessionData(isStarred)
+                }
+            }
+            sessionsStorage.storeSessions(apiSessions)
+            true
+        } catch (ioException: IOException) {
+            false
+        }
 
     private suspend fun getAllSessionsFromDisk(): List<SessionData> =
         sessionsStorage.getAllSessionsData()
