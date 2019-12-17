@@ -8,15 +8,15 @@ sealed class SessionDetailRow {
 
     data class Description(
         val description: String?
-    ): SessionDetailRow()
+    ) : SessionDetailRow()
 
-    object SpeakersLabel: SessionDetailRow()
+    object SpeakersLabel : SessionDetailRow()
 
     data class Speaker(
         val id: String,
         val avatar: String,
         val name: String,
         val description: String,
-        val onSpeakerClicked: (String) -> Unit
-    ): SessionDetailRow()
+        val onSpeakerClicked: (Speaker) -> Unit
+    ) : SessionDetailRow()
 }

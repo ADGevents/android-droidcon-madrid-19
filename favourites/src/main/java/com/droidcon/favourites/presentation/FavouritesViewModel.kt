@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.lifecycle.SingleLiveEvent
 import com.droidcon.favourites.domain.GetFavouriteSessions
+import com.droidcon.schedule.ui.schedulelist.model.SessionRow
 import kotlinx.coroutines.launch
 
 class FavouritesViewModel(
@@ -25,7 +26,7 @@ class FavouritesViewModel(
         }
     }
 
-    private fun onSessionClicked(sessionId: String) {
-        mutableFavouritesEffect.setValue(FavouritesEffect.NavigateToSessionDetail(sessionId))
+    private fun onSessionClicked(session: SessionRow.Session) {
+        mutableFavouritesEffect.setValue(FavouritesEffect.NavigateToSessionDetail(session.id))
     }
 }

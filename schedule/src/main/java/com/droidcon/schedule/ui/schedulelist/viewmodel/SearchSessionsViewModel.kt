@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
+import com.droidcon.commons.tracking.ScheduleAnalyticsTracker
 import com.droidcon.schedule.domain.SearchSessions
 import com.droidcon.schedule.domain.Session
 import com.droidcon.schedule.ui.schedulelist.model.SessionRow
@@ -15,7 +16,8 @@ import kotlinx.coroutines.launch
 
 class SearchSessionsViewModel(
     private val searchSessions: SearchSessions,
-    private val updateSessionStarredValue: UpdateSessionStarredValue
+    private val updateSessionStarredValue: UpdateSessionStarredValue,
+    private val scheduleAnalyticsTracker: ScheduleAnalyticsTracker
 ) : ViewModel() {
 
     private val mutableSessionsSearchState = MutableLiveData<SessionsSearchState>()
@@ -51,26 +53,27 @@ class SearchSessionsViewModel(
         mutableSessionsSearchState.value = SessionsSearchState.Error
     }
 
-    private fun onSessionStarred(sessionId: String, isStarred: Boolean) {
+    private fun onSessionStarred(session: SessionRow.Session, isStarred: Boolean) {
         viewModelScope.launch {
             val newIsStarredValue = !isStarred
-            updateSessionStarredState(sessionId, newIsStarredValue)
+            updateSessionStarredState(session, newIsStarredValue)
 
-            val isSessionUpdated = updateSessionStarredValue(sessionId, newIsStarredValue)
+            val isSessionUpdated = updateSessionStarredValue(session.id, newIsStarredValue)
 
             if (!isSessionUpdated) {
-                updateSessionStarredState(sessionId, isStarred)
+                updateSessionStarredState(session, isStarred)
             }
+            scheduleAnalyticsTracker.trackSessionStarredFromSearch(session.title, newIsStarredValue)
         }
     }
 
-    private fun updateSessionStarredState(sessionId: String, isStarred: Boolean) {
+    private fun updateSessionStarredState(session: SessionRow.Session, isStarred: Boolean) {
         val sessionsSearchState = mutableSessionsSearchState.value as? SessionsSearchState.Content
             ?: return
 
         val updatedSessions = sessionsSearchState.searchResults
             .map { result ->
-                if (result is SessionRow.Session && result.id == sessionId) {
+                if (result is SessionRow.Session && result.id == session.id) {
                     result.copy(starred = isStarred)
                 } else {
                     result
@@ -80,7 +83,8 @@ class SearchSessionsViewModel(
         mutableSessionsSearchState.value = SessionsSearchState.Content(updatedSessions)
     }
 
-    private fun onSessionClicked(sessionId: String) {
-        mutableSessionsSearchEffect.value = SessionsSearchEffect.NavigateToSessionDetail(sessionId)
+    private fun onSessionClicked(session: SessionRow.Session) {
+        mutableSessionsSearchEffect.value = SessionsSearchEffect.NavigateToSessionDetail(session.id)
+        scheduleAnalyticsTracker.trackSessionOpenedFromSearch(session.title)
     }
 }

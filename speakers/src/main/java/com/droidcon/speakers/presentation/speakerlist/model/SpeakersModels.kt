@@ -12,7 +12,7 @@ data class SpeakerState(
     val title: String,
     val subtitle: String,
     val avatar: Url,
-    val onClickAction: (String) -> Unit
+    val onClickAction: (SpeakerState) -> Unit
 )
 
 sealed class SpeakersEffect {

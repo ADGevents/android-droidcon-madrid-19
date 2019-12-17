@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.commons.lifecycle.SingleLiveEvent
+import com.droidcon.commons.tracking.ScheduleAnalyticsTracker
 import com.droidcon.schedule.domain.*
 import com.droidcon.schedule.ui.schedulelist.model.*
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ class ScheduleDayViewModel(
     private val updateSessionStarredValue: UpdateSessionStarredValue,
     private val getFirstInProgressSessionOrNull: GetFirstInProgressSessionOrNull,
     private val shouldTryScrollingToInProgressSession: ShouldTryScrollingToInProgressSession,
-    private val registerScrollToInProgressSessionTry: RegisterScrollToInProgressSessionTry
+    private val registerScrollToInProgressSessionTry: RegisterScrollToInProgressSessionTry,
+    private val scheduleAnalyticsAnalyticsTracker: ScheduleAnalyticsTracker
 ) : ViewModel() {
 
     private val mutableScheduleState = MutableLiveData<ScheduleState>()
@@ -80,20 +82,22 @@ class ScheduleDayViewModel(
             )
         }
 
-    private fun onSessionClicked(sessionId: String) {
-        mutableScheduleEffects.setValue(ScheduleDayEffect.NavigateToDetail(sessionId))
+    private fun onSessionClicked(session: SessionRow.Session) {
+        mutableScheduleEffects.setValue(ScheduleDayEffect.NavigateToDetail(session.id))
+        scheduleAnalyticsAnalyticsTracker.trackSessionOpened(session.title)
     }
 
-    private fun onSessionStarred(sessionId: String, isStarred: Boolean) {
+    private fun onSessionStarred(session: SessionRow.Session, isStarred: Boolean) {
         viewModelScope.launch {
             val newIsStarredValue = !isStarred
-            updateSessionStarredState(sessionId, newIsStarredValue)
+            updateSessionStarredState(session.id, newIsStarredValue)
 
-            val isSessionUpdated = updateSessionStarredValue(sessionId, newIsStarredValue)
+            val isSessionUpdated = updateSessionStarredValue(session.id, newIsStarredValue)
 
             if (!isSessionUpdated) {
-                updateSessionStarredState(sessionId, isStarred)
+                updateSessionStarredState(session.id, isStarred)
             }
+            scheduleAnalyticsAnalyticsTracker.trackSessionStarred(session.title, newIsStarredValue)
         }
     }
 
@@ -107,7 +111,6 @@ class ScheduleDayViewModel(
                 session
             }
         }
-
         mutableScheduleState.value = ScheduleState.Content(updatedSessions)
     }
 }
