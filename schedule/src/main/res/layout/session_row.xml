@@ -57,13 +57,28 @@
             android:textAppearance="@style/SessionTitle"
             tools:text="What's new in Jetpack Compose" />
 
-        <TextView
-            android:id="@+id/sessionAdditionalInfo"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="14sp"
-            tools:text="1 hour/ Main Stage" />
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/speakerIconImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/ic_speaker_session" />
+
+            <TextView
+                android:id="@+id/sessionAdditionalInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                tools:text="1 hour/ Main Stage" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
