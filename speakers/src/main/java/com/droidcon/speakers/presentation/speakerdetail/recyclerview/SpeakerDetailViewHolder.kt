@@ -34,12 +34,12 @@ sealed class SpeakerDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(i
                 }
                 setOnClickListener {
                     session.onStarClicked(
-                        session.id,
+                        session,
                         session.isStarred
                     )
                 }
             }
-            itemView.setOnClickListener { session.onSessionClicked(session.id) }
+            itemView.setOnClickListener { session.onSessionClicked(session) }
         }
     }
 }

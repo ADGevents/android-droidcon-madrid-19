@@ -11,7 +11,7 @@ class SpeakersTracker @Inject constructor(
 ) {
     class Category {
         companion object {
-            const val SPEAKERS = "speakers"
+            const val SPEAKERS = "speakers_list"
             const val SPEAKERS_SEARCH = "speakers_search"
         }
     }
@@ -25,9 +25,9 @@ class SpeakersTracker @Inject constructor(
     fun trackSpeakerOpened(speakerName: String) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                category = SPEAKERS,
-                action = SPEAKER_OPENED,
-                label = speakerName
+                name = SPEAKER_OPENED,
+                origin = SPEAKERS,
+                value = speakerName
             )
         )
     }
@@ -36,9 +36,9 @@ class SpeakersTracker @Inject constructor(
     fun trackSpeakerOpenedFromSearch(speakerName: String) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                category = SPEAKERS_SEARCH,
-                action = SPEAKER_OPENED,
-                label = speakerName
+                name = SPEAKER_OPENED,
+                origin = SPEAKERS_SEARCH,
+                value = speakerName
             )
         )
     }

@@ -1,24 +1,25 @@
 package com.droidcon.commons.tracking
 
-import com.droidcon.commons.tracking.SessionDetailTracker.Event.Companion.SESSION_STARRED
-import com.droidcon.commons.tracking.SessionDetailTracker.Event.Companion.SPEAKER_TAPPED
-import com.droidcon.commons.tracking.SessionDetailTracker.Origin.Companion.SESSION_DETAIL
+import com.droidcon.commons.tracking.SpeakerDetailTracker.Event.Companion.SESSION_STARRED
+import com.droidcon.commons.tracking.SpeakerDetailTracker.Event.Companion.SESSION_TAPPED
+import com.droidcon.commons.tracking.SpeakerDetailTracker.Origin.Companion.SPEAKER_DETAIL
 import javax.inject.Inject
 
 
-class SessionDetailTracker @Inject constructor(
+class SpeakerDetailTracker @Inject constructor(
     private val analyticsTracker: AnalyticsTracker
 ) {
+
     class Origin {
         companion object {
-            const val SESSION_DETAIL = "session_detail"
+            const val SPEAKER_DETAIL = "speaker_detail"
         }
     }
 
     class Event {
         companion object {
             const val SESSION_STARRED = "session_starred"
-            const val SPEAKER_TAPPED = "speaker_opened"
+            const val SESSION_TAPPED = "session_tapped"
         }
     }
 
@@ -26,18 +27,18 @@ class SessionDetailTracker @Inject constructor(
         analyticsTracker.trackEvent(
             AnalyticsEvent(
                 name = SESSION_STARRED,
-                origin = SESSION_DETAIL,
+                origin = SPEAKER_DETAIL,
                 value = "$sessionTitle is ${if (starred) "starred" else "unstarred"}"
             )
         )
     }
 
-    fun trackSpeakerOpened(speakerName: String) {
+    fun trackSessionOpened(sessionTitle: String) {
         analyticsTracker.trackEvent(
             AnalyticsEvent(
-                name = SPEAKER_TAPPED,
-                origin = SESSION_DETAIL,
-                value = speakerName
+                name = SESSION_TAPPED,
+                origin = SPEAKER_DETAIL,
+                value = sessionTitle
             )
         )
     }

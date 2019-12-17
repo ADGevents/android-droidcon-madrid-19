@@ -5,8 +5,8 @@ import com.droidcon.speakers.domain.SpeakerSession
 
 fun Speaker.toDetailState(
     speakerSessions: List<SpeakerSession>,
-    onStarClicked: (String, Boolean) -> Unit,
-    onSessionClicked: (String) -> Unit
+    onStarClicked: (SpeakerDetailRow.Session, Boolean) -> Unit,
+    onSessionClicked: (SpeakerDetailRow.Session) -> Unit
 ): SpeakerDetailState =
     SpeakerDetailState(
         id = id,
@@ -17,8 +17,8 @@ fun Speaker.toDetailState(
     )
 
 fun SpeakerSession.toState(
-    onStarClicked: (String, Boolean) -> Unit,
-    onSessionClicked: (String) -> Unit
+    onStarClicked: (SpeakerDetailRow.Session, Boolean) -> Unit,
+    onSessionClicked: (SpeakerDetailRow.Session) -> Unit
 ): SpeakerSessionState =
     SpeakerSessionState(
         id = id,
