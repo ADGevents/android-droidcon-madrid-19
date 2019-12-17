@@ -20,7 +20,7 @@ class FirebaseAnalyticsTracker constructor(
     }
 
     private fun trackEvent(event: String, properties: Bundle) {
-        Log.i(LOGTAG, "logEvent: $event with values: $properties")
+        Log.d(LOGTAG, "logEvent: $event with values: $properties")
         firebaseAnalytics.logEvent(event, properties)
     }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
+import com.droidcon.commons.tracking.ScheduleAnalyticsTracker
 import com.droidcon.schedule.domain.SearchSessions
 import com.droidcon.schedule.domain.Session
 import com.droidcon.schedule.ui.schedulelist.model.SessionRow
@@ -15,7 +16,8 @@ import kotlinx.coroutines.launch
 
 class SearchSessionsViewModel(
     private val searchSessions: SearchSessions,
-    private val updateSessionStarredValue: UpdateSessionStarredValue
+    private val updateSessionStarredValue: UpdateSessionStarredValue,
+    private val scheduleAnalyticsTracker: ScheduleAnalyticsTracker
 ) : ViewModel() {
 
     private val mutableSessionsSearchState = MutableLiveData<SessionsSearchState>()
@@ -61,6 +63,7 @@ class SearchSessionsViewModel(
             if (!isSessionUpdated) {
                 updateSessionStarredState(session, isStarred)
             }
+            scheduleAnalyticsTracker.trackSessionStarredFromSearch(session.title, newIsStarredValue)
         }
     }
 
@@ -82,5 +85,6 @@ class SearchSessionsViewModel(
 
     private fun onSessionClicked(session: SessionRow.Session) {
         mutableSessionsSearchEffect.value = SessionsSearchEffect.NavigateToSessionDetail(session.id)
+        scheduleAnalyticsTracker.trackSessionOpenedFromSearch(session.title)
     }
 }
