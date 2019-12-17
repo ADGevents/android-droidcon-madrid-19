@@ -5,14 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.droidcon.commons.lifecycle.SingleLiveEvent
+import com.droidcon.commons.tracking.SpeakersTracker
 import com.droidcon.speakers.domain.GetAllSpeakers
 import com.droidcon.speakers.domain.Speaker
+import com.droidcon.speakers.presentation.speakerlist.model.SpeakerState
 import com.droidcon.speakers.presentation.speakerlist.model.SpeakersEffect
 import com.droidcon.speakers.presentation.speakerlist.model.SpeakersState
 import com.droidcon.speakers.presentation.speakerlist.model.toState
 import kotlinx.coroutines.launch
 
-class SpeakersViewModel(private val getAllSpeakers: GetAllSpeakers) : ViewModel() {
+class SpeakersViewModel(
+    private val getAllSpeakers: GetAllSpeakers,
+    private val speakersTracker: SpeakersTracker
+) : ViewModel() {
 
     private val mutableSpeakersState = MutableLiveData<SpeakersState>()
     val speakersState: LiveData<SpeakersState> = mutableSpeakersState
@@ -41,7 +46,8 @@ class SpeakersViewModel(private val getAllSpeakers: GetAllSpeakers) : ViewModel(
         mutableSpeakersState.value = speakers.toState(::onSpeakerTapped)
     }
 
-    private fun onSpeakerTapped(speakerId: String) {
-        mutableSpeakersEffects.setValue(SpeakersEffect.NavigateToDetail(speakerId))
+    private fun onSpeakerTapped(speaker: SpeakerState) {
+        mutableSpeakersEffects.setValue(SpeakersEffect.NavigateToDetail(speaker.id))
+        speakersTracker.trackSpeakerOpened(speaker.title)
     }
 }

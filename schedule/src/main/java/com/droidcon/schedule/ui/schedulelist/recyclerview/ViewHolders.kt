@@ -48,7 +48,7 @@ class SessionViewHolder(itemView: View) : SessionRowViewHolder(itemView) {
                     context.getString(com.droidcon.schedule.R.string.mark_as_favourite)
                 }
                 setOnClickListener {
-                    session.onStarClicked(session.id, session.starred)
+                    session.onStarClicked(session, session.starred)
                 }
             }
         } else {
@@ -65,7 +65,7 @@ class SessionViewHolder(itemView: View) : SessionRowViewHolder(itemView) {
         )
         itemView.setBackgroundResource(outValue.resourceId)
         itemView.setOnClickListener {
-            session.onSessionClicked(session.id)
+            session.onSessionClicked(session)
         }
     }
 }

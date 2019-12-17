@@ -20,6 +20,6 @@ class SpeakerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .placeholder(R.drawable.ic_default_avatar)
             .transform(CircleCrop())
             .into(avatarView)
-        itemView.setOnClickListener { speaker.onClickAction(speaker.id) }
+        itemView.setOnClickListener { speaker.onClickAction(speaker) }
     }
 }

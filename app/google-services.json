@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "802507235948",
+    "firebase_url": "https://droidconmadrid.firebaseio.com",
+    "project_id": "droidconmadrid",
+    "storage_bucket": "droidconmadrid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802507235948:android:b264cbfbeb9fbe46b0ee49",
+        "android_client_info": {
+          "package_name": "dev.androidcookers.droidcon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802507235948-rde5ka7m9ah71ne2h3b3490hiqak5doh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy5bdbWZBb1s0I93U9b8oJxbow_wX_-oE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802507235948-rde5ka7m9ah71ne2h3b3490hiqak5doh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

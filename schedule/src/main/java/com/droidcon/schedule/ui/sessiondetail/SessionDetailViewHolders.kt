@@ -39,7 +39,7 @@ class SpeakerViewHolder(itemView: View) : SessionDetailViewHolder(itemView) {
             .transform(CircleCrop())
             .into(speakerAvatar)
         itemView.setOnClickListener {
-            row.onSpeakerClicked(row.id)
+            row.onSpeakerClicked(row)
         }
     }
 }

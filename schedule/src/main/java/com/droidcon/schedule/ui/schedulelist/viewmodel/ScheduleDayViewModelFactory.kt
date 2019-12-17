@@ -3,6 +3,7 @@ package com.droidcon.schedule.ui.schedulelist.viewmodel
 import androidx.fragment.app.Fragment
 import com.droidcon.commons.conference.domain.UpdateSessionStarredValue
 import com.droidcon.commons.ioc.lifecycle.buildViewModel
+import com.droidcon.commons.tracking.ScheduleAnalyticsTracker
 import com.droidcon.schedule.domain.GetFirstInProgressSessionOrNull
 import com.droidcon.schedule.domain.GetSessionsByDay
 import com.droidcon.schedule.domain.RegisterScrollToInProgressSessionTry
@@ -14,7 +15,8 @@ class ScheduleDayViewModelFactory @Inject constructor(
     private val updateSessionStarredValue: UpdateSessionStarredValue,
     private val getFirstInProgressSession: GetFirstInProgressSessionOrNull,
     private val shouldTryScrollingToInProgressSession: ShouldTryScrollingToInProgressSession,
-    private val registerScrollToInProgressSessionTry: RegisterScrollToInProgressSessionTry
+    private val registerScrollToInProgressSessionTry: RegisterScrollToInProgressSessionTry,
+    private val scheduleAnalyticsTracker: ScheduleAnalyticsTracker
 ) {
 
     fun get(fragment: Fragment): ScheduleDayViewModel = fragment.buildViewModel {
@@ -23,7 +25,8 @@ class ScheduleDayViewModelFactory @Inject constructor(
             updateSessionStarredValue,
             getFirstInProgressSession,
             shouldTryScrollingToInProgressSession,
-            registerScrollToInProgressSessionTry
+            registerScrollToInProgressSessionTry,
+            scheduleAnalyticsTracker
         )
     }
 }
