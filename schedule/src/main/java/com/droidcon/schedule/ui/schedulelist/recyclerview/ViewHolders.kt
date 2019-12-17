@@ -6,6 +6,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.droidcon.schedule.R
 import com.droidcon.schedule.ui.schedulelist.model.SessionRow
 
 
@@ -14,38 +15,41 @@ sealed class SessionRowViewHolder(itemView: View) : RecyclerView.ViewHolder(item
 class SessionViewHolder(itemView: View) : SessionRowViewHolder(itemView) {
 
     fun bind(session: SessionRow.Session) {
-        itemView.findViewById<TextView>(com.droidcon.schedule.R.id.sessionTitle).text =
+        itemView.findViewById<TextView>(R.id.sessionTitle).text =
             session.title
-        itemView.findViewById<TextView>(com.droidcon.schedule.R.id.sessionAdditionalInfo).text =
+        itemView.findViewById<TextView>(R.id.sessionAdditionalInfo).text =
             session.additionalInfo
-        itemView.findViewById<TextView>(com.droidcon.schedule.R.id.sessionTime).text = session.time
-        itemView.findViewById<TextView>(com.droidcon.schedule.R.id.timePeriod).text =
+        itemView.findViewById<TextView>(R.id.sessionTime).text =
+            session.time
+        itemView.findViewById<TextView>(R.id.timePeriod).text =
             session.timePeriod
 
         if (session.hasSessionDetail) {
             setClickableItem(session)
+            itemView.findViewById<View>(R.id.speakerIconImageView).visibility = View.VISIBLE
         } else {
             itemView.setBackgroundColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    com.droidcon.schedule.R.color.service_session_row_background
+                    R.color.service_session_row_background
                 )
             )
             itemView.setOnClickListener(null)
+            itemView.findViewById<View>(R.id.speakerIconImageView).visibility = View.GONE
         }
 
         val starSessionButton =
-            itemView.findViewById<ImageButton>(com.droidcon.schedule.R.id.starSession)
+            itemView.findViewById<ImageButton>(R.id.starSession)
 
         if (session.favouritesEnabled) {
             starSessionButton.run {
                 visibility = View.VISIBLE
                 contentDescription = if (session.starred) {
-                    setImageResource(com.droidcon.schedule.R.drawable.ic_star_filled_24dp)
-                    context.getString(com.droidcon.schedule.R.string.unmark_as_favourite)
+                    setImageResource(R.drawable.ic_star_filled_24dp)
+                    context.getString(R.string.unmark_as_favourite)
                 } else {
-                    setImageResource(com.droidcon.schedule.R.drawable.ic_star_empty_24dp)
-                    context.getString(com.droidcon.schedule.R.string.mark_as_favourite)
+                    setImageResource(R.drawable.ic_star_empty_24dp)
+                    context.getString(R.string.mark_as_favourite)
                 }
                 setOnClickListener {
                     session.onStarClicked(session, session.starred)
@@ -73,6 +77,6 @@ class SessionViewHolder(itemView: View) : SessionRowViewHolder(itemView) {
 class DayDividerViewHolder(itemView: View) : SessionRowViewHolder(itemView) {
 
     fun bind(dayDivider: SessionRow.DayDivider) {
-        itemView.findViewById<TextView>(com.droidcon.schedule.R.id.title).text = dayDivider.title
+        itemView.findViewById<TextView>(R.id.title).text = dayDivider.title
     }
 }
