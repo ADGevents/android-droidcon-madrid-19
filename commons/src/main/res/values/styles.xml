@@ -41,4 +41,7 @@
         <item name="android:textColorPrimary">@color/text_white</item>
         <item name="actionMenuTextColor">@color/text_white</item>
     </style>
+    <style name="AppTheme.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
 </resources>
