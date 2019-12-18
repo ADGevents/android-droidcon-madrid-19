@@ -3,6 +3,7 @@ package com.droidcon.schedule.ui.sessiondetail
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droidcon.commons.presentation.Navigator
@@ -12,9 +13,13 @@ import com.droidcon.schedule.ui.sessiondetail.model.SessionDetailEffect
 import com.droidcon.schedule.ui.sessiondetail.model.getSessionDetailRows
 import com.droidcon.schedule.ui.sessiondetail.viewmodel.SessionDetailViewModel
 import com.droidcon.schedule.ui.sessiondetail.viewmodel.SessionDetailViewModelFactory
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
+
 
 class SessionDetailActivity : DaggerAppCompatActivity() {
 
@@ -54,6 +59,30 @@ class SessionDetailActivity : DaggerAppCompatActivity() {
         findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener {
             onBackPressed()
         }
+
+        setCollapsingToolbarForSession()
+    }
+
+    private fun setCollapsingToolbarForSession() {
+        val collapsingToolbar =
+            findViewById<CollapsingToolbarLayout>(R.id.collapsingToolbarLayout)
+        val appBarLayout = findViewById<AppBarLayout>(R.id.appBarLayout)
+        appBarLayout.addOnOffsetChangedListener(object : OnOffsetChangedListener {
+            var isShow = false
+            var scrollRange = -1
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.totalScrollRange
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbar.title = sessionDetailViewModel.getSessionTitle()
+                    isShow = true
+                } else if (isShow) {
+                    collapsingToolbar.title = ""
+                    isShow = false
+                }
+            }
+        })
     }
 
     private fun setUpViewModel(sessionId: String) {

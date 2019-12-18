@@ -40,6 +40,8 @@ class SessionDetailViewModel(
         }
     }
 
+    fun getSessionTitle(): String? = sessionDetailState.value?.title
+
     private suspend fun onSessionLoaded(session: Session) {
         val sessionSpeakers = getSessionSpeakers(session.id)
         val sessionDetail = session.toSessionDetail(
