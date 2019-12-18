@@ -1,130 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/appBarLayoutBackground"
-            android:fitsSystemWindows="true">
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/appBarLayoutBackground"
+        android:fitsSystemWindows="true">
 
 
         <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:navigationIcon="@drawable/ic_arrow_back">
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_arrow_back">
 
             <TextView
-                    android:id="@+id/contactsOfInterestTitle"
-                    style="@style/TextAppearance.AppBarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/contacts"
-                    tools:text="Contacts of interest" />
+                android:id="@+id/contactsOfInterestTitle"
+                style="@style/TextAppearance.AppBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/contacts"
+                tools:text="Contacts of interest" />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/droidconOrganizersLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_marginBottom="8dp"
+                android:text="@string/droidcon_organizers"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
-                    android:id="@+id/droidconOrganizersLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/droidcon_organizers"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="Nicolas Patarino"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Nicolas Patarino"
-                    android:textSize="17sp"
-                    tools:ignore="HardcodedText" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:autoLink="email"
+                android:text="@string/npatarino_email"
+                android:textColorLink="@color/colorPrimary" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:autoLink="email"
-                    android:text="@string/npatarino_email" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:autoLink="phone"
+                android:text="@string/npatatino_phone_number"
+                android:textColorLink="@color/colorPrimary" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:autoLink="phone"
-                    android:text="@string/npatatino_phone_number" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="8dp"
+                android:text="Adrian Santalla"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Adrian Santalla"
-                    android:textSize="17sp"
-                    tools:ignore="HardcodedText" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:autoLink="email"
+                android:text="@string/asantall_email"
+                android:textColorLink="@color/colorPrimary" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:autoLink="email"
-                    android:text="@string/asantall_email" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:autoLink="phone"
+                android:text="@string/asantalla_phone_number"
+                android:textColorLink="@color/colorPrimary" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:autoLink="phone"
-                    android:text="@string/asantalla_phone_number" />
+                android:id="@+id/emergenciesLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:autoLink="all"
+                android:text="@string/emergencies"
+                android:textColor="@android:color/black"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="18sp" />
 
             <TextView
-                    android:id="@+id/emergenciesLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:autoLink="all"
-                    android:text="@string/emergencies"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
-
-            <TextView
-                    android:id="@+id/careUnitLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:autoLink="phone"
-                    android:text="@string/care_unit_family_and_women"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                android:id="@+id/careUnitLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:autoLink="phone"
+                android:text="@string/care_unit_family_and_women"
+                android:textColor="@android:color/black"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 
