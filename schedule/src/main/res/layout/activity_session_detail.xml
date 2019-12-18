@@ -19,7 +19,7 @@
             app:contentScrim="@color/session_detail_toolbar"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:theme="@style/HomeAsUpIndicatorWhiteStyled">
-            
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="248dp"
