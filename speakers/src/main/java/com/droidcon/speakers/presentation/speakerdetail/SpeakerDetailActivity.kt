@@ -15,6 +15,8 @@ import com.droidcon.speakers.presentation.speakerdetail.model.getSpeakerDetailRo
 import com.droidcon.speakers.presentation.speakerdetail.recyclerview.SpeakerTalksAdapter
 import com.droidcon.speakers.presentation.speakerdetail.viewmodel.SpeakerDetailViewModel
 import com.droidcon.speakers.presentation.speakerdetail.viewmodel.SpeakerDetailViewModelFactory
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -43,11 +45,6 @@ class SpeakerDetailActivity : DaggerAppCompatActivity() {
         setUpViewModel(speakerId)
     }
 
-    override fun onStart() {
-        super.onStart()
-
-    }
-
     private fun setUpViews() {
         speakerAvatar = findViewById(R.id.speakerAvatar)
         speakerName = findViewById(R.id.speakerName)
@@ -61,6 +58,28 @@ class SpeakerDetailActivity : DaggerAppCompatActivity() {
             onBackPressed()
         }
 
+        setUpCollapsingToolbar()
+    }
+
+    private fun setUpCollapsingToolbar() {
+        val collapsingToolbar = findViewById<CollapsingToolbarLayout>(R.id.collapsingToolbar)
+        val appBarLayout = findViewById<AppBarLayout>(R.id.speakerDetailAppBar)
+        appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+            var isShow = false
+            var scrollRange = -1
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.totalScrollRange
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbar.title = speakerDetailViewModel.speakerDetailState.value?.speakerName
+                    isShow = true
+                } else if (isShow) {
+                    collapsingToolbar.title = ""
+                    isShow = false
+                }
+            }
+        })
     }
 
     private fun setUpViewModel(speakerId: String) {
