@@ -21,7 +21,7 @@ class GetSessionsByDay @Inject constructor(
     suspend operator fun invoke(sessionDay: Int): Either<GetSessionsError, List<Session>> =
         sessionsRepository.getAllSessions().map { sessions ->
             sessions.map { it.toSession() }
-                .sortedBy { it.sessionStartTimeStamp }
+                .sortedWith(compareBy({ it.sessionStartTimeStamp }, { it.roomName }))
                 .filter { it.sessionStartTimeStamp.getDayOfTheMonth() == sessionDay }
         }
 
