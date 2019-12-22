@@ -5,7 +5,7 @@ ext {
     buildTools = "29.0.2"
     targetSdk = 29
     minSdk = 21
-    versionCode = 7
+    versionCode = 8
     versionName = "1.0.0"
     dagger = "2.24"
     androidLifecycle = "2.1.0"

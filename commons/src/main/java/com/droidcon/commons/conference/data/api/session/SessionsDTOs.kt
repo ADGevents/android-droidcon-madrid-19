@@ -1,30 +1,31 @@
 package com.droidcon.commons.conference.data.api.session
 
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class SessionGroupDto(
-    val groupId: String,
-    val groupName: String,
-    val sessions: List<SessionDto>
+    @Json(name = "groupId") val groupId: String,
+    @Json(name = "groupName") val groupName: String,
+    @Json(name = "sessions") val sessions: List<SessionDto>
 )
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class SessionDto(
-    val id: String,
-    val title: String,
-    val description: String?,
-    val startsAt: String,
-    val endsAt: String,
-    val isServiceSession: Boolean,
-    val isPlenumSession: Boolean,
-    val speakers: List<SpeakerDto> = emptyList(),
-    val roomId: Int?,
-    val room: String
+    @Json(name = "id") val id: String,
+    @Json(name = "title") val title: String,
+    @Json(name = "description") val description: String?,
+    @Json(name = "startsAt") val startsAt: String,
+    @Json(name = "endsAt") val endsAt: String,
+    @Json(name = "isServiceSession") val isServiceSession: Boolean,
+    @Json(name = "isPlenumSession") val isPlenumSession: Boolean,
+    @Json(name = "speakers") val speakers: List<SpeakerDto> = emptyList(),
+    @Json(name = "roomId") val roomId: Int?,
+    @Json(name = "room") val room: String
 )
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class SpeakerDto(
-    val id: String,
-    val name: String
+    @Json(name = "id") val id: String,
+    @Json(name = "name") val name: String
 )

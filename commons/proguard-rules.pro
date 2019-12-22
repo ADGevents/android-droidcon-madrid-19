@@ -19,3 +19,21 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#Kotlin serialization
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.SerializationKt
+-keep,includedescriptorclasses class com.droidcon.commons.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.droidcon.commons.** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class com.droidcon.commons.** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
+}
+-keep,includedescriptorclasses class dev.androidcookers.droidcon.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.droidcon.schedule.** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class dev.androidcookers.droidcon.** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
+}

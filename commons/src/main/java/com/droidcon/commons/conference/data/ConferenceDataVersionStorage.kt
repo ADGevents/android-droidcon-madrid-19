@@ -8,7 +8,7 @@ class ConferenceDataVersionStorage @Inject constructor(
 ) {
 
     fun getVersion(): Long =
-        sharedPreferences.getLong(CONFERENCE_DATA_VERSION_KEY, 1)
+        sharedPreferences.getLong(CONFERENCE_DATA_VERSION_KEY, 0)
 
     fun putVersion(version: Long) {
         sharedPreferences.edit().putLong(CONFERENCE_DATA_VERSION_KEY, version).apply()
